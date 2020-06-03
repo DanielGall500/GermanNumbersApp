@@ -31,13 +31,17 @@ public class Game {
         return playerScore.getScore();
     }
 
-    public void parse(int input)
+    public void play(int input)
     {
         updateScore(input);
     }
 
     private void updateScore(int input)
     {
+        System.out.println("Is CorrectL : " + generator.isCorrectNumber(input));
+        System.out.println("Input : " + input);
+        System.out.println("Actual: " + generator.getCurrentNumber());
+
         if(generator.isCorrectNumber(input))
             playerScore.increment();
     }
@@ -55,9 +59,21 @@ public class Game {
         }
         else
         {
-            TURN++;
-            currentNumber = generator.next();
+            incrementTurn();
+            nextNumber();
+
+            System.out.println("Curr: " + currentNumber);
         }
+    }
+
+    private void nextNumber()
+    {
+        currentNumber = generator.next();
+    }
+
+    private void incrementTurn()
+    {
+        TURN++;
     }
 
 }

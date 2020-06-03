@@ -54,6 +54,11 @@ public class NumSupplier {
         genList = generateList(min, max, size);
     }
 
+    public int getCurrentNumber()
+    {
+        return genList.get(iterator);
+    }
+
     public boolean isEndOfList()
     {
         return (iterator == size-1);
@@ -64,7 +69,7 @@ public class NumSupplier {
         if(isEndOfList())
             throw new ArrayIndexOutOfBoundsException("Reached End Of List");
         else
-            return genList.get(iterator++);
+            return genList.get(++iterator);
     }
 
     public boolean isCorrectNumber(int num)
