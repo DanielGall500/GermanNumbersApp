@@ -50,4 +50,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35000002" />
+
+    <EditText
+        android:id="@+id/timerView"
+        android:layout_width="73dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="41dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

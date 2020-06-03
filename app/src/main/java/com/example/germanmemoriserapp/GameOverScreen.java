@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameOverScreen extends AppCompatActivity {
 
     Intent moveToNewGame, moveToMenu;
 
     Button GO_backToMenu, GO_retry;
+    TextView scoreResultView;
 
     private String backToMenuTxt = "MENU";
     private String retryTxt = "RETRY";
@@ -23,10 +25,11 @@ public class GameOverScreen extends AppCompatActivity {
 
         GO_backToMenu = findViewById(R.id.GO_backToMenu);
         GO_retry = findViewById(R.id.GO_retry);
+        scoreResultView = findViewById(R.id.scoreView);
 
         GO_backToMenu.setText(backToMenuTxt);
         GO_retry.setText(retryTxt);
-
+        scoreResultView.setText(getScoreResult());
 
         moveToNewGame = new Intent(GameOverScreen.this, MainActivity.class);
         moveToMenu = new Intent(GameOverScreen.this, MenuScreen.class);
@@ -47,5 +50,10 @@ public class GameOverScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String getScoreResult()
+    {
+        return "";
     }
 }

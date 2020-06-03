@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,28 +13,31 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //Settings
-    private final int MIN_NUM = 1;
-    private final int MAX_NUM = 10;
-    private int NUM_TURNS = 3;
+    final int MIN_NUM = 1;
+    final int MAX_NUM = 10;
+    final int NUM_TURNS = 3;
 
-    private Intent moveToGOScreen;
+    Intent moveToGOScreen;
 
-    private String enterNumberTxt = "Got it!";
-    private final String emptyTxt = "";
-
-    private final int TOTAL_TURNS = 3;
+    String enterNumberTxt = "Got it!";
+    final String emptyTxt = "";
 
     EditText enterNumberBox;
-    Button enterButton;
     TextView tmpNumberView;
     EditText scoreView;
+    Button enterButton;
+    TextView timerView;
 
     Game GAME;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        moveToGOScreen = new Intent(MainActivity.this,
+                GameOverScreen.class);
 
         GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
 
@@ -42,23 +46,35 @@ public class MainActivity extends AppCompatActivity {
         tmpNumberView = findViewById(R.id.tmpNumberView);
         enterButton = findViewById(R.id.enterButton);
         scoreView = findViewById(R.id.scoreView);
+        timerView = findViewById(R.id.timerView);
 
         //Set Initial UI Parameters
+        enterButton.setText(enterNumberTxt);
         updateGfx(enterNumberBox, scoreView);
 
-        moveToGOScreen = new Intent(MainActivity.this, GameOverScreen.class);
+        //Begin the timer
+        //timeHandler.postDelayed(timerRunnable, 0);
+        timer = new Timer(timerView);
+        timer.begin();
 
         enterButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
 
-                int INPUT = parseText(enterNumberBox);
+                String userInput = enterNumberBox.getText().toString();
+
+                //Don't Accept Invalid Input
+                if(!GAME.isValidInput(userInput))
+                    return;
+
+                int INPUT = parseText(userInput);
 
                 GAME.play(INPUT);
 
                 if(GAME.isEndOfGame())
                 {
+                    timer.stop();
                     startActivity(moveToGOScreen);
                 }
                 else
@@ -70,10 +86,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private int parseText(EditText entryBox)
+    private int parseText(String userInput)
     {
-        String strInput = entryBox.getText().toString();
-        return Integer.parseInt(strInput);
+        return Integer.parseInt(userInput);
     }
 
     private void updateGfx(EditText entryBox, EditText scoreBox)

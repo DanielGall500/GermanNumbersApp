@@ -36,6 +36,21 @@ public class Game {
         updateScore(input);
     }
 
+    public boolean isValidInput(String input)
+    {
+        char[] chars = input.toCharArray();
+        int digit;
+
+        for(char c : chars)
+        {
+            digit = ((int)c - 48);
+
+            if(digit <= 0 || digit >= 9)
+                return false;
+        }
+        return true;
+    }
+
     private void updateScore(int input)
     {
         if(generator.isCorrectNumber(input))
