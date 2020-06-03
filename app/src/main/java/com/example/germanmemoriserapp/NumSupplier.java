@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class NumSupplier {
 
-    private int[] DEFAULT_RANGE = {0,10};
     private int DEFAULT_MIN = 0;
     private int DEFAULT_MAX = 10;
     private int DEFAULT_SIZE = 3;
@@ -14,7 +13,7 @@ public class NumSupplier {
     private int max;
     private int size;
 
-    private int iterator = 0;
+    private int iterator = -1;
 
     private ArrayList<Integer> genList;
     private Random randGen = new Random();
@@ -55,9 +54,14 @@ public class NumSupplier {
         genList = generateList(min, max, size);
     }
 
+    public boolean isEndOfList()
+    {
+        return (iterator == size-1);
+    }
+
     public int next()
     {
-        if(iterator == (size-1))
+        if(isEndOfList())
             throw new ArrayIndexOutOfBoundsException("Reached End Of List");
         else
             return genList.get(iterator++);
@@ -65,10 +69,10 @@ public class NumSupplier {
 
     public boolean isCorrectNumber(int num)
     {
-        if(iterator == 0)
-            throw new ArrayIndexOutOfBoundsException("Must Make A Move Before Calling.");
+        if(!gameHasBegun())
+            throw new ArrayIndexOutOfBoundsException("Must Begin Game Before Calling");
         else
-            return num == genList.get(iterator-1);
+            return num == genList.get(iterator);
     }
 
     private ArrayList<Integer> generateList(int min, int max, int size)
@@ -88,5 +92,10 @@ public class NumSupplier {
     private int generateNumber(int min, int max)
     {
         return randGen.nextInt(max - min + 1) + min;
+    }
+
+    private boolean gameHasBegun()
+    {
+        return iterator >= 0;
     }
 }
