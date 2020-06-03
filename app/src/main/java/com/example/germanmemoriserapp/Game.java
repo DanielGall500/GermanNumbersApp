@@ -12,11 +12,11 @@ public class Game {
     private int TURN = 0;
     private int NUM_TURNS;
 
-    public Game(int turns)
+    public Game(int min, int max, int turns)
     {
         this.NUM_TURNS = turns;
 
-        generator = new NumSupplier(1, 10, NUM_TURNS);
+        generator = new NumSupplier(min, max, turns);
 
         newTurn();
     }
@@ -38,10 +38,6 @@ public class Game {
 
     private void updateScore(int input)
     {
-        System.out.println("Is CorrectL : " + generator.isCorrectNumber(input));
-        System.out.println("Input : " + input);
-        System.out.println("Actual: " + generator.getCurrentNumber());
-
         if(generator.isCorrectNumber(input))
             playerScore.increment();
     }
@@ -61,8 +57,6 @@ public class Game {
         {
             incrementTurn();
             nextNumber();
-
-            System.out.println("Curr: " + currentNumber);
         }
     }
 

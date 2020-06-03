@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Settings
+    private final int MIN_NUM = 1;
+    private final int MAX_NUM = 10;
+    private int NUM_TURNS = 3;
+
     private Intent moveToGOScreen;
 
     private String enterNumberTxt = "Got it!";
@@ -30,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GAME = new Game(TOTAL_TURNS);
+        GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
 
+        //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
         enterButton = findViewById(R.id.enterButton);
         scoreView = findViewById(R.id.scoreView);
 
-        tmpNumberView.setText(String.valueOf(GAME.getNumber()));
-        scoreView.setText(String.valueOf(GAME.getScore()));
-        enterButton.setText(enterNumberTxt);
+        //Set Initial UI Parameters
+        updateGfx(enterNumberBox, scoreView);
 
         moveToGOScreen = new Intent(MainActivity.this, GameOverScreen.class);
 
@@ -51,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 int INPUT = parseText(enterNumberBox);
 
                 GAME.play(INPUT);
-
-                System.out.println("New Score: " + GAME.getScore());
 
                 if(GAME.isEndOfGame())
                 {
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     private int parseText(EditText entryBox)
     {
         String strInput = entryBox.getText().toString();
-
         return Integer.parseInt(strInput);
     }
 
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         //To Be Deleted
         String number = String.valueOf(GAME.getNumber());
-        System.out.println("Updates: " + number);
         tmpNumberView.setText(number);
     }
 
