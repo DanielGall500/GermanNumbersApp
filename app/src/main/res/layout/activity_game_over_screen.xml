@@ -30,10 +30,13 @@
         app:layout_constraintVertical_bias="0.811" />
 
     <TextView
-        android:id="@+id/scoreResultView"
+        android:id="@+id/GO_scoreResultsView"
         android:layout_width="168dp"
         android:layout_height="81dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="188dp" />
+        app:layout_constraintBottom_toTopOf="@+id/GO_retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 if(GAME.isEndOfGame())
                 {
                     timer.stop();
+
+                    //Transfer Score Data
+                    moveToGOScreen.putExtra(getString(R.string.score_key),
+                            String.valueOf(timer.getPreviousResult()));
+
                     startActivity(moveToGOScreen);
                 }
                 else

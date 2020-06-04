@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class GameOverScreen extends AppCompatActivity {
 
-    Intent moveToNewGame, moveToMenu;
+    Intent moveToNewGame, moveToMenu, moveFromGame;
 
     Button GO_backToMenu, GO_retry;
     TextView scoreResultView;
@@ -18,21 +18,26 @@ public class GameOverScreen extends AppCompatActivity {
     private String backToMenuTxt = "MENU";
     private String retryTxt = "RETRY";
 
+    String gameScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over_screen);
 
+        moveToNewGame = new Intent(GameOverScreen.this, MainActivity.class);
+        moveToMenu = new Intent(GameOverScreen.this, MenuScreen.class);
+
+        moveFromGame = getIntent();
+        gameScore = moveFromGame.getStringExtra(getString(R.string.score_key));
+
         GO_backToMenu = findViewById(R.id.GO_backToMenu);
         GO_retry = findViewById(R.id.GO_retry);
-        scoreResultView = findViewById(R.id.scoreView);
+        scoreResultView = findViewById(R.id.GO_scoreResultsView);
 
         GO_backToMenu.setText(backToMenuTxt);
         GO_retry.setText(retryTxt);
         scoreResultView.setText(getScoreResult());
-
-        moveToNewGame = new Intent(GameOverScreen.this, MainActivity.class);
-        moveToMenu = new Intent(GameOverScreen.this, MenuScreen.class);
 
         GO_backToMenu.setOnClickListener(new View.OnClickListener()
         {
@@ -54,6 +59,6 @@ public class GameOverScreen extends AppCompatActivity {
 
     private String getScoreResult()
     {
-        return "";
+        return String.format("Your Score Is %s seconds!", gameScore);
     }
 }
