@@ -45,12 +45,11 @@ public class MainActivity extends AppCompatActivity {
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
         enterButton = findViewById(R.id.enterButton);
-        scoreView = findViewById(R.id.scoreView);
         timerView = findViewById(R.id.timerView);
 
         //Set Initial UI Parameters
         enterButton.setText(enterNumberTxt);
-        updateGfx(enterNumberBox, scoreView);
+        updateGfx(enterNumberBox);
 
         //Begin the timer
         //timeHandler.postDelayed(timerRunnable, 0);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     GAME.newTurn();
-                    updateGfx(enterNumberBox, scoreView);
+                    updateGfx(enterNumberBox);
                 }
             }
         });
@@ -96,10 +95,9 @@ public class MainActivity extends AppCompatActivity {
         return Integer.parseInt(userInput);
     }
 
-    private void updateGfx(EditText entryBox, EditText scoreBox)
+    private void updateGfx(EditText entryBox)
     {
         clearEntryBox_GFX(entryBox);
-        updateScoreView_GFX(scoreBox);
 
         //To Be Deleted
         String number = String.valueOf(GAME.getNumber());
@@ -109,11 +107,5 @@ public class MainActivity extends AppCompatActivity {
     private void clearEntryBox_GFX(EditText entryBox)
     {
         entryBox.setText(emptyTxt);
-    }
-
-    private void updateScoreView_GFX(EditText scoreBox)
-    {
-        String score = String.valueOf(GAME.getScore());
-        scoreBox.setText(score);
     }
 }
