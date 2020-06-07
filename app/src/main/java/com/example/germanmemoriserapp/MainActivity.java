@@ -1,6 +1,7 @@
 package com.example.germanmemoriserapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tmpNumberView;
     Button enterButton;
     TextView timerView;
+
+    Keyboard digitKeyboard;
 
     ImageButton[] keyboardButtons;
 
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         keyboardButtons[8] = findViewById(R.id.digitEightBtn);
         keyboardButtons[9] = findViewById(R.id.digitNineBtn);
 
-        Keyboard digitKeyboard = new Keyboard(keyboardButtons);
+        digitKeyboard = new Keyboard(keyboardButtons, enterNumberBox);
 
         enterButton.setOnClickListener(new View.OnClickListener()
         {
@@ -120,15 +123,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateGfx(EditText entryBox)
     {
-        clearEntryBox_GFX(entryBox);
+        clearAllInput(entryBox);
 
         //To Be Deleted
         String number = String.valueOf(GAME.getNumber());
         tmpNumberView.setText(number);
     }
 
-    private void clearEntryBox_GFX(EditText entryBox)
+    private void clearAllInput(EditText entryBox)
     {
-        entryBox.setText(emptyTxt);
+        digitKeyboard.clearInput();
+        entryBox.setText(digitKeyboard.getInput());
     }
 }

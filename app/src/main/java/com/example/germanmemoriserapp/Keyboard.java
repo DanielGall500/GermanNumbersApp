@@ -2,24 +2,36 @@ package com.example.germanmemoriserapp;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
-public class Keyboard {
+import java.util.HashMap;
 
+public class Keyboard implements View.OnClickListener {
+
+    final int NUM_DIGITS = 10;
     ImageButton[] digitButtons;
+    String input = "";
 
-    public Keyboard(ImageButton[] digits)
+    EditText inputField;
+
+    HashMap<Integer, Integer> associatedDigits;
+
+    public Keyboard(ImageButton[] digits, EditText inputArea)
     {
         this.digitButtons = digits;
+        this.inputField = inputArea;
 
         ImageButton zero = getDigitBtn(0);
 
-        zero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setActivated(!v.isActivated());
-            }
-        });
+        //Map Button ID -> Corresponding Digit
+        associatedDigits = new HashMap<>();
+
+        for(int i = 0; i < NUM_DIGITS; i++)
+            associatedDigits.put(digitButtons[i].getId(), i);
+
+        for(ImageButton b : digitButtons)
+            b.setOnClickListener(this);
     }
 
     private ImageButton getDigitBtn(int digit)
@@ -30,4 +42,34 @@ public class Keyboard {
         return digitButtons[digit];
     }
 
+    private void addInput(int digit)
+    {
+        input += String.valueOf(digit);
+    }
+
+    public String getInput()
+    {
+        return this.input;
+    }
+
+    public void clearInput()
+    {
+        this.input = "";
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        int ID = v.getId();
+
+        int digit = associatedDigits.get(ID);
+
+        System.out.println("new digit " + digit);
+
+        addInput(digit);
+
+        System.out.println("New input: " + getInput());
+
+        inputField.setText(getInput());
+    }
 }

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#03A9F4"
@@ -83,7 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
 
-        />
+            />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -99,24 +100,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_four_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_four_state" />
 
             <ImageButton
                 android:id="@+id/digitFiveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_five_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_five_state" />
 
             <ImageButton
                 android:id="@+id/digitSixBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_six_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_six_state" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,24 +134,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_seven_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_seven_state" />
 
             <ImageButton
                 android:id="@+id/digitEightBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_eight_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_eight_state" />
 
             <ImageButton
                 android:id="@+id/digitNineBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_nine_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_nine_state" />
         </LinearLayout>
 
         <LinearLayout
@@ -167,24 +168,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_one_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_one_state" />
 
             <ImageButton
                 android:id="@+id/digitTwoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_two_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_two_state" />
 
             <ImageButton
                 android:id="@+id/digitThreeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/keyboard_three_state"
-                android:background="#00FFFFFF"/>
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_three_state" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
