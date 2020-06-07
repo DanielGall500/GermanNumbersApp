@@ -64,11 +64,7 @@ public class Keyboard implements View.OnClickListener {
 
         int digit = associatedDigits.get(ID);
 
-        System.out.println("new digit " + digit);
-
         addInput(digit);
-
-        System.out.println("New input: " + getInput());
 
         inputField.setText(getInput());
     }
