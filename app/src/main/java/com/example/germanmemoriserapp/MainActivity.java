@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import org.w3c.dom.Attr;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     final int MIN_NUM = 1;
     final int MAX_NUM = 10;
     final int NUM_TURNS = 3;
+    final int NUM_DIGITS = 10;
 
     Intent moveToGOScreen;
 
@@ -24,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     EditText enterNumberBox;
     TextView tmpNumberView;
-    EditText scoreView;
     Button enterButton;
     TextView timerView;
+
+    ImageButton[] keyboardButtons;
 
     Game GAME;
     Timer timer;
@@ -55,6 +61,23 @@ public class MainActivity extends AppCompatActivity {
         //timeHandler.postDelayed(timerRunnable, 0);
         timer = new Timer(timerView);
         timer.begin();
+
+
+        keyboardButtons = new ImageButton[NUM_DIGITS];
+
+
+        keyboardButtons[0] = findViewById(R.id.digitZeroBtn);
+        keyboardButtons[1] = findViewById(R.id.digitOneBtn);
+        keyboardButtons[2] = findViewById(R.id.digitTwoBtn);
+        keyboardButtons[3] = findViewById(R.id.digitThreeBtn);
+        keyboardButtons[4] = findViewById(R.id.digitFourBtn);
+        keyboardButtons[5] = findViewById(R.id.digitFiveBtn);
+        keyboardButtons[6] = findViewById(R.id.digitSixBtn);
+        keyboardButtons[7] = findViewById(R.id.digitSevenBtn);
+        keyboardButtons[8] = findViewById(R.id.digitEightBtn);
+        keyboardButtons[9] = findViewById(R.id.digitNineBtn);
+
+        Keyboard digitKeyboard = new Keyboard(keyboardButtons);
 
         enterButton.setOnClickListener(new View.OnClickListener()
         {

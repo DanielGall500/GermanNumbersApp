@@ -38,6 +38,9 @@ public class Game {
 
     public boolean isValidInput(String input)
     {
+        if(input.length() == 0)
+            return false;
+
         char[] chars = input.toCharArray();
         int digit;
 
@@ -45,7 +48,7 @@ public class Game {
         {
             digit = ((int)c - 48);
 
-            if(digit <= 0 || digit >= 9)
+            if(digit < 0 || digit > 9)
                 return false;
         }
         return true;

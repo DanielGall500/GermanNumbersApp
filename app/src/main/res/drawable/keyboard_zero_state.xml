@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
-        <bitmap android:src="@drawable/zero_digit_pressed_green" />
+        <bitmap android:src="@drawable/zero_digit_pressed" />
     </item>
     <item android:state_pressed="false">
         <bitmap android:src="@drawable/zero_digit_unpressed" />
