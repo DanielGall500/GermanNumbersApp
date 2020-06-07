@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Attr;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     //Settings
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     Game GAME;
     Timer timer;
 
+    HashMap<Integer, Integer> associatedDigits = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +54,25 @@ public class MainActivity extends AppCompatActivity {
 
         GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
 
+        int[] digitIds = new int[] {
+                R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
+                R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
+                R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
+                R.id.digitNineBtn,
+        };
+
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
         enterButton = findViewById(R.id.enterButton);
         timerView = findViewById(R.id.timerView);
+
+        keyboardButtons = new ImageButton[NUM_DIGITS];
+
+        for(int i = 0; i < NUM_DIGITS; i++)
+            keyboardButtons[i] = findViewById(digitIds[i]);
+
+        digitKeyboard = new Keyboard(keyboardButtons, enterNumberBox);
 
         //Set Initial UI Parameters
         enterButton.setText(enterNumberTxt);
@@ -64,23 +82,6 @@ public class MainActivity extends AppCompatActivity {
         //timeHandler.postDelayed(timerRunnable, 0);
         timer = new Timer(timerView);
         timer.begin();
-
-
-        keyboardButtons = new ImageButton[NUM_DIGITS];
-
-
-        keyboardButtons[0] = findViewById(R.id.digitZeroBtn);
-        keyboardButtons[1] = findViewById(R.id.digitOneBtn);
-        keyboardButtons[2] = findViewById(R.id.digitTwoBtn);
-        keyboardButtons[3] = findViewById(R.id.digitThreeBtn);
-        keyboardButtons[4] = findViewById(R.id.digitFourBtn);
-        keyboardButtons[5] = findViewById(R.id.digitFiveBtn);
-        keyboardButtons[6] = findViewById(R.id.digitSixBtn);
-        keyboardButtons[7] = findViewById(R.id.digitSevenBtn);
-        keyboardButtons[8] = findViewById(R.id.digitEightBtn);
-        keyboardButtons[9] = findViewById(R.id.digitNineBtn);
-
-        digitKeyboard = new Keyboard(keyboardButtons, enterNumberBox);
 
         enterButton.setOnClickListener(new View.OnClickListener()
         {
