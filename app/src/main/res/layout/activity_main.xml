@@ -2,23 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/appLayout"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#03A9F4"
     tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/enterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterNumberBox"
-        app:layout_constraintVertical_bias="0.08" />
 
     <EditText
         android:id="@+id/enterNumberBox"
@@ -76,12 +64,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterButton"
-        app:layout_constraintVertical_bias="0.474">
+        app:layout_constraintTop_toBottomOf="@+id/enterNumberBox">
 
         <ImageButton
             android:id="@+id/digitZeroBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="135dp"
             android:layout_height="75dp"
             android:background="#00FFFFFF"
             android:src="@drawable/keyboard_zero_state"
@@ -92,39 +79,15 @@
 
             />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="410dp"
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="135dp"
             android:layout_height="75dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/digitZeroBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-            <ImageButton
-                android:id="@+id/digitFourBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:src="@drawable/keyboard_four_state" />
-
-            <ImageButton
-                android:id="@+id/digitFiveBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:src="@drawable/keyboard_five_state" />
-
-            <ImageButton
-                android:id="@+id/digitSixBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00FFFFFF"
-                android:src="@drawable/keyboard_six_state" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:srcCompat="@drawable/abc_vector_test" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -192,6 +155,40 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:src="@drawable/keyboard_three_state" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="410dp"
+            android:layout_height="75dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <ImageButton
+                android:id="@+id/digitFourBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_four_state" />
+
+            <ImageButton
+                android:id="@+id/digitFiveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_five_state" />
+
+            <ImageButton
+                android:id="@+id/digitSixBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:src="@drawable/keyboard_six_state" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
