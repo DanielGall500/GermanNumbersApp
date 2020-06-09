@@ -31,9 +31,13 @@ public class Game {
         return playerScore.getScore();
     }
 
-    public void play(int input)
+    public boolean play(int input)
     {
+        if(!generator.isCorrectNumber(input))
+            return false;
+
         updateScore(input);
+        return true;
     }
 
     public boolean isValidInput(String input)

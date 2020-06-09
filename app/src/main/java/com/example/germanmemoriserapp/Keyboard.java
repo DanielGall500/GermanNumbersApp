@@ -1,13 +1,17 @@
 package com.example.germanmemoriserapp;
 
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Keyboard implements View.OnClickListener {
+import android.os.Handler;
+
+public class Keyboard implements View.OnClickListener{
 
     final int NUM_DIGITS = 10;
     ImageButton[] digitButtons;
@@ -17,10 +21,36 @@ public class Keyboard implements View.OnClickListener {
 
     HashMap<Integer, Integer> associatedDigits;
 
-    public Keyboard(ImageButton[] digits, EditText inputArea)
+    //private RefreshHandler handler = new RefreshHandler();
+
+    /*class RefreshHandler extends Handler
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            getInputInfo();
+        }
+
+        public void sleep(long delayMillis)
+        {
+            this.removeMessages(0);
+            sendMessageDelayed(obtainMessage(0), delayMillis);
+        }
+    }
+
+    private void getInputInfo()
+    {
+        System.out.println("Updating UI");
+        handler.sleep(1000);
+    }*/
+
+    private Handler keyboardHandler;
+
+    public Keyboard(ImageButton[] digits, EditText inputArea, Handler handler)
     {
         this.digitButtons = digits;
         this.inputField = inputArea;
+        this.keyboardHandler = handler;
 
         ImageButton zero = getDigitBtn(0);
 
@@ -64,10 +94,11 @@ public class Keyboard implements View.OnClickListener {
 
         int digit = associatedDigits.get(ID);
 
-        System.out.println(getInput());
-
         addInput(digit);
 
         inputField.setText(getInput());
+
+        //Tell the world about our new input
+        keyboardHandler.sendEmptyMessage(0);
     }
 }

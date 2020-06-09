@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,13 @@ import org.w3c.dom.Attr;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    int[] digitIds = new int[] {
+            R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
+            R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
+            R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
+            R.id.digitNineBtn,
+    };
 
     //Settings
     final int MIN_NUM = 1;
@@ -44,6 +52,50 @@ public class MainActivity extends AppCompatActivity {
 
     HashMap<Integer, Integer> associatedDigits = new HashMap<>();
 
+    InputHandler handler = new InputHandler();
+
+    class InputHandler extends Handler
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            handleInput();
+        }
+    }
+
+    private void handleInput()
+    {
+        String userInput = digitKeyboard.getInput();
+
+        //Don't Accept Invalid Input
+        if(!GAME.isValidInput(userInput))
+            return;
+
+        int INPUT = parse(userInput);
+
+        boolean correctNumber = GAME.play(INPUT);
+
+        if(!correctNumber)
+        {
+            return;
+        }
+        else if(GAME.isEndOfGame())
+        {
+            timer.stop();
+
+            //Transfer Score Data
+            moveToGOScreen.putExtra(getString(R.string.score_key),
+                    String.valueOf(timer.getPreviousResult()));
+
+            startActivity(moveToGOScreen);
+        }
+        else
+        {
+            GAME.newTurn();
+            updateGfx(enterNumberBox);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
 
-        int[] digitIds = new int[] {
-                R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
-                R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
-                R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
-                R.id.digitNineBtn,
-        };
-
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
@@ -69,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
         keyboardButtons = new ImageButton[NUM_DIGITS];
 
-        for(int i = 0; i < NUM_DIGITS; i++)
+        for (int i = 0; i < NUM_DIGITS; i++)
             keyboardButtons[i] = findViewById(digitIds[i]);
 
-        digitKeyboard = new Keyboard(keyboardButtons, enterNumberBox);
+        digitKeyboard = new Keyboard(keyboardButtons, enterNumberBox, handler);
 
         //Set Initial UI Parameters
         enterButton.setText(enterNumberTxt);
@@ -82,42 +127,9 @@ public class MainActivity extends AppCompatActivity {
         //timeHandler.postDelayed(timerRunnable, 0);
         timer = new Timer(timerView);
         timer.begin();
-
-        enterButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-
-                String userInput = enterNumberBox.getText().toString();
-
-                //Don't Accept Invalid Input
-                if(!GAME.isValidInput(userInput))
-                    return;
-
-                int INPUT = parseText(userInput);
-
-                GAME.play(INPUT);
-
-                if(GAME.isEndOfGame())
-                {
-                    timer.stop();
-
-                    //Transfer Score Data
-                    moveToGOScreen.putExtra(getString(R.string.score_key),
-                            String.valueOf(timer.getPreviousResult()));
-
-                    startActivity(moveToGOScreen);
-                }
-                else
-                {
-                    GAME.newTurn();
-                    updateGfx(enterNumberBox);
-                }
-            }
-        });
     }
 
-    private int parseText(String userInput)
+    private int parse(String userInput)
     {
         return Integer.parseInt(userInput);
     }
