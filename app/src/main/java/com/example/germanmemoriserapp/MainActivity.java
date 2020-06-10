@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
 
     //Settings
@@ -29,19 +27,15 @@ public class MainActivity extends AppCompatActivity {
             R.id.digitNineBtn, R.id.backBtn
     };
 
-    Intent moveToGOScreen = new Intent(MainActivity.this,
-            GameOverScreen.class);
+    Intent moveToGOScreen;
 
     EditText enterNumberBox;
     TextView tmpNumberView;
     TextView timerView;
 
     Keyboard digitKeyboard;
-
-    ImageButton[] keyboardButtons;
-
-    Game GAME;
     Timer timer;
+    Game GAME;
 
     InputHandler handler = new InputHandler();
 
@@ -50,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        moveToGOScreen = new Intent(MainActivity.this,
+                GameOverScreen.class);
+
         GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
 
         //Find UI Elements
@@ -57,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         tmpNumberView = findViewById(R.id.tmpNumberView);
         timerView = findViewById(R.id.timerView);
 
-        keyboardButtons = new ImageButton[SIZE_KEYB];
+        ImageButton[] keyboardButtons = new ImageButton[SIZE_KEYB];
 
         for (int i = 0; i < SIZE_KEYB; i++)
             keyboardButtons[i] = findViewById(digitIds[i]);
