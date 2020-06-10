@@ -21,7 +21,6 @@ public class Keyboard implements View.OnClickListener {
     EditText inputField;
 
     String input = "";
-    int inputSize = 0;
 
     public Keyboard(ImageButton[] digits, int size, EditText inputArea, Handler handler) {
         this.inputField = inputArea;
@@ -53,7 +52,6 @@ public class Keyboard implements View.OnClickListener {
 
     private void addInput(int digit) {
         input += String.valueOf(digit);
-        inputSize++;
     }
 
     public String getInput() {
@@ -62,7 +60,6 @@ public class Keyboard implements View.OnClickListener {
 
     private void setInput(String inp) {
         this.input = inp;
-        this.inputSize = input.length();
     }
 
     public void clearInput() {
@@ -70,7 +67,7 @@ public class Keyboard implements View.OnClickListener {
     }
 
     public int getInputSize() {
-        return this.inputSize;
+        return input.length();
     }
 
     private void actionBack() {
