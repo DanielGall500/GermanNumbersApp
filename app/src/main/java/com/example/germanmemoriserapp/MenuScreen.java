@@ -19,7 +19,7 @@ public class MenuScreen extends AppCompatActivity {
     private Button playGameBtn, exitGameBtn;
     private Spinner levelSpinner;
 
-    private ArrayList<DifficultyItem> difficulties;
+    private ArrayList<DifficultyItem> difficultyList;
     private DifficultyAdapter difficultyAdapter;
 
     @Override
@@ -36,18 +36,31 @@ public class MenuScreen extends AppCompatActivity {
 
         exitGameBtn.setOnClickListener(new ExitAppListener(this));
 
-        createDifficultyList();
-        difficultyAdapter = new DifficultyAdapter(this, difficulties);
+        difficultyList = createDifficultyList();
+        difficultyAdapter = new DifficultyAdapter(this, difficultyList);
 
         levelSpinner.setAdapter(difficultyAdapter);
     }
 
-    private void createDifficultyList() {
-        difficulties = new ArrayList<>();
+    private ArrayList<DifficultyItem> createDifficultyList() {
+        ArrayList<DifficultyItem> difficultyItems = new ArrayList<>();
 
-        DifficultyItem beginner = new DifficultyItem(getString(R.string.difficulty_one),0);
+        String[] difficultyTexts = new String[] {
+                getString(R.string.difficulty_one),
+                getString(R.string.difficulty_two),
+                getString(R.string.difficulty_three)
+        };
 
-        difficulties.add(beginner);
+        DifficultyItem[] items = new DifficultyItem[] {
+                new DifficultyItem(difficultyTexts[0],0),
+                new DifficultyItem(difficultyTexts[1],0),
+                new DifficultyItem(difficultyTexts[2],0)
+        };
+
+        for(DifficultyItem item : items)
+            difficultyItems.add(item);
+
+        return difficultyItems;
     }
 }
 
