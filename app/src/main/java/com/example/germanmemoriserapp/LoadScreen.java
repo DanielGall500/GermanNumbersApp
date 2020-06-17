@@ -12,6 +12,10 @@ public class LoadScreen extends AppCompatActivity {
     SoundManager soundPlayer;
     Intent moveToGame;
 
+    private int min = 1;
+    private int max = 10;
+    private int size = 3;
+
     class AudioHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -28,9 +32,9 @@ public class LoadScreen extends AppCompatActivity {
          * an audio manager. */
         soundPlayer = SoundManager.get();
 
-        soundPlayer.setLoadCompleteHandler(new AudioHandler());
+        soundPlayer.init(min, max, size, this);
 
-        soundPlayer.loadAllGameSounds(this);
+        soundPlayer.setLoadCompleteHandler(new AudioHandler());
 
         moveToGame = new Intent(this, MainActivity.class);
     }
