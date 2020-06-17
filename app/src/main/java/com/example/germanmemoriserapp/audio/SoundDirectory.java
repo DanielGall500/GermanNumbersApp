@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.audio;
 
 import android.content.Context;
 

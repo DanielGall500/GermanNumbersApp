@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.audio;
 
 import android.content.Context;
 import android.media.AudioAttributes;
@@ -6,6 +6,8 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
+
+import com.example.germanmemoriserapp.mechanics.NumSupplier;
 
 import java.util.ArrayList;
 import java.util.HashMap;

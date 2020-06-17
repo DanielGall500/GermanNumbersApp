@@ -1,7 +1,6 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.activities;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,9 +10,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.Serializable;
-
-import com.example.germanmemoriserapp.Game.GAME_STATE;
+import com.example.germanmemoriserapp.mechanics.Game;
+import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
+import com.example.germanmemoriserapp.ui.Keyboard;
+import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.mechanics.Timer;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoadScreen"></activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".GameOverScreen" />
-        <activity android:name=".MenuScreen">
+        <activity android:name=".activities.LoadScreen"></activity>
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.GameOverScreen" />
+        <activity android:name=".activities.MenuScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

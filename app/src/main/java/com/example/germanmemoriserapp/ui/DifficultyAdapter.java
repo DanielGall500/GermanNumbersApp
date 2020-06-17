@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.w3c.dom.Text;
+import com.example.germanmemoriserapp.R;
 
 import java.util.ArrayList;
 

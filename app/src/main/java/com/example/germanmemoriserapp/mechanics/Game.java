@@ -1,8 +1,10 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.mechanics;
+
+import com.example.germanmemoriserapp.audio.SoundManager;
 
 public class Game {
 
-    enum GAME_STATE {
+    public enum GAME_STATE {
         NO_CHANGE, NEW_TURN, GAME_OVER
     };
 

@@ -1,10 +1,13 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.germanmemoriserapp.ui.DifficultyAdapter;
+import com.example.germanmemoriserapp.ui.DifficultyItem;
+import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.ExitAppListener;
 import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
 

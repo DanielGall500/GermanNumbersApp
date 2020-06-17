@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.mechanics;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

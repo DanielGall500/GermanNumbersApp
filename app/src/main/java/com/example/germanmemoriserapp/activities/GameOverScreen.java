@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
 
 public class GameOverScreen extends AppCompatActivity {

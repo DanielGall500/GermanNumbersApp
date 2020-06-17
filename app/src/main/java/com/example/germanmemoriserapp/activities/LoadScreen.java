@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.audio.SoundManager;
 
 public class LoadScreen extends AppCompatActivity {
 

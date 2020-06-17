@@ -1,4 +1,4 @@
-package com.example.germanmemoriserapp;
+package com.example.germanmemoriserapp.ui;
 
 import android.os.Handler;
 import android.view.View;
