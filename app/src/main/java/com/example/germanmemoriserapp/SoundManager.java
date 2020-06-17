@@ -7,7 +7,9 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Queue;
 
 /*
 ONLY LOAD NUMBERS AFTER YOU KNOW WHICH ONES
@@ -24,41 +26,35 @@ public class SoundManager {
     private final int SRC_QUALITY = 1;
     private final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
-    public static synchronized SoundManager get() {
-        if(soundManager == null) {
-            soundManager = new SoundManager();
-        }
+    private final int LEFT_VOL = 1;
+    private final int RIGHT_VOL = 1;
+    private final int PRIORITY = 1;
+    private final int LOOP = 1;
+    private final int RATE = 1;
 
-        return soundManager;
-    }
-
-
-    /*
-    TODO
-    Implement a load queue, where each new
-    load can be queued and wait its turn for
-    loading and removed from the queue once
-    loaded.
-     */
-    private int soundIds[] = new int[] {
-            R.raw.nummer_ein, R.raw.nummer_zwei,
-            R.raw.nummer_drei, R.raw.nummer_vier,
-            R.raw.nummer_funf, R.raw.nummer_sechs,
-            R.raw.nummer_sieben, R.raw.nummer_acht,
-            R.raw.nummer_neun, R.raw.nummer_zehn
-    };
-
+    private NumSupplier numSupplier;
+    private SoundDirectory directories;
     private SoundPool soundPlayer;
     private Handler audioHandler;
-
     private HashMap<Integer, Integer> soundMap;
+    private Queue<Integer> soundIdQueue;
 
+    private ArrayList<Integer> numberArray;
+    private int soundIterator = 0;
 
-    private final int NUM_AUDIO_CLIPS = 10;
-    private int numLoadedClips = 0;
-
-    private int currLoad = 0;
     private Context appContext;
+
+    /*
+    Called every time a new audio clip is loaded.
+    If there are more clips in the sound queue, the
+    listener automatically loads the next one.
+     */
+    class LoadListener implements SoundPool.OnLoadCompleteListener {
+        @Override
+        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+            alertSoundLoaded();
+        }
+    }
 
     private SoundManager() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -80,25 +76,61 @@ public class SoundManager {
 
         soundMap = new HashMap<>();
 
+        //REMOVE THIS ?
         this.soundPlayer = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 
         soundPlayer.setOnLoadCompleteListener(new LoadListener());
 
+        numSupplier = new NumSupplier();
+        directories = new SoundDirectory();
     }
 
     /*
-    Load the sounds for the game.
+    Singleton implementation.
      */
-    public void loadAllGameSounds(Context context) {
+    public static synchronized SoundManager get() {
+        if(soundManager == null) {
+            soundManager = new SoundManager();
+        }
+
+        return soundManager;
+    }
+
+    public void init(int min, int max, int size, Context context) {
 
         this.appContext = context;
 
-        int num = 1;
-        loadAudioClip(num, soundIds[currLoad], context);
+        this.numberArray = numSupplier.generate(min, max, size);
+
+        soundIdQueue = directories.getResIds(numberArray, appContext);
+
+        loadAll();
     }
 
-    private void loadAudioClip(int num, int res, Context context) {
-        int mID = soundPlayer.load(context, res, 1);
+    //TODO
+    public void release() {
+        soundPlayer.release();
+        soundPlayer = null;
+
+        //need to reset sound directory
+    }
+
+    /*
+    Load all sounds needed for the game.
+     */
+    public void loadAll() {
+
+        if(soundIdQueue.isEmpty())
+            throw new RuntimeException("No Game Directories Prepared");
+
+        int soundId = soundIdQueue.poll();
+        int num = directories.getNum(soundId);
+
+        loadAudioClip(num, soundId);
+    }
+
+    private void loadAudioClip(int num, int res) {
+        int mID = soundPlayer.load(appContext, res, 1);
         storeSoundId(num, mID);
     }
 
@@ -111,15 +143,11 @@ public class SoundManager {
      */
     public void play(int num) {
 
-        if(!isValid(num))
+        if(!isLoaded(num))
             throw new IllegalArgumentException("Invalid Number");
 
         int id = getLoadedSoundId(num);
-        soundPlayer.play(id, 1, 1, 0, -1, 1);
-    }
-
-    public void reset() {
-
+        soundPlayer.play(id, LEFT_VOL, RIGHT_VOL, PRIORITY, LOOP, RATE);
     }
 
     public void setLoadCompleteHandler(Handler h) {
@@ -133,12 +161,23 @@ public class SoundManager {
     /*
     If a new audio clip is loaded, we handle it by calling
     to the alertSoundLoaded method.
-     */
-    private void alertSoundLoaded(int id) {
-        numLoadedClips++;
 
-        if(allClipsLoaded())
+    If there are more clips in the sound queue, it
+    automatically loads the next one.
+
+    Otherwise if all sounds are loaded, we make sure
+    to send out a signal telling the rest of our
+    application.
+     */
+    private void alertSoundLoaded() {
+        if(!soundIdQueue.isEmpty()) {
+            int nextDir = soundIdQueue.poll();
+            int number = directories.getNum(nextDir);
+
+            loadAudioClip(number, nextDir);
+        } else {
             onAllLoadsComplete();
+        }
     }
 
     /*
@@ -146,23 +185,28 @@ public class SoundManager {
     particular game has loaded.
      */
     private boolean allClipsLoaded() {
-        return getNumLoadedClips() == NUM_AUDIO_CLIPS;
+        return soundIdQueue.isEmpty();
     }
 
+    /*
+    Tell the loading screen that our audio
+    files are ready
+    */
     private void onAllLoadsComplete() {
-        /*Tell the loading screen that our audio
-          files are ready*/
-
         if(audioHandler != null) {
             audioHandler.sendEmptyMessage(0);
         }
     }
 
-    public void destroy() {
-        soundPlayer.release();
-        soundPlayer = null;
+    public void init(ArrayList<Integer> nums) {
+        this.numberArray = nums;
     }
 
+    /*
+    Retrieve the id of our loaded sound for
+    playback. Note that this is NOT the same
+    as an id for the directory of each sound.
+     */
     private int getLoadedSoundId(int num) {
         if(!soundMap.containsKey(num))
             throw new IllegalArgumentException("Invalid Number");
@@ -170,39 +214,25 @@ public class SoundManager {
         return soundMap.get(num);
     }
 
-    public int getNumLoadedClips() {
-        return this.numLoadedClips;
-    }
-
-    private boolean isValid(int num) {
+    private boolean isLoaded(int num) {
         return soundMap.containsKey(num);
     }
 
-    class LoadListener implements SoundPool.OnLoadCompleteListener {
-        @Override
-        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-
-            /*
-            because i have a for loop loading in everything
-            asynchronously, its not loading the ones i want first?
-             */
-
-            soundPlayer.play(getLoadedSoundId(currLoad+1), 1, 1, 0, 2, 1);
-
-            numLoadedClips++;
-
-            if(++currLoad < NUM_AUDIO_CLIPS) {
-                loadAudioClip(currLoad + 1, soundIds[currLoad], appContext);
-            } else if(allClipsLoaded()) {
-                onAllLoadsComplete();
-            } else {
-                throw new RuntimeException("Invalid Load Cycle");
-            }
-
-
-        }
-
+    public void resetIter() {
+        soundIterator = 0;
     }
+
+    public boolean hasNext() {
+        return (soundIterator + 1) < numberArray.size();
+    }
+
+    public int next() {
+        if(!hasNext())
+            throw new RuntimeException("No Numbers Left");
+        else
+            return numberArray.get(soundIterator++);
+    }
+
 
 
 }
