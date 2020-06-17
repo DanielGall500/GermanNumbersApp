@@ -2,20 +2,85 @@ package com.example.germanmemoriserapp;
 
 public class Game {
 
-    private NumSupplier generator;
-    private Score playerScore = new Score();
+    public enum GAME_STATE {
+        NO_CHANGE, NEW_TURN, GAME_OVER
+    };
+
+    private Score playerScore;
+    private SoundManager soundManager;
 
     private int currentNumber;
 
-    private int TURN = 0;
-    private int NUM_TURNS;
+    public Game() {
+        playerScore = new Score();
+        soundManager = SoundManager.get();
+    }
 
-    public Game(int min, int max, int turns) {
-        this.NUM_TURNS = turns;
+    /*
+    Actions
+     */
+    public void begin() {
+        newNumber();
+    }
 
-        generator = new NumSupplier(min, max, turns);
+    private void newTurn() {
+        newNumber();
+        playAudioClip();
+    }
 
-        newTurn();
+    private void gameOver() {
+        soundManager.release();
+    }
+
+    private void playAudioClip() {
+        soundManager.play(currentNumber);
+    }
+
+    /*
+    Execute an action based on the next
+    game state.
+     */
+    public void execute(GAME_STATE state) {
+        switch (state) {
+            case NEW_TURN:
+                newTurn();
+                break;
+            case GAME_OVER:
+                gameOver();
+                break;
+            case NO_CHANGE:
+                break;
+        }
+    }
+
+    /*
+    Get the next state of the game based on
+    user input.
+     */
+    public GAME_STATE getState(String input) {
+
+        boolean gameOver = !soundManager.hasNext();
+
+        if(inputIsCorrect(input))
+            incrementScore();
+        else
+            return GAME_STATE.NO_CHANGE;
+
+        return gameOver ? GAME_STATE.GAME_OVER : GAME_STATE.NEW_TURN;
+    }
+
+    private boolean inputIsCorrect(String input) {
+        if(!isValidInput(input))
+            return false;
+
+        return input == String.valueOf(currentNumber);
+    }
+
+    private void newNumber() {
+        if(soundManager.hasNext())
+            currentNumber = soundManager.next();
+        else
+            throw new RuntimeException("No Numbers Left");
     }
 
     public int getNumber() {
@@ -26,14 +91,11 @@ public class Game {
         return playerScore.getScore();
     }
 
-    public boolean play(int input) {
-        if (!generator.isCorrectNumber(input))
-            return false;
-
-        updateScore(input);
-        return true;
+    private void incrementScore() {
+        playerScore.increment();
     }
 
+    //TODO: ew
     public boolean isValidInput(String input) {
         if (input.length() == 0)
             return false;
@@ -50,31 +112,8 @@ public class Game {
         return true;
     }
 
-    private void updateScore(int input) {
-        if (generator.isCorrectNumber(input))
-            playerScore.increment();
-    }
-
     public boolean isEndOfGame() {
-        return (TURN == NUM_TURNS);
-    }
-
-    public int newTurn() {
-        if (isEndOfGame()) {
-            throw new RuntimeException("EOG Reached");
-        } else {
-            incrementTurn();
-            nextNumber();
-            return currentNumber;
-        }
-    }
-
-    private void nextNumber() {
-        currentNumber = generator.next();
-    }
-
-    private void incrementTurn() {
-        TURN++;
+        return !soundManager.hasNext();
     }
 
 }
