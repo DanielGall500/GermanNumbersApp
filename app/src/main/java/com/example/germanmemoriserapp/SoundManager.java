@@ -29,7 +29,7 @@ public class SoundManager {
     private final int LEFT_VOL = 1;
     private final int RIGHT_VOL = 1;
     private final int PRIORITY = 1;
-    private final int LOOP = 1;
+    private final int LOOP = -1;
     private final int RATE = 1;
 
     private NumSupplier numSupplier;
@@ -107,12 +107,11 @@ public class SoundManager {
         loadAll();
     }
 
-    //TODO
-    public void release() {
+    public void reset() {
         soundPlayer.release();
         soundPlayer = null;
 
-        //need to reset sound directory
+        directories.reset();
     }
 
     /*
