@@ -49,9 +49,7 @@ public class SoundManager {
     };
 
     private SoundPool soundPlayer;
-    private boolean isLoaded = false;
     private Handler audioHandler;
-    private int loadedSoundsIds[];
 
     private HashMap<Integer, Integer> soundMap;
 
@@ -80,7 +78,6 @@ public class SoundManager {
             soundPlayer = new SoundPool(MAX_STREAMS, STREAM_TYPE, SRC_QUALITY);
         }
 
-        loadedSoundsIds = new int[NUM_AUDIO_CLIPS];
         soundMap = new HashMap<>();
 
         this.soundPlayer = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
@@ -92,23 +89,15 @@ public class SoundManager {
     /*
     Load the sounds for the game.
      */
-    public void loadGameSounds(Context context) {
-
-        //int id = soundIds[0];
-       // GLOB_ID = soundPlayer.load(context, id, 1);
+    public void loadAllGameSounds(Context context) {
 
         this.appContext = context;
 
-        //addNumberAudio(1, soundId, context);
         int num = 1;
         loadAudioClip(num, soundIds[currLoad], context);
-
-
-        //mID = soundPlayer.load(context, soundIds[currLoad], 1);
     }
 
-    private void loadAudioClip(int num, int res, Context context)
-    {
+    private void loadAudioClip(int num, int res, Context context) {
         int mID = soundPlayer.load(context, res, 1);
         storeSoundId(num, mID);
     }
@@ -126,10 +115,6 @@ public class SoundManager {
             throw new IllegalArgumentException("Invalid Number");
 
         int id = getLoadedSoundId(num);
-
-        System.out.println("Attempting To Play Sound ID: " + id);
-        System.out.println("Number: " + num);
-
         soundPlayer.play(id, 1, 1, 0, -1, 1);
     }
 
@@ -168,11 +153,9 @@ public class SoundManager {
         /*Tell the loading screen that our audio
           files are ready*/
 
-        if(audioHandler == null) {
-            throw new RuntimeException("Handler Must Be Set");
+        if(audioHandler != null) {
+            audioHandler.sendEmptyMessage(0);
         }
-
-        audioHandler.sendEmptyMessage(0);
     }
 
     public void destroy() {
@@ -187,12 +170,10 @@ public class SoundManager {
         return soundMap.get(num);
     }
 
-    private boolean isLoaded() {
-        return this.isLoaded;
-    }
     public int getNumLoadedClips() {
         return this.numLoadedClips;
     }
+
     private boolean isValid(int num) {
         return soundMap.containsKey(num);
     }
@@ -206,10 +187,19 @@ public class SoundManager {
             asynchronously, its not loading the ones i want first?
              */
 
-            soundPlayer.play(getLoadedSoundId(currLoad+1), 1, 1, 0, -1, 1);
+            soundPlayer.play(getLoadedSoundId(currLoad+1), 1, 1, 0, 2, 1);
 
-            if(++currLoad < NUM_AUDIO_CLIPS)
-                loadAudioClip(currLoad+1,soundIds[currLoad],appContext);
+            numLoadedClips++;
+
+            if(++currLoad < NUM_AUDIO_CLIPS) {
+                loadAudioClip(currLoad + 1, soundIds[currLoad], appContext);
+            } else if(allClipsLoaded()) {
+                onAllLoadsComplete();
+            } else {
+                throw new RuntimeException("Invalid Load Cycle");
+            }
+
+
         }
 
     }

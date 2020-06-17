@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     InputHandler handler = new InputHandler();
 
-    NumberAudioPlayer player;
+    SoundManager audioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /*
-        Load in our audio generator as a parcelable from the
-        loading screen.
+        Load in our singleton audio generator
          */
-        player = (NumberAudioPlayer)
-                getIntent().getParcelableExtra("NumberAudioPlayer");
+        audioManager = SoundManager.get();
 
-        System.out.println("TESTING LOADED: " + player.getNumLoadedClips());
+        //safety check to ensure sounds load
 
         moveToGOScreen = new Intent(MainActivity.this,
                 GameOverScreen.class);
@@ -85,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         timer = new Timer(timerView);
         timer.begin();
 
-        //player = new NumberAudioPlayer(this, 1, AudioManager.STREAM_MUSIC, 0);
     }
 
     private int parse(String userInput) {
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             updateGfx(enterNumberBox);
 
             System.out.println("Next Number: " + newNum);
-            player.play(newNum);
+            audioManager.play(newNum);
 
         }
     }
