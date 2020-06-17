@@ -2,13 +2,12 @@ package com.example.germanmemoriserapp;
 
 public class Game {
 
-    public enum GAME_STATE {
+    enum GAME_STATE {
         NO_CHANGE, NEW_TURN, GAME_OVER
     };
 
-    private Score playerScore;
     private SoundManager soundManager;
-
+    private Score playerScore;
     private int currentNumber;
 
     public Game() {
@@ -21,17 +20,18 @@ public class Game {
      */
     public void begin() {
         newNumber();
+        playAudioClip();
     }
 
-    private void newTurn() {
+    private void onNewTurn() {
         newNumber();
         playAudioClip();
     }
 
-    private void gameOver() {
-        soundManager.release();
+    private void onGameOver() {
+        soundManager.reset();
     }
-
+    
     private void playAudioClip() {
         soundManager.play(currentNumber);
     }
@@ -43,10 +43,10 @@ public class Game {
     public void execute(GAME_STATE state) {
         switch (state) {
             case NEW_TURN:
-                newTurn();
+                onNewTurn();
                 break;
             case GAME_OVER:
-                gameOver();
+                onGameOver();
                 break;
             case NO_CHANGE:
                 break;
@@ -70,10 +70,7 @@ public class Game {
     }
 
     private boolean inputIsCorrect(String input) {
-        if(!isValidInput(input))
-            return false;
-
-        return input == String.valueOf(currentNumber);
+        return input.equals(String.valueOf(currentNumber));
     }
 
     private void newNumber() {
@@ -93,23 +90,6 @@ public class Game {
 
     private void incrementScore() {
         playerScore.increment();
-    }
-
-    //TODO: ew
-    public boolean isValidInput(String input) {
-        if (input.length() == 0)
-            return false;
-
-        char[] chars = input.toCharArray();
-        int digit;
-
-        for (char c : chars) {
-            digit = ((int) c - 48);
-
-            if (digit < 0 || digit > 9)
-                return false;
-        }
-        return true;
     }
 
     public boolean isEndOfGame() {
