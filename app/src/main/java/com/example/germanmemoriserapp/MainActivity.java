@@ -13,12 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.germanmemoriserapp.Game.GAME_STATE;
 
-    //Settings
-    final int MIN_NUM = 1;
-    final int MAX_NUM = 10;
-    final int NUM_TURNS = 3;
+public class MainActivity extends AppCompatActivity {
 
     //10 Digits + 1 Back Button
     final int SIZE_KEYB = 11;
@@ -30,38 +27,40 @@ public class MainActivity extends AppCompatActivity {
             R.id.digitNineBtn, R.id.backBtn
     };
 
+    InputHandler handler;
     Intent moveToGOScreen;
-
     EditText enterNumberBox;
     TextView tmpNumberView;
     TextView timerView;
-
     Keyboard digitKeyboard;
     Timer timer;
     Game GAME;
 
-    //NumberAudioPlayer player;
-
-    InputHandler handler = new InputHandler();
-
-    SoundManager audioManager;
+    /*
+    Called when the user presses a button on
+    the game's keyboard.
+     */
+    class InputHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            String userInput = digitKeyboard.getInput();
+            handleInput(userInput);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        Load in our singleton audio generator
-         */
-        audioManager = SoundManager.get();
+        //TODO: safety check to ensure sounds load
 
-        //safety check to ensure sounds load
+        handler = new InputHandler();
 
         moveToGOScreen = new Intent(MainActivity.this,
                 GameOverScreen.class);
 
-        GAME = new Game(MIN_NUM, MAX_NUM, NUM_TURNS);
+        GAME = new Game();
 
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
@@ -83,10 +82,36 @@ public class MainActivity extends AppCompatActivity {
         timer = new Timer(timerView);
         timer.begin();
 
+        GAME.begin();
     }
 
-    private int parse(String userInput) {
-        return Integer.parseInt(userInput);
+    private void handleInput(String userInput) {
+
+        GAME_STATE nextState = GAME.getState(userInput);
+
+        GAME.execute(nextState);
+
+        if(nextState.equals(GAME_STATE.NEW_TURN)) {
+            onNewTurn();
+        }
+        else if(nextState.equals(GAME_STATE.GAME_OVER)) {
+            onGameOver();
+        }
+    }
+
+    private void onNewTurn() {
+        updateGfx(enterNumberBox);
+    }
+
+    private void onGameOver() {
+        timer.stop();
+
+        //Transfer Score Data
+        moveToGOScreen.putExtra(getString(R.string.score_key),
+                String.valueOf(timer.getPreviousResult()));
+
+        startActivity(moveToGOScreen);
+        this.finish();
     }
 
     private void updateGfx(EditText entryBox) {
@@ -100,44 +125,5 @@ public class MainActivity extends AppCompatActivity {
     private void clearAllInput(EditText entryBox) {
         digitKeyboard.clearInput();
         entryBox.setText(digitKeyboard.getInput());
-    }
-
-    class InputHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            handleInput();
-        }
-    }
-
-    private void handleInput() {
-        String userInput = digitKeyboard.getInput();
-
-        //Don't Accept Invalid Input
-        if (!GAME.isValidInput(userInput))
-            return;
-
-        int INPUT = parse(userInput);
-
-        boolean correctNumber = GAME.play(INPUT);
-
-        if (!correctNumber) {
-            return;
-        } else if (GAME.isEndOfGame()) {
-            timer.stop();
-
-            //Transfer Score Data
-            moveToGOScreen.putExtra(getString(R.string.score_key),
-                    String.valueOf(timer.getPreviousResult()));
-
-            startActivity(moveToGOScreen);
-        } else {
-
-            int newNum = GAME.newTurn();
-            updateGfx(enterNumberBox);
-
-            System.out.println("Next Number: " + newNum);
-            audioManager.play(newNum);
-
-        }
     }
 }
