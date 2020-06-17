@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.LoadScreen">
 
+    <ProgressBar
+        android:id="@+id/audioProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="375dp"
+        android:layout_height="59dp"
+        android:progress="1"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="583dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

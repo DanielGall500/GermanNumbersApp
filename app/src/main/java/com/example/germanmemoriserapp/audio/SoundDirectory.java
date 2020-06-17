@@ -22,7 +22,7 @@ public class SoundDirectory {
         Queue<Integer> ids = new LinkedList<>();
         int N = nums.size();
 
-        for(int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             int num = nums.get(i);
 
             String file = getFileStr(num);
@@ -37,7 +37,7 @@ public class SoundDirectory {
     }
 
     public int getNum(int id) {
-        if(!dirMap.containsKey(id)) {
+        if (!dirMap.containsKey(id)) {
             throw new IllegalArgumentException("Invalid ID");
         } else {
             return dirMap.get(id);
@@ -59,7 +59,6 @@ public class SoundDirectory {
     public void reset() {
         dirMap.clear();
     }
-
 
 
 }

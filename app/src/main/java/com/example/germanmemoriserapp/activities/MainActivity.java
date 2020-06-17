@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GAME = new Game();
+
         //TODO: safety check to ensure sounds load
 
         handler = new InputHandler();
@@ -61,25 +63,15 @@ public class MainActivity extends AppCompatActivity {
         moveToGOScreen = new Intent(MainActivity.this,
                 GameOverScreen.class);
 
-        GAME = new Game();
-
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
         timerView = findViewById(R.id.timerView);
 
-        ImageButton[] keyboardButtons = new ImageButton[SIZE_KEYB];
-
-        for (int i = 0; i < SIZE_KEYB; i++)
-            keyboardButtons[i] = findViewById(digitIds[i]);
-
-        digitKeyboard = new Keyboard(keyboardButtons, SIZE_KEYB, enterNumberBox, handler);
-
-        //Begin the timer
-        //timeHandler.postDelayed(timerRunnable, 0);
+        digitKeyboard = setupKeyboard(digitIds, SIZE_KEYB);
         timer = new Timer(timerView);
-        timer.begin();
 
+        timer.begin();
         GAME.begin();
 
         //Set Initial UI Parameters
@@ -88,11 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleInput(String userInput) {
 
-        System.out.println("input: " + userInput);
-
         GAME_STATE nextState = GAME.getState(userInput);
-
-        System.out.println("Next State: " + nextState.toString());
 
         GAME.execute(nextState);
 
@@ -130,5 +118,14 @@ public class MainActivity extends AppCompatActivity {
     private void clearAllInput(EditText entryBox) {
         digitKeyboard.clearInput();
         entryBox.setText(digitKeyboard.getInput());
+    }
+
+    private Keyboard setupKeyboard(int[] digitIds, int N) {
+        ImageButton[] keyboardButtons = new ImageButton[N];
+
+        for (int i = 0; i < N; i++)
+            keyboardButtons[i] = findViewById(digitIds[i]);
+
+        return new Keyboard(keyboardButtons, N, enterNumberBox, handler);
     }
 }

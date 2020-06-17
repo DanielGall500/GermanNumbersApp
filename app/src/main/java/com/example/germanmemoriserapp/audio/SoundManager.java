@@ -15,20 +15,20 @@ import java.util.Queue;
 
 public class SoundManager {
 
+    //Singleton Sound Manager Object
+    private static SoundManager soundManager;
     /*
     Audio Settings
      */
     private final int MAX_STREAMS = 1;
     private final int SRC_QUALITY = 1;
     private final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
-
     /*
     Audio Attributes
      */
     private final int ATT_USAGE = AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
     private final int ATT_FLAG = AudioAttributes.FLAG_AUDIBILITY_ENFORCED;
     private final int ATT_CONTENT = AudioAttributes.CONTENT_TYPE_SONIFICATION;
-
     /*
     Playback Settings
      */
@@ -42,30 +42,15 @@ public class SoundManager {
     private SoundDirectory directories;
     private SoundPool soundPlayer;
     private Handler audioHandler;
+    private Handler progressHandler;
     private HashMap<Integer, Integer> soundMap;
     private Queue<Integer> soundIdQueue;
-
     private ArrayList<Integer> numberArray;
     private int soundIterator = 0;
     private Context appContext;
 
-    //Singleton Sound Manager Object
-    private static SoundManager soundManager;
-
-    /*
-    Called every time a new audio clip is loaded.
-    If there are more clips in the sound queue, the
-    listener automatically loads the next one.
-     */
-    class LoadListener implements SoundPool.OnLoadCompleteListener {
-        @Override
-        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-            alertSoundLoaded();
-        }
-    }
-
     private SoundManager() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(ATT_USAGE).setFlags(ATT_FLAG)
@@ -91,7 +76,7 @@ public class SoundManager {
     Singleton implementation.
      */
     public static synchronized SoundManager get() {
-        if(soundManager == null) {
+        if (soundManager == null) {
             soundManager = new SoundManager();
         }
 
@@ -102,11 +87,20 @@ public class SoundManager {
 
         this.appContext = context;
 
-        this.numberArray = numSupplier.generate(min, max, size);
-
+        numberArray = numSupplier.generate(min, max, size);
         soundIdQueue = directories.getResIds(numberArray, appContext);
 
-        loadAll();
+        /*
+        Load audio clips on a new thread
+         */
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                loadAll();
+            }
+        };
+
+        t.start();
     }
 
     public void reset() {
@@ -121,7 +115,7 @@ public class SoundManager {
      */
     public void loadAll() {
 
-        if(soundIdQueue.isEmpty())
+        if (soundIdQueue.isEmpty())
             throw new RuntimeException("No Game Directories Prepared");
 
         int soundId = soundIdQueue.poll();
@@ -144,19 +138,23 @@ public class SoundManager {
      */
     public void play(int num) {
 
-        if(!isLoaded(num))
+        if (!isLoaded(num))
             throw new IllegalArgumentException("Invalid Number");
 
         int id = getLoadedSoundId(num);
         soundPlayer.play(id, LEFT_VOL, RIGHT_VOL, PRIORITY, LOOP, RATE);
     }
 
+    public Handler getLoadCompleteHandler() {
+        return this.audioHandler;
+    }
+
     public void setLoadCompleteHandler(Handler h) {
         this.audioHandler = h;
     }
 
-    public Handler getLoadCompleteHandler() {
-        return this.audioHandler;
+    public void setProgressHandler(Handler h) {
+        this.progressHandler = h;
     }
 
     /*
@@ -171,7 +169,7 @@ public class SoundManager {
     application.
      */
     private void alertSoundLoaded() {
-        if(!soundIdQueue.isEmpty()) {
+        if (!soundIdQueue.isEmpty()) {
             int nextDir = soundIdQueue.poll();
             int number = directories.getNum(nextDir);
 
@@ -179,6 +177,10 @@ public class SoundManager {
         } else {
             onAllLoadsComplete();
         }
+    }
+
+    public void alertProgressBarUpdate() {
+        progressHandler.sendEmptyMessage(0);
     }
 
     /*
@@ -194,7 +196,7 @@ public class SoundManager {
     files are ready
     */
     private void onAllLoadsComplete() {
-        if(audioHandler != null) {
+        if (audioHandler != null) {
             audioHandler.sendEmptyMessage(0);
         }
     }
@@ -209,7 +211,7 @@ public class SoundManager {
     as an id for the directory of each sound.
      */
     private int getLoadedSoundId(int num) {
-        if(!soundMap.containsKey(num))
+        if (!soundMap.containsKey(num))
             throw new IllegalArgumentException("Invalid Number");
 
         return soundMap.get(num);
@@ -224,16 +226,28 @@ public class SoundManager {
     }
 
     public boolean hasNext() {
-        return (soundIterator + 1) < numberArray.size();
+        return (soundIterator + 1) <= numberArray.size();
     }
 
     public int next() {
-        if(!hasNext())
+        if (!hasNext())
             throw new RuntimeException("No Numbers Left");
         else
             return numberArray.get(soundIterator++);
     }
 
+    /*
+    Called every time a new audio clip is loaded.
+    If there are more clips in the sound queue, the
+    listener automatically loads the next one.
+     */
+    class LoadListener implements SoundPool.OnLoadCompleteListener {
+        @Override
+        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+            alertSoundLoaded();
+            alertProgressBarUpdate();
+        }
+    }
 
 
 }

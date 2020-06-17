@@ -6,18 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
 
 public class LoadScreen extends AppCompatActivity {
 
-    SoundManager soundPlayer;
-    Intent moveToGame;
+    private SoundManager soundPlayer;
+    private Intent moveToGame;
+
+    private ProgressBar audioProgressBar;
 
     private int min = 1;
     private int max = 10;
-    private int size = 3;
+    private int size = 4;
+
+    private int audioProgress = 0;
 
     class AudioHandler extends Handler {
         @Override
@@ -26,10 +31,30 @@ public class LoadScreen extends AppCompatActivity {
         }
     }
 
+    class ProgressHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            System.out.println("UPDATE PROGRESS");
+            audioProgress++;
+
+            //Run on UI thread
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    audioProgressBar.setProgress(audioProgress);
+                }
+            });
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_screen);
+
+        audioProgressBar = findViewById(R.id.audioProgressBar);
+        audioProgressBar.setMax(4);
+        audioProgressBar.setProgress(audioProgress);
 
         /* Get our singleton implementation of
          * an audio manager. */
@@ -38,6 +63,7 @@ public class LoadScreen extends AppCompatActivity {
         soundPlayer.init(min, max, size, this);
 
         soundPlayer.setLoadCompleteHandler(new AudioHandler());
+        soundPlayer.setProgressHandler(new ProgressHandler());
 
         moveToGame = new Intent(this, MainActivity.class);
     }

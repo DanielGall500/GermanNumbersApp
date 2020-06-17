@@ -49,8 +49,7 @@ public class NumSupplier {
         ArrayList<Integer> generated = new ArrayList<>();
 
         int tmp;
-        for(int i = 0; i < size; i++)
-        {
+        for(int i = 0; i < size; i++) {
             tmp = generateNumber(min, max);
             generated.add(tmp);
         }
