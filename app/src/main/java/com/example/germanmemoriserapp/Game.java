@@ -31,7 +31,7 @@ public class Game {
     private void onGameOver() {
         soundManager.reset();
     }
-    
+
     private void playAudioClip() {
         soundManager.play(currentNumber);
     }
