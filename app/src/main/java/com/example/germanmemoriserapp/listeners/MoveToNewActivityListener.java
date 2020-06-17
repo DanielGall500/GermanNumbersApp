@@ -13,10 +13,8 @@ public class MoveToNewActivityListener implements View.OnClickListener {
 
     Intent moveToNewScreen;
 
-    public MoveToNewActivityListener(Context currContext,
-                                     AppCompatActivity currActivity,
-                                     Class newActivity)
-    {
+    public MoveToNewActivityListener(Context currContext, AppCompatActivity currActivity,
+                                     Class newActivity) {
         this.currentContext = currContext;
         this.currentActivity = currActivity;
 
@@ -24,8 +22,7 @@ public class MoveToNewActivityListener implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         currentContext.startActivity(moveToNewScreen);
         currentActivity.finish();
     }
