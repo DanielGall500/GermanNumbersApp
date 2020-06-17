@@ -35,7 +35,7 @@ public class GameOverScreen extends AppCompatActivity {
         ));
 
         retryBtn.setOnClickListener(new MoveToNewActivityListener(
-                this, this, MainActivity.class
+                this, this, LoadScreen.class
         ));
     }
 
