@@ -28,27 +28,15 @@ public class SoundDirectory {
             String file = getFileStr(num);
             int id = getId(file, context);
 
-            System.out.println("Adding new id: " + id);
-
             dirMap.put(id, num);
 
             ids.offer(id);
         }
 
-        System.out.println("PRESIZE: " + dirMap.keySet().size());
-
         return ids;
     }
 
     public int getNum(int id) {
-        System.out.println("ID: " + id);
-        System.out.println(dirMap.containsKey(id));
-
-        for(int i : dirMap.keySet())
-            System.out.print(i + ", ");
-
-        System.out.println("SIZE: " + dirMap.keySet().size());
-
         if(!dirMap.containsKey(id)) {
             throw new IllegalArgumentException("Invalid ID");
         } else {
@@ -66,6 +54,10 @@ public class SoundDirectory {
         );
 
         return resId;
+    }
+
+    public void reset() {
+        dirMap.clear();
     }
 
 
