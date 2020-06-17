@@ -13,21 +13,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
 
-/*
-ONLY LOAD NUMBERS AFTER YOU KNOW WHICH ONES
-ARE BEING USED
- */
-
 public class SoundManager {
 
-    //Holds our one instance of the sound manager
-    //for global use
-    private static SoundManager soundManager;
-
+    /*
+    Audio Settings
+     */
     private final int MAX_STREAMS = 1;
     private final int SRC_QUALITY = 1;
     private final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
 
+    /*
+    Audio Attributes
+     */
+    private final int ATT_USAGE = AudioAttributes.USAGE_ASSISTANCE_SONIFICATION;
+    private final int ATT_FLAG = AudioAttributes.FLAG_AUDIBILITY_ENFORCED;
+    private final int ATT_CONTENT = AudioAttributes.CONTENT_TYPE_SONIFICATION;
+
+    /*
+    Playback Settings
+     */
     private final int LEFT_VOL = 1;
     private final int RIGHT_VOL = 1;
     private final int PRIORITY = 1;
@@ -43,8 +47,10 @@ public class SoundManager {
 
     private ArrayList<Integer> numberArray;
     private int soundIterator = 0;
-
     private Context appContext;
+
+    //Singleton Sound Manager Object
+    private static SoundManager soundManager;
 
     /*
     Called every time a new audio clip is loaded.
@@ -62,13 +68,11 @@ public class SoundManager {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
+                    .setUsage(ATT_USAGE).setFlags(ATT_FLAG)
+                    .setContentType(ATT_CONTENT).build();
 
             soundPlayer = new SoundPool.Builder()
-                    .setMaxStreams(1)
+                    .setMaxStreams(MAX_STREAMS)
                     .setAudioAttributes(audioAttributes)
                     .build();
 
@@ -77,14 +81,10 @@ public class SoundManager {
         }
 
         soundMap = new HashMap<>();
-
-        //REMOVE THIS ?
-        this.soundPlayer = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-
-        soundPlayer.setOnLoadCompleteListener(new LoadListener());
-
         numSupplier = new NumSupplier();
         directories = new SoundDirectory();
+
+        soundPlayer.setOnLoadCompleteListener(new LoadListener());
     }
 
     /*
