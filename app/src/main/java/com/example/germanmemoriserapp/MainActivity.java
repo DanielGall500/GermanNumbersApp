@@ -74,20 +74,24 @@ public class MainActivity extends AppCompatActivity {
 
         digitKeyboard = new Keyboard(keyboardButtons, SIZE_KEYB, enterNumberBox, handler);
 
-        //Set Initial UI Parameters
-        updateGfx(enterNumberBox);
-
         //Begin the timer
         //timeHandler.postDelayed(timerRunnable, 0);
         timer = new Timer(timerView);
         timer.begin();
 
         GAME.begin();
+
+        //Set Initial UI Parameters
+        updateGfx(enterNumberBox);
     }
 
     private void handleInput(String userInput) {
 
+        System.out.println("input: " + userInput);
+
         GAME_STATE nextState = GAME.getState(userInput);
+
+        System.out.println("Next State: " + nextState.toString());
 
         GAME.execute(nextState);
 
