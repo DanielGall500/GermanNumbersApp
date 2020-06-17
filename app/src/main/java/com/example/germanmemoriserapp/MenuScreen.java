@@ -32,7 +32,7 @@ public class MenuScreen extends AppCompatActivity {
         levelSpinner = findViewById(R.id.difficultySpinner);
 
         playGameBtn.setOnClickListener(new MoveToNewActivityListener(
-                this,this, MainActivity.class));
+                this,this, LoadScreen.class));
 
         exitGameBtn.setOnClickListener(new ExitAppListener(this));
 

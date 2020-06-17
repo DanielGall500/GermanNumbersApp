@@ -1,6 +1,7 @@
 package com.example.germanmemoriserapp;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,12 +40,25 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     Game GAME;
 
+    //NumberAudioPlayer player;
+
     InputHandler handler = new InputHandler();
+
+    NumberAudioPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Load in our audio generator as a parcelable from the
+        loading screen.
+         */
+        player = (NumberAudioPlayer)
+                getIntent().getParcelableExtra("NumberAudioPlayer");
+
+        System.out.println("TESTING LOADED: " + player.getNumLoadedClips());
 
         moveToGOScreen = new Intent(MainActivity.this,
                 GameOverScreen.class);
@@ -68,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         //timeHandler.postDelayed(timerRunnable, 0);
         timer = new Timer(timerView);
         timer.begin();
+
+        //player = new NumberAudioPlayer(this, 1, AudioManager.STREAM_MUSIC, 0);
     }
 
     private int parse(String userInput) {
@@ -116,8 +134,13 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(moveToGOScreen);
         } else {
-            GAME.newTurn();
+
+            int newNum = GAME.newTurn();
             updateGfx(enterNumberBox);
+
+            System.out.println("Next Number: " + newNum);
+            player.play(newNum);
+
         }
     }
 }

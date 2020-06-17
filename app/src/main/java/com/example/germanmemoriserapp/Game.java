@@ -59,12 +59,13 @@ public class Game {
         return (TURN == NUM_TURNS);
     }
 
-    public void newTurn() {
+    public int newTurn() {
         if (isEndOfGame()) {
             throw new RuntimeException("EOG Reached");
         } else {
             incrementTurn();
             nextNumber();
+            return currentNumber;
         }
     }
 
