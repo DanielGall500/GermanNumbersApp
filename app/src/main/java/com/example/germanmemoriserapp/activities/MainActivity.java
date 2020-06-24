@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
+import com.example.germanmemoriserapp.ui.ButtonResource;
 import com.example.germanmemoriserapp.ui.Keyboard;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.Timer;
@@ -37,13 +38,6 @@ public class MainActivity extends AppCompatActivity {
             R.id.digitNineBtn, R.id.backBtn
     };
 
-    int[] unpressedIds = new int[] {
-            R.drawable.keyb_0, R.drawable.keyb_1, R.drawable.keyb_2,
-            R.drawable.keyb_3, R.drawable.keyb_4, R.drawable.keyb_5,
-            R.drawable.keyb_6, R.drawable.keyb_7, R.drawable.keyb_8,
-            R.drawable.keyb_9
-    };
-
     Intent moveToGOScreen;
     EditText enterNumberBox;
     TextView tmpNumberView;
@@ -51,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     Keyboard digitKeyboard;
     Timer timer;
     Game GAME;
+
+    /*
+    Grabs Buttons Images: Unpressed, Correct, Incorrect
+     */
+    ButtonResource btnRes = new ButtonResource();
 
     /*
     Matches digit ID to digit value
@@ -115,19 +114,8 @@ public class MainActivity extends AppCompatActivity {
             int digit = (int) btnData.get("DIGIT");
 
             ImageButton btn = getBtn(digit);
-
-            switch(newState) {
-                case VALID:
-                    btn.setImageResource(R.drawable.keyb_1);
-                    break;
-                case INVALID:
-                    btn.setImageResource(R.drawable.keyb_0);
-                    break;
-                case UNPRESSED:
-                    int unpressedImg = unpressedIds[digit];
-                    btn.setImageResource(unpressedImg);
-                    break;
-            }
+            int img = btnRes.get(digit, newState);
+            btn.setImageResource(img);
         }
     }
 
@@ -153,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
         tmpNumberView = findViewById(R.id.tmpNumberView);
         timerView = findViewById(R.id.timerView);
 
-        Keyboard keyb = new Keyboard(inputFieldH, buttonUiH, gameStateH,
+        digitKeyboard = new Keyboard(inputFieldH, buttonUiH, gameStateH,
                 digitIdReference, GAME);
 
-        setAllButtonListeners(keyb);
+        setAllButtonListeners(digitKeyboard);
 
         GAME = new Game();
         GAME.begin();
