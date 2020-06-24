@@ -25,6 +25,7 @@ public class Game {
     /*
     Actions
      */
+
     public void begin() {
         newNumber();
         playAudioClip();

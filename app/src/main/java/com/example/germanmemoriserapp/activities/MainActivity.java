@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -42,32 +44,57 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.keyb_9
     };
 
-    InputHandler handler;
     Intent moveToGOScreen;
     EditText enterNumberBox;
     TextView tmpNumberView;
     TextView timerView;
     Keyboard digitKeyboard;
     Timer timer;
-
     Game GAME;
-    //Input INPUT;
 
-    HashMap<Integer, Integer> associatedDigits;
+    /*
+    Matches digit ID to digit value
+     */
+    HashMap<Integer, Integer> digitIdReference;
+
+    /*
+    Initialise our handlers. These will update particular
+    parts of our game when called.
+     */
+    GameStateHandler gameStateH = new GameStateHandler();
+    InputFieldUIHandler inputFieldH = new InputFieldUIHandler();
+    ButtonUIHandler buttonUiH = new ButtonUIHandler();
 
     /*
     Called when the user presses a button on
     the game's keyboard.
      */
-    class InputHandler extends Handler {
+    class GameStateHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            String userInput = digitKeyboard.getInput();
-            handleInput(userInput);
+            String userInput = (String) msg.obj;
+
+            //Retrieve next state of the game
+            GAME_STATE nextState = GAME.getState(userInput);
+
+            //Execute this action in the backend
+            GAME.execute(nextState);
+
+            //Execute this action in the frontend
+            if(nextState.equals(GAME_STATE.NEW_TURN)) {
+                onNewTurn();
+            }
+            else if(nextState.equals(GAME_STATE.GAME_OVER)) {
+                onGameOver();
+            }
         }
     }
 
-    class InputFieldUIListener extends Handler {
+    /*
+    Called if we want to update the text
+    in our input field.
+     */
+    class InputFieldUIHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             String newStr = (String) msg.obj;
@@ -75,7 +102,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class ButtonUIListener extends Handler {
+    /*
+    Called if we want to update the state of
+    a keyboard's button.
+     */
+    class ButtonUIHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             Bundle btnData = msg.getData();
@@ -84,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             int digit = (int) btnData.get("DIGIT");
 
             ImageButton btn = getBtn(digit);
-
-            System.out.println(String.format("Setting %d to %s", digit, newState.toString()));
 
             switch(newState) {
                 case VALID:
@@ -106,65 +135,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Make fullscreen
+        //Preference: Make fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-
         setContentView(R.layout.activity_main);
-
-        associatedDigits = new HashMap<>();
-
-        for (int i = 0; i < NUM_DIGITS; i++) {
-            associatedDigits.put(digitIds[i], i);
-        }
-
-        //Mediator between the game and the keyboard
-        //INPUT = new Input(GAME, new InputHandler());
-
-        GAME = new Game();
-
-        //TODO: safety check to ensure sounds load
-
-        handler = new InputHandler();
 
         moveToGOScreen = new Intent(MainActivity.this,
                 GameOverScreen.class);
+
+        //Match particular button Ids to their numerical value
+        digitIdReference = setupDigitRef(digitIds);
 
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         tmpNumberView = findViewById(R.id.tmpNumberView);
         timerView = findViewById(R.id.timerView);
 
-        digitKeyboard = setupKeyboard(digitIds, SIZE_KEYB);
+        Keyboard keyb = new Keyboard(inputFieldH, buttonUiH, gameStateH,
+                digitIdReference, GAME);
 
-        for(int i = 0; i < SIZE_KEYB; i++) {
-            int id = digitIds[i];
-            findViewById(id).setOnClickListener(digitKeyboard);
-        }
+        setAllButtonListeners(keyb);
+
+        GAME = new Game();
+        GAME.begin();
+        onNewTurn();
 
         timer = new Timer(timerView);
-
         timer.begin();
-        GAME.begin();
-
-        //First move
-        onNewTurn();
-    }
-
-    private void handleInput(String userInput) {
-
-        GAME_STATE nextState = GAME.getState(userInput);
-
-        GAME.execute(nextState);
-
-        if(nextState.equals(GAME_STATE.NEW_TURN)) {
-            onNewTurn();
-        }
-        else if(nextState.equals(GAME_STATE.GAME_OVER)) {
-            onGameOver();
-        }
     }
 
     private void onNewTurn() {
@@ -197,23 +196,28 @@ public class MainActivity extends AppCompatActivity {
         entryBox.setText(digitKeyboard.getInput());
     }
 
-    private Keyboard setupKeyboard(int[] digitIds, int N) {
-
-        ImageButton[] keyboardButtons = new ImageButton[N];
-
-        for (int i = 0; i < N; i++)
-            keyboardButtons[i] = findViewById(digitIds[i]);
-
-        for(ImageButton button : keyboardButtons) {
-            button.setOnClickListener(digitKeyboard);
-        }
-
-        return new Keyboard(new InputFieldUIListener(), new ButtonUIListener(),
-                associatedDigits, handler, GAME);
-    }
-
     private ImageButton getBtn(int digit) {
         //TODO
         return findViewById(digitIds[digit]);
+    }
+
+    private void setAllButtonListeners(View.OnClickListener listener) {
+        for(int i = 0; i < SIZE_KEYB; i++) {
+            int id = digitIds[i];
+            findViewById(id).setOnClickListener(listener);
+        }
+    }
+
+    /*
+    A reference which matches the integer id of a button
+    to its numerical digit value.
+     */
+    private HashMap<Integer, Integer> setupDigitRef(int[] digitIds) {
+        HashMap<Integer, Integer> digitReference = new HashMap<>();
+
+        for (int i = 0; i < NUM_DIGITS; i++)
+            digitReference.put(digitIds[i], i);
+
+        return digitReference;
     }
 }

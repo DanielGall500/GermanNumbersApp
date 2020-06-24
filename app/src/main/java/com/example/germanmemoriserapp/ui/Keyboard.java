@@ -101,10 +101,10 @@ public class Keyboard implements View.OnClickListener {
     }
 
     public Keyboard(Handler inputFieldHandler, Handler buttonHandler,
-                    HashMap<Integer, Integer> idRef,
-                    Handler handler, Game game) {
+                    Handler keyboardHandler, HashMap<Integer, Integer> idRef,
+                    Game game) {
 
-        this.keyboardHandler = handler;
+        this.keyboardHandler = keyboardHandler;
         this.buttonHandler = buttonHandler;
         this.inputFieldHandler = inputFieldHandler;
         this.buttonIdRef = idRef;
@@ -132,9 +132,16 @@ public class Keyboard implements View.OnClickListener {
         int digit = getDigitFromId(id);
 
         KEYBOARD_STATE nextState = INPUT.parseInput(digit);
+        String userInput = INPUT.get();
 
+        /*
+        Update our text entry field.
+         */
         updateFieldText(getInput());
 
+        /*
+        Update the keyboard button's state.
+         */
         switch(nextState) {
             case VALID:
                 onValidMove(digit);
@@ -145,8 +152,12 @@ public class Keyboard implements View.OnClickListener {
                 break;
         }
 
-        //Tell the world that there's new input
-        keyboardHandler.sendEmptyMessage(0);
+        /*
+        Check if our new input warrants a new turn / game over.
+         */
+        Message userInputMsg = new Message();
+        userInputMsg.obj = userInput;
+        keyboardHandler.sendMessage(userInputMsg);
     }
 
     int mDigit;
@@ -156,13 +167,6 @@ public class Keyboard implements View.OnClickListener {
         mDigit = digit;
 
         setValid(mDigit);
-
-        /*mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                clear();
-            }
-        }, wait);*/
     }
 
     private void onInvalidMove(int digit) {
@@ -186,10 +190,6 @@ public class Keyboard implements View.OnClickListener {
 
     private void updateFieldText(String s) {
         sendMsgToHandler(inputFieldHandler, s);
-    }
-
-    private void onNewTurn() {
-
     }
 
     private int getDigitFromId(int id) {
