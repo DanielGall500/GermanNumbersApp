@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
-        <bitmap android:src="@drawable/keyb_0" />
+        <bitmap android:src="@drawable/keyb_0_correct" />
     </item>
     <item android:state_pressed="false">
         <bitmap android:src="@drawable/keyb_0" />

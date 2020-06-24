@@ -1,6 +1,5 @@
 package com.example.germanmemoriserapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,16 +18,28 @@ import com.example.germanmemoriserapp.ui.Keyboard;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.Timer;
 
+import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
+
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     //10 Digits + 1 Back Button
     final int SIZE_KEYB = 11;
+    final int NUM_DIGITS = 10;
 
     int[] digitIds = new int[]{
             R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
             R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
             R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
             R.id.digitNineBtn, R.id.backBtn
+    };
+
+    int[] unpressedIds = new int[] {
+            R.drawable.keyb_0, R.drawable.keyb_1, R.drawable.keyb_2,
+            R.drawable.keyb_3, R.drawable.keyb_4, R.drawable.keyb_5,
+            R.drawable.keyb_6, R.drawable.keyb_7, R.drawable.keyb_8,
+            R.drawable.keyb_9
     };
 
     InputHandler handler;
@@ -38,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
     TextView timerView;
     Keyboard digitKeyboard;
     Timer timer;
+
     Game GAME;
+    //Input INPUT;
+
+    HashMap<Integer, Integer> associatedDigits;
 
     /*
     Called when the user presses a button on
@@ -49,6 +64,41 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             String userInput = digitKeyboard.getInput();
             handleInput(userInput);
+        }
+    }
+
+    class InputFieldUIListener extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            String newStr = (String) msg.obj;
+            enterNumberBox.setText(newStr);
+        }
+    }
+
+    class ButtonUIListener extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle btnData = msg.getData();
+
+            BUTTON_STATE newState = (BUTTON_STATE) btnData.get("STATE");
+            int digit = (int) btnData.get("DIGIT");
+
+            ImageButton btn = getBtn(digit);
+
+            System.out.println(String.format("Setting %d to %s", digit, newState.toString()));
+
+            switch(newState) {
+                case VALID:
+                    btn.setImageResource(R.drawable.keyb_1);
+                    break;
+                case INVALID:
+                    btn.setImageResource(R.drawable.keyb_0);
+                    break;
+                case UNPRESSED:
+                    int unpressedImg = unpressedIds[digit];
+                    btn.setImageResource(unpressedImg);
+                    break;
+            }
         }
     }
 
@@ -63,6 +113,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_main);
+
+        associatedDigits = new HashMap<>();
+
+        for (int i = 0; i < NUM_DIGITS; i++) {
+            associatedDigits.put(digitIds[i], i);
+        }
+
+        //Mediator between the game and the keyboard
+        //INPUT = new Input(GAME, new InputHandler());
 
         GAME = new Game();
 
@@ -79,10 +138,19 @@ public class MainActivity extends AppCompatActivity {
         timerView = findViewById(R.id.timerView);
 
         digitKeyboard = setupKeyboard(digitIds, SIZE_KEYB);
+
+        for(int i = 0; i < SIZE_KEYB; i++) {
+            int id = digitIds[i];
+            findViewById(id).setOnClickListener(digitKeyboard);
+        }
+
         timer = new Timer(timerView);
 
         timer.begin();
         GAME.begin();
+
+        //First move
+        digitKeyboard.updateCorrectNumber(GAME.getNumber());
 
         //Set Initial UI Parameters
         updateGfx(enterNumberBox);
@@ -126,16 +194,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearAllInput(EditText entryBox) {
-        digitKeyboard.clearInput();
         entryBox.setText(digitKeyboard.getInput());
     }
 
     private Keyboard setupKeyboard(int[] digitIds, int N) {
+
         ImageButton[] keyboardButtons = new ImageButton[N];
 
         for (int i = 0; i < N; i++)
             keyboardButtons[i] = findViewById(digitIds[i]);
 
-        return new Keyboard(keyboardButtons, N, enterNumberBox, handler);
+        for(ImageButton button : keyboardButtons) {
+            button.setOnClickListener(digitKeyboard);
+        }
+
+        return new Keyboard(new InputFieldUIListener(), new ButtonUIListener(),
+                associatedDigits, handler, GAME);
+    }
+
+    private ImageButton getBtn(int digit) {
+        //TODO
+        return findViewById(digitIds[digit]);
     }
 }

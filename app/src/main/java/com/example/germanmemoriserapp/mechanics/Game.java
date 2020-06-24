@@ -2,6 +2,8 @@ package com.example.germanmemoriserapp.mechanics;
 
 import com.example.germanmemoriserapp.audio.SoundManager;
 
+import java.util.HashMap;
+
 public class Game {
 
     public enum GAME_STATE {
@@ -12,9 +14,12 @@ public class Game {
     private Score playerScore;
     private int currentNumber;
 
+    //private Input input;
+
     public Game() {
         playerScore = new Score();
         soundManager = SoundManager.get();
+        //this.input = input;
     }
 
     /*
@@ -76,10 +81,12 @@ public class Game {
     }
 
     private void newNumber() {
-        if(soundManager.hasNext())
-            currentNumber = soundManager.next();
-        else
+        if(soundManager.hasNext()) {
+            setNewCorrectNumber();
+        }
+        else {
             throw new RuntimeException("No Numbers Left");
+        }
     }
 
     public int getNumber() {
@@ -96,6 +103,13 @@ public class Game {
 
     public boolean isEndOfGame() {
         return !soundManager.hasNext();
+    }
+
+    private void setNewCorrectNumber() {
+        System.out.println("Next: " + soundManager.next());
+        currentNumber = soundManager.next();
+        //input.newTurn(currentNumber);
+
     }
 
 }
