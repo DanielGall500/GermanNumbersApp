@@ -150,10 +150,7 @@ public class MainActivity extends AppCompatActivity {
         GAME.begin();
 
         //First move
-        digitKeyboard.updateCorrectNumber(GAME.getNumber());
-
-        //Set Initial UI Parameters
-        updateGfx(enterNumberBox);
+        onNewTurn();
     }
 
     private void handleInput(String userInput) {
@@ -171,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onNewTurn() {
+        digitKeyboard.updateCorrectNumber(GAME.getNumber());
+        digitKeyboard.clear();
+        clearAllInput(enterNumberBox);
         updateGfx(enterNumberBox);
     }
 

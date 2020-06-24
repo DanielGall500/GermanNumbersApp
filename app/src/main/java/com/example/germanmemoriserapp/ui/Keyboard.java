@@ -35,15 +35,14 @@ public class Keyboard implements View.OnClickListener {
         public Input() {}
 
 
-        public KEYBOARD_STATE inputRequest(int digit) {
+        public KEYBOARD_STATE parseInput(int digit) {
+
+            add(digit);
+
             if(isNextDigit(digit)) {
-                add(digit);
-                System.out.println("Requesting Valid");
                 return KEYBOARD_STATE.VALID;
             }
             else {
-                clear();
-                System.out.println("Requesting Invalid");
                 return KEYBOARD_STATE.INVALID;
             }
         }
@@ -52,7 +51,7 @@ public class Keyboard implements View.OnClickListener {
             current += String.valueOf(n);
         }
 
-        private void clear() {
+        public void clear() {
             current = "";
         }
 
@@ -62,11 +61,14 @@ public class Keyboard implements View.OnClickListener {
         }
 
         private int getNextDigit() {
-            boolean isNextDigit = size() < correctNumSize();
+            boolean isNextDigit = size() <= correctNumSize();
+
+            System.out.println("GET NEXT DIGIT");
+            System.out.println(size() + ", " + correctNumSize());
 
             if(isNextDigit) {
                 return Integer.parseInt(String.valueOf(
-                        correctNumber.charAt(size())));
+                        correctNumber.charAt(size()-1)));
             } else {
                 throw new IllegalArgumentException("No More Digits");
             }
@@ -129,17 +131,18 @@ public class Keyboard implements View.OnClickListener {
 
         int digit = getDigitFromId(id);
 
-        System.out.println("Clicked: " + digit);
+        KEYBOARD_STATE nextState = INPUT.parseInput(digit);
 
-        KEYBOARD_STATE nextState = INPUT.inputRequest(digit);
-
-        System.out.println(nextState.toString());
+        updateFieldText(getInput());
 
         switch(nextState) {
             case VALID:
                 onValidMove(digit);
+                break;
             case INVALID:
+                INPUT.clear();
                 onInvalidMove(digit);
+                break;
         }
 
         //Tell the world that there's new input
@@ -147,23 +150,19 @@ public class Keyboard implements View.OnClickListener {
     }
 
     int mDigit;
+    final int wait = 1000; //ms
     private void onValidMove(int digit) {
-
-        System.out.println("onValidMove");
-
-        final int wait = 1000; //ms
 
         mDigit = digit;
 
-        sendMsgToHandler(inputFieldHandler, INPUT.get());
         setValid(mDigit);
 
-        mHandler.postDelayed(new Runnable() {
+        /*mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 clear();
             }
-        }, wait);
+        }, wait);*/
     }
 
     private void onInvalidMove(int digit) {
@@ -171,8 +170,22 @@ public class Keyboard implements View.OnClickListener {
         System.out.println("onInvalidMove");
 
         setInvalid(digit);
-        requestInputFieldSetText(TXT_CLEAR);
 
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                clear();
+
+                //Reset text entry box
+                INPUT.clear();
+                updateFieldText(getInput());
+            }
+        }, wait);
+
+    }
+
+    private void updateFieldText(String s) {
+        sendMsgToHandler(inputFieldHandler, s);
     }
 
     private void onNewTurn() {
