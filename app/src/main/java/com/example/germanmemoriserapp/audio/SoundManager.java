@@ -7,6 +7,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 
+import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.NumSupplier;
 
 import java.util.ArrayList;
@@ -105,8 +106,6 @@ public class SoundManager {
 
     public void reset() {
         soundPlayer.release();
-        soundPlayer = null;
-
         directories.reset();
     }
 
@@ -125,7 +124,10 @@ public class SoundManager {
     }
 
     private void loadAudioClip(int num, int res) {
-        int mID = soundPlayer.load(appContext, res, 1);
+        System.out.println("Attempting to load " + num);
+        System.out.println("Load ID: " + res);
+        System.out.println(R.raw.number_10);
+        int mID = soundPlayer.load(appContext, R.raw.number_2, 1);
         storeSoundId(num, mID);
     }
 

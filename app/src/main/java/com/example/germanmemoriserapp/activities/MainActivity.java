@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             int digit = (int) btnData.get("DIGIT");
 
             ImageButton btn = getBtn(digit);
-            int img = btnRes.get(digit, newState);
+            int img = btnRes.getGameBtn(digit, newState);
             btn.setImageResource(img);
         }
     }
@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 String.valueOf(timer.getPreviousResult()));
 
         startActivity(moveToGOScreen);
+
         this.finish();
     }
 

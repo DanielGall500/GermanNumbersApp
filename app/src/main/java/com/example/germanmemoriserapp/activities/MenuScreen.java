@@ -2,26 +2,35 @@ package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.Spinner;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 
-import com.example.germanmemoriserapp.ui.DifficultyAdapter;
-import com.example.germanmemoriserapp.ui.DifficultyItem;
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.ExitAppListener;
+import com.example.germanmemoriserapp.enums.Difficulty;
+import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
-
-import java.util.ArrayList;
+import com.example.germanmemoriserapp.ui.ButtonResource;
 
 public class MenuScreen extends AppCompatActivity {
 
-    private Button playGameBtn, exitGameBtn;
-    private Spinner levelSpinner;
+    private ImageButton playGameBtn, scoreBtn, howToBtn;
+    private ImageButton diffBeginnerBtn, diffNormalBtn, diffMasterBtn;
 
-    private ArrayList<DifficultyItem> difficultyList;
-    private DifficultyAdapter difficultyAdapter;
+    private final Difficulty INITIAL_DIFFICULTY = Difficulty.NORMAL;
+
+    private int[] difficultyBtns = new int[] {
+            R.id.diffBeginnerBtn,
+            R.id.diffNormalBtn,
+            R.id.diffMasterBtn
+    };
+
+    DifficultyListener difficultyListener;
+
+    Animation buttonAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,39 +46,37 @@ public class MenuScreen extends AppCompatActivity {
         setContentView(R.layout.activity_menu_screen);
 
         playGameBtn = findViewById(R.id.menuPlayBtn);
-        exitGameBtn = findViewById(R.id.exitGameBtn);
-        levelSpinner = findViewById(R.id.difficultySpinner);
+        scoreBtn = findViewById(R.id.menuScoresBtn);
+        howToBtn = findViewById(R.id.menuHowToBtn);
+
+        diffBeginnerBtn = findViewById(R.id.diffBeginnerBtn);
+        diffNormalBtn = findViewById(R.id.diffNormalBtn);
+        diffMasterBtn = findViewById(R.id.diffMasterBtn);
+
+        difficultyListener = new DifficultyListener(this);
+
+        diffBeginnerBtn.setOnClickListener(difficultyListener);
+        diffNormalBtn.setOnClickListener(difficultyListener);
+        diffMasterBtn.setOnClickListener(difficultyListener);
 
         playGameBtn.setOnClickListener(new MoveToNewActivityListener(
                 this,this, LoadScreen.class));
 
-        exitGameBtn.setOnClickListener(new ExitAppListener(this));
+        buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
 
-        difficultyList = createDifficultyList();
-        difficultyAdapter = new DifficultyAdapter(this, difficultyList);
+        scoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(v.getId()).startAnimation(buttonAnimation);
+            }
+        });
 
-        levelSpinner.setAdapter(difficultyAdapter);
-    }
-
-    private ArrayList<DifficultyItem> createDifficultyList() {
-        ArrayList<DifficultyItem> difficultyItems = new ArrayList<>();
-
-        String[] difficultyTexts = new String[] {
-                getString(R.string.difficulty_one),
-                getString(R.string.difficulty_two),
-                getString(R.string.difficulty_three)
-        };
-
-        DifficultyItem[] items = new DifficultyItem[] {
-                new DifficultyItem(difficultyTexts[0],0),
-                new DifficultyItem(difficultyTexts[1],0),
-                new DifficultyItem(difficultyTexts[2],0)
-        };
-
-        for(DifficultyItem item : items)
-            difficultyItems.add(item);
-
-        return difficultyItems;
+        howToBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(v.getId()).startAnimation(buttonAnimation);
+            }
+        });
     }
 }
 
