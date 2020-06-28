@@ -7,7 +7,6 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -73,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             String userInput = (String) msg.obj;
 
+            /*
+            Update our text entry field.
+             */
+            updateFieldText(digitKeyboard.getInput());
+
             //Retrieve next state of the game
             GAME_STATE nextState = GAME.getState(userInput);
 
@@ -105,6 +109,23 @@ public class MainActivity extends AppCompatActivity {
     Called if we want to update the state of
     a keyboard's button.
      */
+
+    private void updateFieldText(String s) {
+        sendMsgToHandler(inputFieldH, s);
+    }
+
+    private void sendMsgToHandler(Handler h, String s) {
+        Message msg = new Message();
+        msg.obj = s;
+        msg.setTarget(h);
+        msg.sendToTarget();
+    }
+
+    private void sendMsgToHandler(Handler h, Message msg) {
+        msg.setTarget(h);
+        msg.sendToTarget();
+    }
+
     class ButtonUIHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -181,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearAllInput(EditText entryBox) {
-        entryBox.setText(digitKeyboard.getInput());
+        entryBox.setText("");
     }
 
     private ImageButton getBtn(int digit) {

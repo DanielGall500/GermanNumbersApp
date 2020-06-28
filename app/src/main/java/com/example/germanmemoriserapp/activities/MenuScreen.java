@@ -36,7 +36,7 @@ public class MenuScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu_screen);
 
-        playGameBtn = findViewById(R.id.playGameBtn);
+        playGameBtn = findViewById(R.id.menuPlayBtn);
         exitGameBtn = findViewById(R.id.exitGameBtn);
         levelSpinner = findViewById(R.id.difficultySpinner);
 

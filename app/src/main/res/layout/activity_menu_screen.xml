@@ -2,66 +2,122 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/MenuBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MenuScreen">
 
+    <ImageView
+        android:id="@+id/menuTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/difficultyLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/main_title"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="44dp" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
+        android:id="@+id/menuBtnLayout"
+        android:layout_width="270dp"
         android:layout_height="196dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/playGameBtn"
-            android:layout_width="412dp"
-            android:layout_height="51dp"
-            android:text="@string/btn_item_play"
+        <ImageButton
+            android:id="@+id/menuPlayBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/PlayBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/menuScoresBtn"/>
 
-        <Button
-            android:id="@+id/exitGameBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_item_exit"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/rankBtn"
+        <ImageButton
+            android:id="@+id/menuScoresBtn"
+            android:background="@drawable/ScoresBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_item_rank"
-            app:layout_constraintBottom_toTopOf="@+id/exitGameBtn"
+            app:layout_constraintBottom_toTopOf="@+id/menuHowToBtn"
+            app:layout_constraintTop_toBottomOf="@+id/menuPlayBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/learnBtn"
+        <ImageButton
+            android:id="@+id/menuHowToBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_item_learn"
-            app:layout_constraintBottom_toTopOf="@+id/rankBtn"
+            android:background="@drawable/HowToPlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playGameBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/menuScoresBtn"
+            app:layout_constraintBottom_toBottomOf="@id/menuBtnLayout"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Spinner
-        android:id="@+id/difficultySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="85dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517"
-        tools:layout_editor_absoluteX="181dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/difficultyLayout"
+        android:layout_width="360dp"
+        android:layout_height="83dp"
+        app:layout_constraintBottom_toTopOf="@+id/menuBtnLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="">
+
+        <ImageView
+            android:id="@+id/diffTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/difficultuBtnLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/Bar" />
+
+        <ImageView
+            android:id="@+id/diffBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/difficultuBtnLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/Bar" />
+
+        <LinearLayout
+            android:id="@+id/difficultuBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diffTopBar"
+            tools:layout_editor_absoluteY="8dp">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/BeginnerBtn" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/NormalBtn" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/MasterBtn" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

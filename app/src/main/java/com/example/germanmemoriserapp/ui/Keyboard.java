@@ -124,6 +124,10 @@ public class Keyboard implements View.OnClickListener {
 
     Handler mHandler = new Handler();
 
+    public KEYBOARD_STATE getNextState(int digit) {
+        return INPUT.parseInput(digit);
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -133,11 +137,6 @@ public class Keyboard implements View.OnClickListener {
 
         KEYBOARD_STATE nextState = INPUT.parseInput(digit);
         String userInput = INPUT.get();
-
-        /*
-        Update our text entry field.
-         */
-        updateFieldText(getInput());
 
         /*
         Update the keyboard button's state.
@@ -162,14 +161,14 @@ public class Keyboard implements View.OnClickListener {
 
     int mDigit;
     final int wait = 1000; //ms
-    private void onValidMove(int digit) {
+    public void onValidMove(int digit) {
 
         mDigit = digit;
 
         setValid(mDigit);
     }
 
-    private void onInvalidMove(int digit) {
+    public void onInvalidMove(int digit) {
 
         System.out.println("onInvalidMove");
 
@@ -221,6 +220,11 @@ public class Keyboard implements View.OnClickListener {
     private void sendMsgToHandler(Handler h, Message msg) {
         msg.setTarget(h);
         msg.sendToTarget();
+    }
+
+
+    public void clearInput() {
+        INPUT.clear();
     }
 
     private void requestInputFieldSetText(String txt) {

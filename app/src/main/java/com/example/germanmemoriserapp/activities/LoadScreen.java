@@ -20,7 +20,7 @@ public class LoadScreen extends AppCompatActivity {
 
     private ProgressBar audioProgressBar;
 
-    private int min = 1;
+    private int min = 0;
     private int max = 10;
     private int size = 4;
 
