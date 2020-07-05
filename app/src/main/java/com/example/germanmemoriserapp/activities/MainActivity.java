@@ -7,6 +7,8 @@ import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
             R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
             R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
-            R.id.digitNineBtn, R.id.backBtn
+            R.id.digitNineBtn, R.id.relistenAnim
     };
 
     Intent moveToGOScreen;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     Keyboard digitKeyboard;
     Timer timer;
     Game GAME;
+    ImageButton relistenBtn;
+    Animation relistenAnim;
 
     /*
     Grabs Buttons Images: Unpressed, Correct, Incorrect
@@ -62,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
     GameStateHandler gameStateH = new GameStateHandler();
     InputFieldUIHandler inputFieldH = new InputFieldUIHandler();
     ButtonUIHandler buttonUiH = new ButtonUIHandler();
+
+    class RelistenBtnHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            findViewById(v.getId()).startAnimation(relistenAnim);
+            GAME.playAudioClip();
+        }
+    }
 
     /*
     Called when the user presses a button on
@@ -166,6 +178,11 @@ public class MainActivity extends AppCompatActivity {
                 digitIdReference, GAME);
 
         setAllButtonListeners(digitKeyboard);
+
+        relistenBtn = findViewById(R.id.relistenAnim);
+        relistenAnim = AnimationUtils.loadAnimation(this, R.anim.relisten_anim);
+
+        relistenBtn.setOnClickListener(new RelistenBtnHandler());
 
         GAME = new Game();
         GAME.begin();

@@ -25,7 +25,7 @@ public class SoundDirectory {
         for (int i = 0; i < N; i++) {
             int num = nums.get(i);
 
-            String file = getFileStr(num % 10);
+            String file = getFileStr(num);
             int id = getId(file, context);
 
             dirMap.put(id, num);

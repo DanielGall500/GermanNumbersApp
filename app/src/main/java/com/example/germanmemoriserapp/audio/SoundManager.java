@@ -36,7 +36,7 @@ public class SoundManager {
     private final int LEFT_VOL = 1;
     private final int RIGHT_VOL = 1;
     private final int PRIORITY = 1;
-    private final int LOOP = -1;
+    private final int LOOP = 0;
     private final int RATE = 1;
 
     private NumSupplier numSupplier;
@@ -124,10 +124,7 @@ public class SoundManager {
     }
 
     private void loadAudioClip(int num, int res) {
-        System.out.println("Attempting to load " + num);
-        System.out.println("Load ID: " + res);
-        System.out.println(R.raw.number_10);
-        int mID = soundPlayer.load(appContext, R.raw.number_2, 1);
+        int mID = soundPlayer.load(appContext, res, 1);
         storeSoundId(num, mID);
     }
 
