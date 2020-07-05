@@ -5,17 +5,53 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/klang_main_background"
+    android:background="@drawable/empty_background"
     tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/topLayerConstraint"
+        android:layout_width="fill_parent"
+        android:layout_height="109dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/secondLayerConstraint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/timerView"
+            android:layout_width="117dp"
+            android:layout_height="61dp"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/tmpNumberView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/thirdLayerConstraint"
+        android:layout_width="fill_parent"
+        android:layout_height="67dp"
+        app:layout_constraintBottom_toTopOf="@+id/keybConstraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondLayerConstraint">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/keybConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayerConstraint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thirdLayerConstraint"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/thirdLayerConstraint">
 
 
         <LinearLayout
@@ -151,42 +187,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/thirdLayerConstraint"
-        android:layout_width="fill_parent"
-        android:layout_height="67dp"
-        app:layout_constraintBottom_toTopOf="@+id/keybConstraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondLayerConstraint">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/topLayerConstraint"
-        android:layout_width="fill_parent"
-        android:layout_height="109dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/secondLayerConstraint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/timerView"
-            android:layout_width="117dp"
-            android:layout_height="61dp"
-            android:ems="10"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/tmpNumberView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/secondLayerConstraint"
         android:layout_width="fill_parent"
         android:layout_height="63dp"
@@ -197,7 +197,6 @@
 
         <EditText
             android:id="@+id/enterNumberBox"
-            android:gravity="center"
             android:layout_width="318dp"
             android:layout_height="fill_parent"
             android:background="@drawable/entry_box"
@@ -206,6 +205,7 @@
             android:ems="10"
             android:focusableInTouchMode="false"
             android:fontFamily="@font/baloo"
+            android:gravity="center"
             android:inputType="number"
             android:maxLength="6"
             android:maxLines="1"

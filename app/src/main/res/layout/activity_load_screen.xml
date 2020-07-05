@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/empty_background"
     tools:context=".activities.LoadScreen">
 
     <ProgressBar
@@ -12,6 +13,9 @@
         android:layout_width="375dp"
         android:layout_height="59dp"
         android:progress="1"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="583dp" />
+        android:soundEffectsEnabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
