@@ -7,7 +7,6 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 
-import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.NumSupplier;
 
 import java.util.ArrayList;
@@ -84,6 +83,9 @@ public class SoundManager {
         return soundManager;
     }
 
+    /*
+    Generate new numbers (audio clips) for a new game.
+    */
     public void init(int min, int max, int size, Context context) {
 
         this.appContext = context;
@@ -110,32 +112,15 @@ public class SoundManager {
         t.start();
     }
 
-    public void reset() {
-        soundPlayer.release();
-        directories.reset();
+    public boolean hasNext() {
+        return (soundIterator + 1) <= numberArray.size();
     }
 
-    /*
-    Load all sounds needed for the game.
-     */
-    public void loadAll() {
-
-        if (soundIdQueue.isEmpty())
-            throw new RuntimeException("No Game Directories Prepared");
-
-        int soundId = soundIdQueue.poll();
-        int num = directories.getNum(soundId);
-
-        loadAudioClip(num, soundId);
-    }
-
-    private void loadAudioClip(int num, int res) {
-        int mID = soundPlayer.load(appContext, res, 1);
-        storeSoundId(num, mID);
-    }
-
-    private void storeSoundId(int num, int id) {
-        soundMap.put(num, id);
+    public int next() {
+        if (!hasNext())
+            throw new RuntimeException("No Numbers Left");
+        else
+            return numberArray.get(soundIterator++);
     }
 
     /*
@@ -150,16 +135,26 @@ public class SoundManager {
         soundPlayer.play(id, LEFT_VOL, RIGHT_VOL, PRIORITY, LOOP, RATE);
     }
 
-    public Handler getLoadCompleteHandler() {
-        return this.audioHandler;
-    }
-
     public void setLoadCompleteHandler(Handler h) {
         this.audioHandler = h;
     }
 
     public void setProgressHandler(Handler h) {
         this.progressHandler = h;
+    }
+
+    /*
+    Load all sounds needed for the game.
+    */
+    private void loadAll() {
+
+        if (soundIdQueue.isEmpty())
+            throw new RuntimeException("No Game Directories Prepared");
+
+        int soundId = soundIdQueue.poll();
+        int num = directories.getNum(soundId);
+
+        loadAudioClip(num, soundId);
     }
 
     /*
@@ -184,16 +179,16 @@ public class SoundManager {
         }
     }
 
-    public void alertProgressBarUpdate() {
-        progressHandler.sendEmptyMessage(0);
+    /*
+    Load a specific number clip.
+     */
+    private void loadAudioClip(int num, int res) {
+        int mID = soundPlayer.load(appContext, res, 1);
+        storeSoundId(num, mID);
     }
 
-    /*
-    Check if every sound clip needed for this
-    particular game has loaded.
-     */
-    private boolean allClipsLoaded() {
-        return soundIdQueue.isEmpty();
+    private void storeSoundId(int num, int id) {
+        soundMap.put(num, id);
     }
 
     /*
@@ -204,10 +199,6 @@ public class SoundManager {
         if (audioHandler != null) {
             audioHandler.sendEmptyMessage(0);
         }
-    }
-
-    public void init(ArrayList<Integer> nums) {
-        this.numberArray = nums;
     }
 
     /*
@@ -226,19 +217,8 @@ public class SoundManager {
         return soundMap.containsKey(num);
     }
 
-    public void resetIter() {
-        soundIterator = 0;
-    }
-
-    public boolean hasNext() {
-        return (soundIterator + 1) <= numberArray.size();
-    }
-
-    public int next() {
-        if (!hasNext())
-            throw new RuntimeException("No Numbers Left");
-        else
-            return numberArray.get(soundIterator++);
+    private void alertProgressBarUpdate() {
+        progressHandler.sendEmptyMessage(0);
     }
 
     /*

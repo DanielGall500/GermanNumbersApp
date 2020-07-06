@@ -9,8 +9,8 @@ import java.util.Queue;
 
 public class SoundDirectory {
 
-    private String FOLDER = "raw";
-    private String FILE_PREFIX = "number_";
+    private final String FOLDER = "raw";
+    private final String FILE_PREFIX = "number_";
 
     private HashMap<Integer, Integer> dirMap;
 
@@ -55,10 +55,4 @@ public class SoundDirectory {
 
         return resId;
     }
-
-    public void reset() {
-        dirMap.clear();
-    }
-
-
 }
