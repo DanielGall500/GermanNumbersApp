@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 public class LoadScreen extends AppCompatActivity {
 
@@ -20,9 +21,9 @@ public class LoadScreen extends AppCompatActivity {
 
     private ProgressBar audioProgressBar;
 
-    private int NUM_MIN = 1;
-    private int NUM_MAX = 9;
     private int NUM_CLIPS = 4;
+
+    private Difficulty gameDifficulty = new Difficulty(Difficulty.Level.BEGINNER);
 
     private int audioProgress = 0;
 
@@ -70,7 +71,7 @@ public class LoadScreen extends AppCompatActivity {
          * an audio manager. */
         soundPlayer = SoundManager.get();
 
-        soundPlayer.init(NUM_MIN, NUM_MAX, NUM_CLIPS, this);
+        soundPlayer.init(gameDifficulty, NUM_CLIPS, this);
 
         soundPlayer.setLoadCompleteHandler(new AudioHandler());
         soundPlayer.setProgressHandler(new ProgressHandler());

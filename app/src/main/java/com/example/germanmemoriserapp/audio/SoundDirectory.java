@@ -2,15 +2,21 @@ package com.example.germanmemoriserapp.audio;
 
 import android.content.Context;
 
+import com.example.germanmemoriserapp.mechanics.Difficulty;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 public class SoundDirectory {
 
     private final String FOLDER = "raw";
     private final String FILE_PREFIX = "number_";
+
+    private ArrayList<Integer> numberArray = new ArrayList<>();
 
     private HashMap<Integer, Integer> dirMap;
 
@@ -18,25 +24,58 @@ public class SoundDirectory {
         this.dirMap = new HashMap<>();
     }
 
-    public Queue<Integer> getResIds(ArrayList<Integer> nums, Context context) {
+    protected Queue<Integer> generateIds(Difficulty diff, Context context, int N) {
+        int min = diff.getMin();
+        int max = diff.getMax();
+
+        NumberGenerator generator = new NumberGenerator();
+
         Queue<Integer> ids = new LinkedList<>();
-        int N = nums.size();
+        numberArray = new ArrayList<Integer>();
 
         for (int i = 0; i < N; i++) {
-            int num = nums.get(i);
 
-            String file = getFileStr(num);
-            int id = getId(file, context);
+            int nxt = generator.generateNumber(min, max);
 
-            dirMap.put(id, num);
+            if (hasID(nxt, context)) {
+                /*
+                Find ID associated with the number.
+                 */
+                int id = getId(getFileStr(nxt), context);
 
-            ids.offer(id);
+                /*
+                Map ID => number.
+                 */
+                dirMap.put(id, nxt);
+
+                /*
+                Add ID to QUEUE.
+                 */
+                ids.offer(id);
+
+                /*
+                Add number to array.
+                 */
+                numberArray.add(nxt);
+
+            } else {
+                /*
+                If there is no sound file associated with
+                this number, we repeat this step.
+                 */
+
+                i--;
+            }
         }
 
         return ids;
     }
 
-    public int getNum(int id) {
+    protected ArrayList<Integer> getIntegerArray() {
+        return this.numberArray;
+    }
+
+    protected int getNum(int id) {
         if (!dirMap.containsKey(id)) {
             throw new IllegalArgumentException("Invalid ID");
         } else {
@@ -54,5 +93,40 @@ public class SoundDirectory {
         );
 
         return resId;
+    }
+
+    protected boolean hasID(int num, Context context) {
+        /*
+        getIdentifier method returns 0 if a resource cannot
+        be found. Thus we can ensure there is a valid id
+        by ensuring 0 is not returned.
+         */
+        return context.getResources().getIdentifier(
+                getFileStr(num), FOLDER, context.getPackageName()) != 0;
+    }
+
+    private class NumberGenerator {
+
+        private Random randGen;
+
+        public NumberGenerator() {
+            randGen = new Random();
+        }
+
+        private ArrayList<Integer> generateArray(int min, int max, int size) {
+            ArrayList<Integer> generated = new ArrayList<>();
+
+            int tmp;
+            for (int i = 0; i < size; i++) {
+                tmp = generateNumber(min, max);
+                generated.add(tmp);
+            }
+
+            return generated;
+        }
+
+        private int generateNumber(int min, int max) {
+            return randGen.nextInt(max - min + 1) + min;
+        }
     }
 }

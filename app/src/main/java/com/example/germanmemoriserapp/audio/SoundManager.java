@@ -7,7 +7,7 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 
-import com.example.germanmemoriserapp.mechanics.NumSupplier;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +38,6 @@ public class SoundManager {
     private final int LOOP = 0;
     private final int RATE = 1;
 
-    private NumSupplier numSupplier;
     private SoundDirectory directories;
     private SoundPool soundPlayer;
     private Handler audioHandler;
@@ -66,8 +65,8 @@ public class SoundManager {
         }
 
         soundMap = new HashMap<>();
-        numSupplier = new NumSupplier();
         directories = new SoundDirectory();
+        numberArray = new ArrayList<>();
 
         soundPlayer.setOnLoadCompleteListener(new LoadListener());
     }
@@ -86,18 +85,21 @@ public class SoundManager {
     /*
     Generate new numbers (audio clips) for a new game.
     */
-    public void init(int min, int max, int size, Context context) {
+    public void init(Difficulty diff, int size, Context context) {
 
         this.appContext = context;
-
-        numberArray = numSupplier.generate(min, max, size);
 
         /*
         Start from the first sound.
          */
         soundIterator = 0;
 
-        soundIdQueue = directories.getResIds(numberArray, appContext);
+        /*
+        Generate a set of file IDs for number in this
+        difficulty level.
+         */
+        soundIdQueue = directories.generateIds(diff, context, size);
+        numberArray = directories.getIntegerArray();
 
         /*
         Load audio clips on a new thread
@@ -113,16 +115,10 @@ public class SoundManager {
     }
 
     public boolean hasNext() {
-        System.out.println("Iter: " + (soundIterator + 1));
-        System.out.println("Arr: " + numberArray.size());
         return (soundIterator + 1) <= numberArray.size();
     }
 
     public int next() {
-
-        System.out.println("Getting sound " + soundIterator);
-        System.out.println("INCrementing 1");
-
         if (!hasNext())
             throw new RuntimeException("No Numbers Left");
         else

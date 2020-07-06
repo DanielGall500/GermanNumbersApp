@@ -1,7 +1,9 @@
 package com.example.germanmemoriserapp.ui;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.enums.Difficulty;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
+
+import java.util.logging.Level;
 
 public class ButtonResource {
 
@@ -60,11 +62,11 @@ public class ButtonResource {
         }
     }
 
-    public int getMenuBtn(Difficulty d, boolean pressed) {
+    public int getMenuBtn(Difficulty.Level lvl, boolean pressed) {
 
         int pressedPos = pressed ? 1 : 0;
 
-        switch(d) {
+        switch(lvl) {
             case BEGINNER:
                 return beginnerRes[pressedPos];
             case NORMAL:

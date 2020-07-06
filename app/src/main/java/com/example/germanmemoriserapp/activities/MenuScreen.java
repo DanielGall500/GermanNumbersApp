@@ -10,17 +10,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.enums.Difficulty;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
-import com.example.germanmemoriserapp.ui.ButtonResource;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 public class MenuScreen extends AppCompatActivity {
 
     private ImageButton playGameBtn, scoreBtn, howToBtn;
     private ImageButton diffBeginnerBtn, diffNormalBtn, diffMasterBtn;
 
-    private final Difficulty INITIAL_DIFFICULTY = Difficulty.NORMAL;
+    private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
 
     private int[] difficultyBtns = new int[] {
             R.id.diffBeginnerBtn,

@@ -11,21 +11,6 @@ public class Score {
         currScore++;
     }
 
-    public void increase(int x)
-    {
-        currScore += x;
-    }
-
-    public void decrement()
-    {
-        currScore--;
-    }
-
-    public void decrease(int x)
-    {
-        currScore -= x;
-    }
-
     public int getScore()
     {
         return this.currScore;
