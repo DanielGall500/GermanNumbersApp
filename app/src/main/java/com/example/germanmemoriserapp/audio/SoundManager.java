@@ -47,7 +47,7 @@ public class SoundManager {
     private HashMap<Integer, Integer> soundMap;
     private Queue<Integer> soundIdQueue;
     private ArrayList<Integer> numberArray;
-    private int soundIterator = 0;
+    private int soundIterator;
     private Context appContext;
 
     private SoundManager() {
@@ -89,6 +89,12 @@ public class SoundManager {
         this.appContext = context;
 
         numberArray = numSupplier.generate(min, max, size);
+
+        /*
+        Start from the first sound.
+         */
+        soundIterator = 0;
+
         soundIdQueue = directories.getResIds(numberArray, appContext);
 
         /*

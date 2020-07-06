@@ -32,7 +32,7 @@ public class Game {
     }
 
     private void onGameOver() {
-        soundManager.reset();
+        soundManager = null;
     }
 
     public void playAudioClip() {
