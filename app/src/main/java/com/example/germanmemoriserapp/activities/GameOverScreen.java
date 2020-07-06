@@ -62,7 +62,7 @@ public class GameOverScreen extends AppCompatActivity {
     }
 
     public String getScoreString(String score) {
-        return String.format("Your Score Is %s seconds!", score);
+        return String.format("%s seconds!", score);
     }
 
     private String retrieveScoreFromGame(String key) {
