@@ -113,10 +113,16 @@ public class SoundManager {
     }
 
     public boolean hasNext() {
+        System.out.println("Iter: " + (soundIterator + 1));
+        System.out.println("Arr: " + numberArray.size());
         return (soundIterator + 1) <= numberArray.size();
     }
 
     public int next() {
+
+        System.out.println("Getting sound " + soundIterator);
+        System.out.println("INCrementing 1");
+
         if (!hasNext())
             throw new RuntimeException("No Numbers Left");
         else

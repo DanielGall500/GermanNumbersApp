@@ -63,6 +63,7 @@ public class Game {
     public GAME_STATE getState(String input) {
 
         boolean gameOver = !soundManager.hasNext();
+        System.out.println("GAmeover? " + gameOver);
 
         if(inputIsCorrect(input))
             incrementScore();
@@ -77,6 +78,7 @@ public class Game {
     }
 
     private void newNumber() {
+        System.out.println("new number: ");
         if(soundManager.hasNext()) {
             setNewCorrectNumber();
         }
@@ -102,9 +104,7 @@ public class Game {
     }
 
     private void setNewCorrectNumber() {
-        System.out.println("Next: " + soundManager.next());
         currentNumber = soundManager.next();
-
     }
 
 }

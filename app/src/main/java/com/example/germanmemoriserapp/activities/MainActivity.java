@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             String userInput = (String) msg.obj;
 
+            System.out.println("NEW GAME STATE");
+
             /*
             Update our text entry field.
              */
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         GAME = new Game();
         GAME.begin();
+
         onNewTurn();
 
         timer = new Timer(timerView);

@@ -20,9 +20,9 @@ public class LoadScreen extends AppCompatActivity {
 
     private ProgressBar audioProgressBar;
 
-    private int min = 1;
-    private int max = 9;
-    private int size = 4;
+    private int NUM_MIN = 1;
+    private int NUM_MAX = 9;
+    private int NUM_CLIPS = 4;
 
     private int audioProgress = 0;
 
@@ -63,14 +63,14 @@ public class LoadScreen extends AppCompatActivity {
         setContentView(R.layout.activity_load_screen);
 
         audioProgressBar = findViewById(R.id.audioProgressBar);
-        audioProgressBar.setMax(4);
+        audioProgressBar.setMax(NUM_CLIPS);
         audioProgressBar.setProgress(audioProgress);
 
         /* Get our singleton implementation of
          * an audio manager. */
         soundPlayer = SoundManager.get();
 
-        soundPlayer.init(min, max, size, this);
+        soundPlayer.init(NUM_MIN, NUM_MAX, NUM_CLIPS, this);
 
         soundPlayer.setLoadCompleteHandler(new AudioHandler());
         soundPlayer.setProgressHandler(new ProgressHandler());
