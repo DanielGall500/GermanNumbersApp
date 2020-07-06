@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +17,11 @@ import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
 
 public class GameOverScreen extends AppCompatActivity {
 
-    private Button retryBtn;
-    private Button backToMenuBtn;
+    private ImageButton retryBtn, menuBtn;
     private TextView scoreResultView;
     private String gameScore;
+    private Animation congratsAnim;
+    private TextView congratsTxtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,34 +32,33 @@ public class GameOverScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-
-
         setContentView(R.layout.activity_game_over_screen);
 
-        retryBtn = findViewById(R.id.GO_retry);
-        backToMenuBtn = findViewById(R.id.GO_backToMenu);
-        scoreResultView = findViewById(R.id.GO_scoreResultsView);
+        congratsAnim = AnimationUtils.loadAnimation(this, R.anim.congrats_spin);
+        congratsTxtView = findViewById(R.id.congratTxtView);
+        congratsTxtView.startAnimation(congratsAnim);
+
+        retryBtn = findViewById(R.id.retryBtn);
+        menuBtn = findViewById(R.id.menuBtn);
+        scoreResultView = findViewById(R.id.scoreView);
 
         String scoreKey = getString(R.string.score_key);
         String score = retrieveScoreFromGame(scoreKey);
 
-        setScoreString(getScoreString(score));
+        scoreResultView.setText(getScoreString(score));
 
-        backToMenuBtn.setOnClickListener(new MoveToNewActivityListener(
+        menuBtn.setOnClickListener(new MoveToNewActivityListener(
                 this, this, MenuScreen.class
         ));
 
         retryBtn.setOnClickListener(new MoveToNewActivityListener(
                 this, this, LoadScreen.class
         ));
+
     }
 
     private TextView getScoreView() {
         return this.scoreResultView;
-    }
-
-    private void setScoreString(String result) {
-        getScoreView().setText(result);
     }
 
     public String getScoreString(String score) {

@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     Intent moveToGOScreen;
     EditText enterNumberBox;
-    TextView tmpNumberView;
     TextView timerView;
     Keyboard digitKeyboard;
     Timer timer;
@@ -171,7 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
-        tmpNumberView = findViewById(R.id.tmpNumberView);
         timerView = findViewById(R.id.timerView);
 
         digitKeyboard = new Keyboard(inputFieldH, buttonUiH, gameStateH,
@@ -196,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
         digitKeyboard.updateCorrectNumber(GAME.getNumber());
         digitKeyboard.clear();
         clearAllInput(enterNumberBox);
-        updateGfx(enterNumberBox);
     }
 
     private void onGameOver() {
@@ -209,14 +206,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(moveToGOScreen);
 
         this.finish();
-    }
-
-    private void updateGfx(EditText entryBox) {
-        clearAllInput(entryBox);
-
-        //To Be Deleted
-        String number = String.valueOf(GAME.getNumber());
-        tmpNumberView.setText(number);
     }
 
     private void clearAllInput(EditText entryBox) {
