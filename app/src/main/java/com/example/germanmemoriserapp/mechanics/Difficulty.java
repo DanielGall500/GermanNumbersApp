@@ -4,14 +4,14 @@ public class Difficulty {
 
     private static int INFINITE = -1;
 
-    private final int BEGINNER_MIN = 1;
-    private final int BEGINNER_MAX = 9;
+    private final int BEGINNER_MIN = 0;
+    private final int BEGINNER_MAX = 100;
 
     private final int NORMAL_MIN = 100;
     private final int NORMAL_MAX = 1000;
 
     private final int MASTER_MIN = 1000;
-    private final int MASTER_MAX = INFINITE;
+    private final int MASTER_MAX = 10000;
 
     public enum Level {
         BEGINNER, NORMAL, MASTER

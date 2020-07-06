@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -31,13 +30,13 @@ public class SoundDirectory {
         NumberGenerator generator = new NumberGenerator();
 
         Queue<Integer> ids = new LinkedList<>();
-        numberArray = new ArrayList<Integer>();
+        numberArray = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
 
             int nxt = generator.generateNumber(min, max);
 
-            if (hasID(nxt, context)) {
+            if (hasID(nxt, context) && !numberArray.contains(nxt)) {
                 /*
                 Find ID associated with the number.
                  */
