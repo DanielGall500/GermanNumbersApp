@@ -1,6 +1,7 @@
 package com.example.germanmemoriserapp.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -196,7 +197,42 @@ public class MainActivity extends AppCompatActivity {
     private void onNewTurn() {
         digitKeyboard.updateCorrectNumber(GAME.getNumber());
         digitKeyboard.clear();
-        clearAllInput(enterNumberBox);
+
+        enterNumberBox.setTextColor(Color.GREEN);
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                enterNumberBox.setText("");
+                enterNumberBox.setTextColor(Color.BLACK);
+            }
+        }, 2000);
+
+    }
+
+    private void onNoChange(boolean valid) {
+
+        enterNumberBox.setTextColor(Color.RED);
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                enterNumberBox.setText("");
+                enterNumberBox.setTextColor(Color.BLACK);
+            }
+        }, 1000);
+
+
+    }
+
+    private void onValidInput() {
+
+    }
+
+    private void onInvalidInput() {
+
     }
 
     private void onGameOver() {

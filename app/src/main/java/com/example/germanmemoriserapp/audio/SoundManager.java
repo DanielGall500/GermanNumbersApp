@@ -65,7 +65,7 @@ public class SoundManager {
         }
 
         soundMap = new HashMap<>();
-        directories = new SoundDirectory();
+        directories = new SoundDirectory(appContext);
         numberArray = new ArrayList<>();
 
         soundPlayer.setOnLoadCompleteListener(new LoadListener());
@@ -160,6 +160,18 @@ public class SoundManager {
     }
 
     /*
+    Load a specific number clip.
+     */
+    private void loadAudioClip(int num, int res) {
+        int mID = soundPlayer.load(appContext, res, 1);
+        storeSoundId(num, mID);
+    }
+
+    private void storeSoundId(int num, int id) {
+        soundMap.put(num, id);
+    }
+
+    /*
     If a new audio clip is loaded, we handle it by calling
     to the alertSoundLoaded method.
 
@@ -179,18 +191,6 @@ public class SoundManager {
         } else {
             onAllLoadsComplete();
         }
-    }
-
-    /*
-    Load a specific number clip.
-     */
-    private void loadAudioClip(int num, int res) {
-        int mID = soundPlayer.load(appContext, res, 1);
-        storeSoundId(num, mID);
-    }
-
-    private void storeSoundId(int num, int id) {
-        soundMap.put(num, id);
     }
 
     /*

@@ -8,19 +8,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Random;
 
 public class SoundDirectory {
 
     private final String FOLDER = "raw";
-    private final String FILE_PREFIX = "number_";
+    private final String FILE_PREFIX = "nummer_";
 
     private ArrayList<Integer> numberArray = new ArrayList<>();
 
     private HashMap<Integer, Integer> dirMap;
 
-    public SoundDirectory() {
+    private Context context;
+
+    public SoundDirectory(Context context) {
         this.dirMap = new HashMap<>();
+        this.context = context;
     }
 
     protected Queue<Integer> generateIds(Difficulty diff, Context context, int N) {
@@ -88,7 +90,23 @@ public class SoundDirectory {
 
     private int getId(String fileStr, Context context) {
         int resId = context.getResources().getIdentifier(
-                fileStr, FOLDER, context.getPackageName()
+                fileStr, "raw", context.getPackageName()
+        );
+
+        return resId;
+    }
+
+    public int getId(int number, Context context) {
+        int resId = context.getResources().getIdentifier(
+                getFileStr(number), "raw", context.getPackageName()
+        );
+
+        return resId;
+    }
+
+    public int getId(int number) {
+        int resId = context.getResources().getIdentifier(
+                getFileStr(number), "raw", this.context.getPackageName()
         );
 
         return resId;
@@ -102,30 +120,5 @@ public class SoundDirectory {
          */
         return context.getResources().getIdentifier(
                 getFileStr(num), FOLDER, context.getPackageName()) != 0;
-    }
-
-    private class NumberGenerator {
-
-        private Random randGen;
-
-        public NumberGenerator() {
-            randGen = new Random();
-        }
-
-        private ArrayList<Integer> generateArray(int min, int max, int size) {
-            ArrayList<Integer> generated = new ArrayList<>();
-
-            int tmp;
-            for (int i = 0; i < size; i++) {
-                tmp = generateNumber(min, max);
-                generated.add(tmp);
-            }
-
-            return generated;
-        }
-
-        private int generateNumber(int min, int max) {
-            return randGen.nextInt(max - min + 1) + min;
-        }
     }
 }
