@@ -30,6 +30,20 @@ public class Game {
     Actions
      */
 
+    public void relisten() {
+
+        if(!gameRelistens.isOutOfListens()) {
+            gameRelistens.decrement();
+            this.playAudioClip();
+        } else {
+
+        }
+    }
+
+    public boolean canRelisten() {
+        return !gameRelistens.isOutOfListens();
+    }
+
     public void begin() {
         newNumber();
         playAudioClip();

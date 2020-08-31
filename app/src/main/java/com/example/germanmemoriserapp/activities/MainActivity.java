@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,
             R.id.digitThreeBtn, R.id.digitFourBtn, R.id.digitFiveBtn,
             R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
-            R.id.digitNineBtn, R.id.relistenAnim
+            R.id.digitNineBtn, R.id.relistenBtn
     };
 
     Intent moveToGOScreen;
@@ -70,8 +70,18 @@ public class MainActivity extends AppCompatActivity {
     class RelistenBtnHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            findViewById(v.getId()).startAnimation(relistenAnim);
-            GAME.playAudioClip();
+
+            if(GAME.canRelisten()) {
+
+                //Relisten button animation
+                findViewById(v.getId()).startAnimation(relistenAnim);
+
+                //Play the clip
+                GAME.relisten();
+            }
+            else {
+                //TODO: No Relistens Left
+            }
         }
     }
 
@@ -180,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
         setAllButtonListeners(digitKeyboard);
 
-        relistenBtn = findViewById(R.id.relistenAnim);
+        relistenBtn = findViewById(R.id.relistenBtn);
         relistenAnim = AnimationUtils.loadAnimation(this, R.anim.relisten_anim);
 
         relistenBtn.setOnClickListener(new RelistenBtnHandler());
