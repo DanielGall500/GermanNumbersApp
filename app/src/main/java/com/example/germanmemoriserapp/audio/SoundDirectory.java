@@ -25,6 +25,8 @@ public class SoundDirectory {
         this.context = context;
     }
 
+    ArrayList<Clip> clips;
+
     protected Queue<Integer> generateIds(Difficulty diff, Context context, int N) {
         int min = diff.getMin();
         int max = diff.getMax();
@@ -34,11 +36,28 @@ public class SoundDirectory {
         Queue<Integer> ids = new LinkedList<>();
         numberArray = new ArrayList<>();
 
+        clips = new ArrayList<>();
+
         for (int i = 0; i < N; i++) {
 
             int nxt = generator.generateNumber(min, max);
 
             if (hasID(nxt, context) && !numberArray.contains(nxt)) {
+
+                /*
+                Clip clip = new Clip(String.valueOf(nxt), this);
+
+                ArrayList<Integer> files = clip.getNecessaryFiles();
+
+                for(int f : files) {
+                    int id = getId(getFileStr(f), context);
+                    dirMap.put(id, nxt);
+                    ids.offer(id);
+                }
+
+                numberArray.add(nxt);*/
+
+
                 /*
                 Find ID associated with the number.
                  */

@@ -12,9 +12,18 @@ public class Game {
     private Score playerScore;
     private int currentNumber;
 
+    /*testing*/
+    private final int nLives = 5;
+    private final int nRelistens = 5;
+    private LifeManager gameLives;
+    private RelistenManager gameRelistens;
+
     public Game() {
         playerScore = new Score();
         soundManager = SoundManager.get();
+
+        gameLives = new LifeManager(nLives);
+        gameRelistens = new RelistenManager(nRelistens);
     }
 
     /*
@@ -67,8 +76,20 @@ public class Game {
 
         if(inputIsCorrect(input))
             incrementScore();
-        else
-            return GAME_STATE.NO_CHANGE;
+        else {
+
+            //Take Away A Life
+            if(gameLives.hasLives()) {
+                gameLives.decrement();
+            }
+
+            //Check If Out Of Lives
+            if(gameLives.isOutOfLives()) {
+                return GAME_STATE.GAME_OVER;
+            } else {
+                return GAME_STATE.NO_CHANGE;
+            }
+        }
 
         return gameOver ? GAME_STATE.GAME_OVER : GAME_STATE.NEW_TURN;
     }
