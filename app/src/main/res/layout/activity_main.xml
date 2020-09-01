@@ -8,36 +8,126 @@
     android:background="@drawable/empty_background"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/topLayerConstraint"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topLayer"
         android:layout_width="fill_parent"
-        android:layout_height="109dp"
+        android:layout_height="110dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/secondLayerConstraint"
+        app:layout_constraintBottom_toTopOf="@id/secondLayerConstraint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/timerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
-            android:focusableInTouchMode="false"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:inputType="number"
-            android:maxLength="6"
-            android:maxLines="1"
-            android:text="1800"
-            android:textColor="#000000"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/lifeSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/lifesymbolsmall3of3" />
+
+                <TextView
+                    android:id="@+id/lifeUpdateTxt"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="10" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/relistenSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/relistensymbolsmall" />
+
+                <TextView
+                    android:id="@+id/relistenUpdateTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="10" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timerViewConstraint"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/timeUpdateTxt"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/baloo"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:text="10"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/clockSymbol"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/clockSymbol"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/timeUpdateTxt"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/clock" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/thirdLayerConstraint"
@@ -196,10 +286,10 @@
         android:id="@+id/secondLayerConstraint"
         android:layout_width="fill_parent"
         android:layout_height="63dp"
-        app:layout_constraintBottom_toTopOf="@+id/thirdLayerConstraint"
+        app:layout_constraintBottom_toTopOf="@id/thirdLayerConstraint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topLayerConstraint">
+        app:layout_constraintTop_toBottomOf="@id/topLayer">
 
         <EditText
             android:id="@+id/enterNumberBox"

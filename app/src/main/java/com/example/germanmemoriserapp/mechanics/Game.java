@@ -1,5 +1,7 @@
 package com.example.germanmemoriserapp.mechanics;
 
+import android.widget.TextView;
+
 import com.example.germanmemoriserapp.audio.SoundManager;
 
 public class Game {
@@ -30,14 +32,25 @@ public class Game {
     Actions
      */
 
-    public void relisten() {
+    public void relisten(TextView relistenTxtView) {
 
         if(!gameRelistens.isOutOfListens()) {
-            gameRelistens.decrement();
+
+            //Decrement Re-listens & Update UI
+            gameRelistens.decrementWithUIUpdate(relistenTxtView);
+
+            //Play The Clip
             this.playAudioClip();
+
         } else {
 
+            //TODO: Alert out of listens
+
         }
+    }
+
+    public int getStartingRelistens() {
+        return nRelistens;
     }
 
     public boolean canRelisten() {

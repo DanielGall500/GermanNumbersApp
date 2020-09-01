@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton relistenBtn;
     Animation relistenAnim;
 
+    TextView relistenUpdatetxt;
+    TextView lifeUpdateTxt;
+
     /*
     Grabs Buttons Images: Unpressed, Correct, Incorrect
      */
@@ -76,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 //Relisten button animation
                 findViewById(v.getId()).startAnimation(relistenAnim);
 
-                //Play the clip
-                GAME.relisten();
+                //Play the clip & Update GFX
+                GAME.relisten(relistenUpdatetxt);
+
             }
             else {
                 //TODO: No Relistens Left
@@ -183,17 +187,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
-        timerView = findViewById(R.id.timerView);
+        timerView = findViewById(R.id.timeUpdateTxt);
 
         digitKeyboard = new Keyboard(inputFieldH, buttonUiH, gameStateH,
                 digitIdReference, GAME);
 
         setAllButtonListeners(digitKeyboard);
-
-        relistenBtn = findViewById(R.id.relistenBtn);
-        relistenAnim = AnimationUtils.loadAnimation(this, R.anim.relisten_anim);
-
-        relistenBtn.setOnClickListener(new RelistenBtnHandler());
 
         GAME = new Game();
         GAME.begin();
@@ -202,6 +201,16 @@ public class MainActivity extends AppCompatActivity {
 
         timer = new Timer(timerView);
         timer.begin();
+
+        relistenBtn = findViewById(R.id.relistenBtn);
+        relistenAnim = AnimationUtils.loadAnimation(this, R.anim.relisten_anim);
+
+        relistenBtn.setOnClickListener(new RelistenBtnHandler());
+
+        relistenUpdatetxt = findViewById(R.id.relistenUpdateTxt);
+        relistenUpdatetxt.setText("H");
+
+        lifeUpdateTxt = findViewById(R.id.lifeUpdateTxt);
     }
 
     private void onNewTurn() {
