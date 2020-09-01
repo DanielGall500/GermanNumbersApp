@@ -96,7 +96,7 @@ public class Game {
     Get the next state of the game based on
     user input.
      */
-    public GAME_STATE getState(String input) {
+    public GAME_STATE getState(String input, TextView lifeTxtView) {
 
         boolean gameOver = !soundManager.hasNext();
         System.out.println("GAmeover? " + gameOver);
@@ -107,7 +107,7 @@ public class Game {
 
             //Take Away A Life
             if(gameLives.hasLives()) {
-                gameLives.decrement();
+                gameLives.decrementWithUIUpdate(lifeTxtView);
             }
 
             //Check If Out Of Lives

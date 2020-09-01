@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             updateFieldText(digitKeyboard.getInput());
 
             //Retrieve next state of the game
-            GAME_STATE nextState = GAME.getState(userInput);
+            GAME_STATE nextState = GAME.getState(userInput, lifeUpdateTxt);
 
             //Execute this action in the backend
             GAME.execute(nextState);
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         relistenBtn.setOnClickListener(new RelistenBtnHandler());
 
         relistenUpdatetxt = findViewById(R.id.relistenUpdateTxt);
-        relistenUpdatetxt.setText("H");
+        relistenUpdatetxt.setText(String.valueOf(GAME.getStartingRelistens()));
 
         lifeUpdateTxt = findViewById(R.id.lifeUpdateTxt);
     }
