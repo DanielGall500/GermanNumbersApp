@@ -1,10 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/empty_background"
     tools:context=".activities.LearnScreen">
+
+    <ScrollView
+        android:id="@+id/learnBtnScrollView"
+        android:layout_width="277dp"
+        android:layout_height="513dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/menuBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageButton
+                android:id="@+id/zero_to_nine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/zero_to_nine_btn" />
+
+            <ImageButton
+                android:id="@+id/ten_to_nineteen_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/ten_to_nineteen_btn" />
+
+            <ImageButton
+                android:id="@+id/twenty_to_twentynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/twenty_to_twentynine_btn" />
+
+            <ImageButton
+                android:id="@+id/thirty_to_thirtynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/thirty_to_thirtynine_btn" />
+
+            <ImageButton
+                android:id="@+id/forty_to_fortynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/forty_to_fortynine_btn" />
+
+            <ImageButton
+                android:id="@+id/fifty_to_fiftynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/fifty_to_fiftynine_btn" />
+
+            <ImageButton
+                android:id="@+id/sixty_to_sixtynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/sixty_to_sixtynine_btn" />
+
+            <ImageButton
+                android:id="@+id/seventy_to_seventynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/seventy_to_seventynine_btn" />
+
+            <ImageButton
+                android:id="@+id/eighty_to_eightynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/eighty_to_eightynine_btn" />
+
+            <ImageButton
+                android:id="@+id/ninety_to_ninetynine_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/ninety_to_ninetynine_btn" />
+
+            <ImageButton
+                android:id="@+id/hundred_plus_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:background="@drawable/hundred_plus_btn" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

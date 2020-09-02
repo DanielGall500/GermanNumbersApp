@@ -9,16 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LoadScreen"></activity>
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.GameOverScreen" />
-        <activity android:name=".activities.MenuScreen">
+        <activity android:name=".activities.LearnSelectedScreen"></activity>
+        <activity android:name=".activities.LearnScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.LoadScreen" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.GameOverScreen" />
+        <activity android:name=".activities.MenuScreen" />
 
         <meta-data
             android:name="preloaded_fonts"
