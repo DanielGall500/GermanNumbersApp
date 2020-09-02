@@ -3,11 +3,14 @@ package com.example.germanmemoriserapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
@@ -20,6 +23,8 @@ public class LoadScreen extends AppCompatActivity {
     private Intent moveToGame;
 
     private ProgressBar audioProgressBar;
+    private AnimationDrawable loadBtnAnim;
+    private ImageView loadBtn;
 
     private int NUM_CLIPS = 4;
 
@@ -62,6 +67,10 @@ public class LoadScreen extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_load_screen);
+
+        loadBtn = findViewById(R.id.loadBtn);
+        loadBtnAnim = (AnimationDrawable)loadBtn.getDrawable();
+        loadBtnAnim.start();
 
         audioProgressBar = findViewById(R.id.audioProgressBar);
         audioProgressBar.setMax(NUM_CLIPS);

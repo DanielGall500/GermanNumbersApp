@@ -7,15 +7,45 @@
     android:background="@drawable/empty_background"
     tools:context=".activities.LoadScreen">
 
-    <ProgressBar
-        android:id="@+id/audioProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="375dp"
-        android:layout_height="59dp"
-        android:progress="1"
-        android:soundEffectsEnabled="true"
+    <ImageView
+        android:id="@+id/titleHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/loadLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999"
+        app:srcCompat="@drawable/main_title" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loadLayout"
+        android:layout_width="409dp"
+        android:layout_height="179dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/titleHeader">
+
+        <ImageView
+            android:id="@+id/loadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/audioProgressBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/loading_btn" />
+
+        <ProgressBar
+            android:id="@+id/audioProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="325dp"
+            android:layout_height="59dp"
+            android:progress="1"
+            android:soundEffectsEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
