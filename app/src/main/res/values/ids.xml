@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="germanTextViewId" type="id"/>
+    <item name="digitTextViewId" type="id"/>
+    <item name="playBtnId" type="id"/>
+</resources>

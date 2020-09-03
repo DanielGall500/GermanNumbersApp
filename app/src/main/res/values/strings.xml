@@ -17,4 +17,6 @@
     <string name="difficulty_two">INTERMEDIATE</string>
     <string name="difficulty_three">ADVANCED</string>
     <string name="score_key">DATA_TRANSFER_SCORE</string>
+
+    <string name="scrollViewColour">#B6B6B6</string>
 </resources>

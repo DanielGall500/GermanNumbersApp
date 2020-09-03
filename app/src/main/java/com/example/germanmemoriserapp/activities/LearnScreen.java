@@ -39,8 +39,5 @@ public class LearnScreen extends AppCompatActivity {
         ScrollView learnBtnScrollView = findViewById(R.id.learnBtnScrollView);
         learnBtnScrollView.fullScroll(ScrollView.FOCUS_UP);
 
-        NumberFileManager manager = new NumberFileManager(this);
-        manager.print();
-
     }
 }
