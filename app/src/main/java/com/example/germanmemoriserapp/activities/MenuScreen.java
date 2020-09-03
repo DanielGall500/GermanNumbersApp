@@ -47,8 +47,8 @@ public class MenuScreen extends AppCompatActivity {
         setContentView(R.layout.activity_menu_screen);
 
         playGameBtn = findViewById(R.id.menuPlayBtn);
-        scoreBtn = findViewById(R.id.menuLearnBtn);
-        learnbtn = findViewById(R.id.menuScoresBtn);
+        scoreBtn = findViewById(R.id.menuScoresBtn);
+        learnbtn = findViewById(R.id.menuLearnBtn);
 
         diffBeginnerBtn = findViewById(R.id.diffBeginnerBtn);
         diffNormalBtn = findViewById(R.id.diffNormalBtn);
