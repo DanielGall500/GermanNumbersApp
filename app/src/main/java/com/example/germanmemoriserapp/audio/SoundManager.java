@@ -105,7 +105,7 @@ public class SoundManager {
         }
         else {
             //TODO
-            soundIdQueue = directories.loadIds(1,10, context);
+            soundIdQueue = directories.loadIds(0,9, context);
         }
 
         /*
