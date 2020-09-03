@@ -2,18 +2,21 @@ package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
-import com.example.germanmemoriserapp.mechanics.NumberFileManager;
-
-import java.util.ArrayList;
+import com.example.germanmemoriserapp.ui.BackButton;
 
 public class LearnScreen extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class LearnScreen extends AppCompatActivity {
             R.id.eighty_to_eightynine_btn, R.id.ninety_to_ninetynine_btn,
             R.id.hundred_plus_btn
     };
+
+    private BackButton backBtn;
+    Animation btnAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +48,41 @@ public class LearnScreen extends AppCompatActivity {
         ScrollView learnBtnScrollView = findViewById(R.id.learnBtnScrollView);
         learnBtnScrollView.fullScroll(ScrollView.FOCUS_UP);
 
+        btnAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
+
+        backBtn = new BackButton(this, this,
+                R.id.learnScreenBackBtn, MenuScreen.class);
+
         int N = buttons.length;
         for(int i = 0; i < N; i++) {
 
             ImageButton btn = findViewById(buttons[i]);
 
-            MoveToNewActivityListener listener =
-                    new MoveToNewActivityListener(
-                            this,this,
-                            false,i);
+            Listener btnListener = new Listener(this, this, i);
 
-            btn.setOnClickListener(listener);
+            btn.setOnClickListener(btnListener);
+        }
+    }
+
+    public class Listener implements View.OnClickListener {
+
+        private int page;
+        private Context context;
+        private AppCompatActivity activity;
+
+        public Listener(Context context, AppCompatActivity activity, int page) {
+            this.context = context;
+            this.activity = activity;
+            this.page = page;
+        }
+
+        @Override
+        public void onClick(View v) {
+            MoveToNewActivityListener newActivity =
+                    new MoveToNewActivityListener();
+
+            newActivity.move(context, activity,
+                    false, page);
         }
     }
 }

@@ -1,7 +1,9 @@
 package com.example.germanmemoriserapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -47,13 +49,9 @@ public class GameOverScreen extends AppCompatActivity {
 
         scoreResultView.setText(getScoreString(score));
 
-        menuBtn.setOnClickListener(new MoveToNewActivityListener(
-                this, this, MenuScreen.class
-        ));
+        menuBtn.setOnClickListener(new MenuButtonListener(this,this));
 
-        retryBtn.setOnClickListener(new MoveToNewActivityListener(
-                this, this, LoadScreen.class
-        ));
+        retryBtn.setOnClickListener(new RetryButtonListener(this,this));
 
     }
 
@@ -76,6 +74,43 @@ public class GameOverScreen extends AppCompatActivity {
 
     private void setScore(String score) {
         gameScore = score;
+    }
+
+    private class MenuButtonListener implements View.OnClickListener {
+
+        private Context appContext;
+        private AppCompatActivity appActivity;
+
+        public MenuButtonListener(Context mContext, AppCompatActivity mActivity) {
+            this.appContext = mContext;
+            this.appActivity = mActivity;
+        }
+
+        @Override
+        public void onClick(View v) {
+            MoveToNewActivityListener listener = new MoveToNewActivityListener();
+            listener.move(appContext, appActivity, MenuScreen.class);
+        }
+    }
+
+    private class RetryButtonListener implements View.OnClickListener {
+
+        private Context context;
+        private AppCompatActivity activity;
+
+        public RetryButtonListener(Context context, AppCompatActivity activity) {
+            this.context = context;
+            this.activity = activity;
+        }
+
+        @Override
+        public void onClick(View v) {
+            MoveToNewActivityListener listener = new MoveToNewActivityListener();
+
+
+            //TODO: FIX DIFFICULTY LEVEL HERE
+            listener.move(context,activity,true,0);
+        }
     }
 
 

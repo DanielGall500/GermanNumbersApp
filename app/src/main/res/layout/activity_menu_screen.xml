@@ -32,32 +32,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/play_btn"
-            app:layout_constraintBottom_toTopOf="@id/menuScoresBtn"
+            app:layout_constraintBottom_toTopOf="@id/menuLearnBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/menuScoresBtn"
+            android:id="@+id/menuLearnBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/scores_btn"
+            android:background="@drawable/learn_btn"
             android:text="@string/btn_item_rank"
-            app:layout_constraintBottom_toTopOf="@+id/menuHowToBtn"
+            app:layout_constraintBottom_toTopOf="@+id/menuScoresBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuPlayBtn" />
 
         <ImageButton
-            android:id="@+id/menuHowToBtn"
+            android:id="@+id/menuScoresBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/how_to_btn"
+            android:background="@drawable/scores_btn"
             app:layout_constraintBottom_toBottomOf="@id/menuBtnLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menuScoresBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/menuLearnBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

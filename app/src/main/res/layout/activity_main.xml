@@ -330,7 +330,6 @@
             android:inputType="number"
             android:maxLength="6"
             android:maxLines="1"
-            android:text="1800"
             android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold"

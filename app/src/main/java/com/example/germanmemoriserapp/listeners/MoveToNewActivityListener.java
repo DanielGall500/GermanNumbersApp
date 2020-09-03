@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.activities.LoadScreen;
 
-public class MoveToNewActivityListener implements View.OnClickListener {
+public class MoveToNewActivityListener  {
 
     Context currentContext;
     AppCompatActivity currentActivity;
@@ -21,20 +21,23 @@ public class MoveToNewActivityListener implements View.OnClickListener {
 
     Animation btnAnimation;
 
-    public MoveToNewActivityListener(Context currContext, AppCompatActivity currActivity,
+    public MoveToNewActivityListener() {}
+
+    public void move(Context currContext, AppCompatActivity currActivity,
                                      Class newActivity) {
         this.currentContext = currContext;
         this.currentActivity = currActivity;
 
         moveToNewScreen = new Intent(currActivity, newActivity);
 
-        //btnAnimation = AnimationUtils.loadAnimation(currActivity, R.anim.button_fly);
+        currentContext.startActivity(moveToNewScreen);
+        currentActivity.finish();
     }
 
     /*
     Used for moving to a loading screen
      */
-    public MoveToNewActivityListener(Context currContext, AppCompatActivity currActivity,
+    public void move(Context currContext, AppCompatActivity currActivity,
                                      boolean isGame, int info) {
         this.currentContext = currContext;
         this.currentActivity = currActivity;
@@ -53,16 +56,9 @@ public class MoveToNewActivityListener implements View.OnClickListener {
         moveToNewScreen.putExtra(isGameKey, isGame);
         moveToNewScreen.putExtra(loadInfo, info);
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        ImageButton btn = currentActivity.findViewById(v.getId());
-
-        btnAnimation = AnimationUtils.loadAnimation(currentActivity, R.anim.button_fly);
-        btn.startAnimation(btnAnimation);
-
         currentContext.startActivity(moveToNewScreen);
         currentActivity.finish();
+
     }
+
 }

@@ -20,6 +20,7 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
 import com.example.germanmemoriserapp.mechanics.LearnPage;
 import com.example.germanmemoriserapp.mechanics.NumberFileManager;
+import com.example.germanmemoriserapp.ui.BackButton;
 
 public class LearnSelectionScreen extends AppCompatActivity {
 
@@ -41,6 +42,8 @@ public class LearnSelectionScreen extends AppCompatActivity {
     private int minNumber;
     private int maxNumber;
 
+    private BackButton learnScreenSelectedBackBtn;
+
     private SoundManager audioManager = SoundManager.get();
 
     private class MediaListener implements View.OnClickListener {
@@ -54,8 +57,6 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-
-            System.out.println("Playing Number: " + mediaNumber);
             audioManager.play(mediaNumber);
         }
     }
@@ -64,7 +65,6 @@ public class LearnSelectionScreen extends AppCompatActivity {
         Intent fromLoadScreen = getIntent();
         String key = getString(R.string.load_screen_information);
         loadScreenInformation = fromLoadScreen.getIntExtra(key,0);
-        System.out.println("SECOND LOAD INFO : " + loadScreenInformation);
 
         int[] minMax = LearnPage.getMinMax(loadScreenInformation);
         minNumber = minMax[0];
@@ -81,6 +81,9 @@ public class LearnSelectionScreen extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_learn_selection_screen);
+
+        learnScreenSelectedBackBtn = new BackButton(this,this,
+                R.id.learnScreenSelectedBackBtn, LearnScreen.class);
 
         NumberFileManager numberManager = new NumberFileManager(
                 this,false, true,

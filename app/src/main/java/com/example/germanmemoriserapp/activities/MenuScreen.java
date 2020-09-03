@@ -1,6 +1,8 @@
 package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,7 +18,7 @@ import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 public class MenuScreen extends AppCompatActivity {
 
-    private ImageButton playGameBtn, scoreBtn, howToBtn;
+    private ImageButton playGameBtn, scoreBtn, learnbtn;
     private ImageButton diffBeginnerBtn, diffNormalBtn, diffMasterBtn;
 
     private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
@@ -45,8 +47,8 @@ public class MenuScreen extends AppCompatActivity {
         setContentView(R.layout.activity_menu_screen);
 
         playGameBtn = findViewById(R.id.menuPlayBtn);
-        scoreBtn = findViewById(R.id.menuScoresBtn);
-        howToBtn = findViewById(R.id.menuHowToBtn);
+        scoreBtn = findViewById(R.id.menuLearnBtn);
+        learnbtn = findViewById(R.id.menuScoresBtn);
 
         diffBeginnerBtn = findViewById(R.id.diffBeginnerBtn);
         diffNormalBtn = findViewById(R.id.diffNormalBtn);
@@ -61,33 +63,60 @@ public class MenuScreen extends AppCompatActivity {
 
 
         int DIFFICULTY = 0; //TODO
-        playGameBtn.setOnClickListener(new MoveToNewActivityListener(
-                this, this, true,
-                DIFFICULTY));
+        MoveToNewActivityListener moveListener = new MoveToNewActivityListener();
+        playGameBtn.setOnClickListener(new PlayListener(this, this, DIFFICULTY));
+        
+        learnbtn.setOnClickListener(new LearnListener(this, this));
+
+        buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
+    }
+
+    public class LearnListener implements View.OnClickListener {
+
+        Context context;
+        AppCompatActivity activity;
+
+        public LearnListener(Context context, AppCompatActivity activity) {
+            this.context = context;
+            this.activity = activity;
+        }
 
 
-        howToBtn.setOnClickListener(new MoveToNewActivityListener(
-                this, this, LearnScreen.class
-        ));
+        @Override
+        public void onClick(View v) {
+            findViewById(v.getId()).startAnimation(buttonAnimation);
 
+            MoveToNewActivityListener moveListener = new MoveToNewActivityListener();
+            moveListener.move(context, activity, LearnScreen.class);
+        }
+    }
 
+    public class PlayListener implements View.OnClickListener {
 
-        //buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
+        Context context;
+        AppCompatActivity activity;
+        int difficulty;
 
-        /*
-        scoreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findViewById(v.getId()).startAnimation(buttonAnimation);
-            }
-        });
+        public PlayListener(Context context, AppCompatActivity activity, int difficulty) {
+            this.context = context;
+            this.activity = activity;
+            this.difficulty = difficulty;
+        }
 
-        howToBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                findViewById(v.getId()).startAnimation(buttonAnimation);
-            }
-        });*/
+        @Override
+        public void onClick(View v) {
+            findViewById(v.getId()).startAnimation(buttonAnimation);
+
+            MoveToNewActivityListener moveListener = new MoveToNewActivityListener();
+            moveListener.move(context, activity, true, difficulty);
+        }
+    }
+
+    public class ScoreListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            findViewById(v.getId()).startAnimation(buttonAnimation);
+        }
     }
 }
 
