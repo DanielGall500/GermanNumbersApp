@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
+import com.example.germanmemoriserapp.mechanics.LearnPage;
 import com.example.germanmemoriserapp.mechanics.NumberFileManager;
 
 public class LearnSelectionScreen extends AppCompatActivity {
@@ -29,13 +31,15 @@ public class LearnSelectionScreen extends AppCompatActivity {
             R.id.cardView9, R.id.cardView10
     };
 
-    int[] nums = {1,2,3,4,5,6,7,8,9,10};
-
     final int CARD_RADIUS = 25;
     final String CARD_TEXT_FONT = "baloo";
     final int CARD_TEXT_STYLE = Typeface.BOLD;
     final int CARD_TEXT_SIZE = 25;
     final int CARD_TEXT_COLOUR = Color.BLACK;
+
+    private int loadScreenInformation;
+    private int minNumber;
+    private int maxNumber;
 
     private SoundManager audioManager = SoundManager.get();
 
@@ -56,6 +60,17 @@ public class LearnSelectionScreen extends AppCompatActivity {
         }
     }
 
+    public void retrieveInformationFromLoadScreen() {
+        Intent fromLoadScreen = getIntent();
+        String key = getString(R.string.load_screen_information);
+        loadScreenInformation = fromLoadScreen.getIntExtra(key,0);
+        System.out.println("SECOND LOAD INFO : " + loadScreenInformation);
+
+        int[] minMax = LearnPage.getMinMax(loadScreenInformation);
+        minNumber = minMax[0];
+        maxNumber = minMax[1];
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +86,14 @@ public class LearnSelectionScreen extends AppCompatActivity {
                 this,false, true,
                 true, true);
 
+        retrieveInformationFromLoadScreen();
 
         int N = cardIds.length;
 
+        int nextNumber = minNumber;
         for(int i = 0; i < N; i++) {
-            int id = cardIds[i];
-            int n = nums[i];
 
+            int id = cardIds[i];
             CardView card = findViewById(id);
 
             card.setRadius(CARD_RADIUS);
@@ -109,20 +125,21 @@ public class LearnSelectionScreen extends AppCompatActivity {
             /*
             Set Digit
              */
-            digitTxt.setText(String.valueOf(n));
+            digitTxt.setText(String.valueOf(nextNumber));
 
              /*
             Set German
              */
-            String germanWord = numberManager.getGermanFromDigit(n);
+            String germanWord = numberManager.getGermanFromDigit(
+                    nextNumber);
             germanTxt.setText(germanWord);
 
             /*
             Set Audio Listener For Play Button
              */
-            playBtn.setOnClickListener(new MediaListener(n));
+            playBtn.setOnClickListener(new MediaListener(nextNumber));
 
-
+            nextNumber++;
         }
 
     }

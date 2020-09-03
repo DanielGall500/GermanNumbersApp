@@ -84,7 +84,8 @@ public class LoadScreen extends AppCompatActivity {
         to load.
          */
         final String infoKey = getString(R.string.load_screen_information);
-        loadInformation = inputToLoadScreen.getIntExtra(infoKey, 0);
+        loadInformation = inputToLoadScreen.getIntExtra(infoKey, 1);
+        System.out.println("LOAD INFORMATION: " + loadInformation);
 
     }
 
@@ -143,6 +144,12 @@ public class LoadScreen extends AppCompatActivity {
             Move To Learn Page
              */
             moveToNextScreen = new Intent(this, LearnSelectionScreen.class);
+
+            /*
+            Store relevant information for learning page.
+             */
+            String key = getString(R.string.load_screen_information);
+            moveToNextScreen.putExtra(key, loadInformation);
         }
     }
 

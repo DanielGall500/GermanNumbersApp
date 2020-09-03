@@ -42,14 +42,15 @@ public class LearnScreen extends AppCompatActivity {
         ScrollView learnBtnScrollView = findViewById(R.id.learnBtnScrollView);
         learnBtnScrollView.fullScroll(ScrollView.FOCUS_UP);
 
-        for(int id : buttons) {
+        int N = buttons.length;
+        for(int i = 0; i < N; i++) {
 
-            ImageButton btn = findViewById(id);
+            ImageButton btn = findViewById(buttons[i]);
 
             MoveToNewActivityListener listener =
                     new MoveToNewActivityListener(
                             this,this,
-                            false,0);
+                            false,i);
 
             btn.setOnClickListener(listener);
         }

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Handler;
 
 import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.mechanics.LearnPage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,8 +105,11 @@ public class SoundManager {
             numberArray = directories.getIntegerArray();
         }
         else {
-            //TODO
-            soundIdQueue = directories.loadIds(0,9, context);
+            int[] minAndMax = LearnPage.getMinMax(info);
+            int min = minAndMax[0];
+            int max = minAndMax[1];
+
+            soundIdQueue = directories.loadIds(min, max, context);
         }
 
         /*
