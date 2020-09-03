@@ -18,5 +18,8 @@
     <string name="difficulty_three">ADVANCED</string>
     <string name="score_key">DATA_TRANSFER_SCORE</string>
 
+    <string name="load_screen_isGameBoolean">IS_GAME</string>
+    <string name="load_screen_information">INPUT_INFORMATION</string>
+
     <string name="scrollViewColour">#B6B6B6</string>
 </resources>

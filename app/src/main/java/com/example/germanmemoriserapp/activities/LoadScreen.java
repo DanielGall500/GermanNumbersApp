@@ -20,16 +20,13 @@ import com.example.germanmemoriserapp.mechanics.Difficulty;
 public class LoadScreen extends AppCompatActivity {
 
     private SoundManager soundPlayer;
-    private Intent moveToGame;
+    private Intent moveToNextScreen;
 
     private ProgressBar audioProgressBar;
     private AnimationDrawable loadBtnAnim;
     private ImageView loadBtn;
 
     private int NUM_CLIPS = 4;
-
-    private Difficulty gameDifficulty = new Difficulty(Difficulty.Level.BEGINNER);
-
     private int audioProgress = 0;
 
     class AudioHandler extends Handler {
@@ -42,7 +39,6 @@ public class LoadScreen extends AppCompatActivity {
     class ProgressHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            System.out.println("UPDATE PROGRESS");
             audioProgress++;
 
             //Run on UI thread
@@ -55,6 +51,43 @@ public class LoadScreen extends AppCompatActivity {
         }
     }
 
+    /*
+    Load Screen
+
+    Can Load:
+    - The Game
+        - Input: isGame, Difficulty
+        - Output: Loaded Audio
+
+    - Learning Activities
+        - Input: isGame, Page Number
+        - Output: Loaded Audio, German String Arr, Digit String Arr
+     */
+
+    private boolean isGame;
+    private int loadInformation;
+
+
+    private void retrieveLoadScreenInput() {
+        Intent inputToLoadScreen = getIntent();
+
+        /*
+        This key tells us if we're loading a game or a learning page
+         */
+        final String isGameKey = getString(R.string.load_screen_isGameBoolean);
+        isGame = inputToLoadScreen.getBooleanExtra(
+                isGameKey, true);
+
+        /*
+        Depending on if we are loading a game or a learning page,
+        this key will tell us either the difficulty level or the page
+        to load.
+         */
+        final String infoKey = getString(R.string.load_screen_information);
+        loadInformation = inputToLoadScreen.getIntExtra(infoKey, 0);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +97,8 @@ public class LoadScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-
-
         setContentView(R.layout.activity_load_screen);
+
 
         loadBtn = findViewById(R.id.loadBtn);
         loadBtnAnim = (AnimationDrawable)loadBtn.getDrawable();
@@ -80,16 +112,42 @@ public class LoadScreen extends AppCompatActivity {
          * an audio manager. */
         soundPlayer = SoundManager.get();
 
-        soundPlayer.init(gameDifficulty, NUM_CLIPS, this);
+        /*
+        Handle Input to Load Screen
+         */
+        retrieveLoadScreenInput();
 
+        //Possibly cause problems
         soundPlayer.setLoadCompleteHandler(new AudioHandler());
         soundPlayer.setProgressHandler(new ProgressHandler());
 
-        moveToGame = new Intent(this, MainActivity.class);
+
+        if(isGame) {
+            /*
+            Load Audio Files
+             */
+            soundPlayer.init(true, NUM_CLIPS, this);
+
+
+            /*
+            Move To Game
+             */
+            moveToNextScreen = new Intent(this, MainActivity.class);
+        } else {
+
+
+            /*Load Audio Files*/
+            soundPlayer.init(false, loadInformation, this);
+
+            /*
+            Move To Learn Page
+             */
+            moveToNextScreen = new Intent(this, LearnSelectionScreen.class);
+        }
     }
 
     private void loadComplete() {
-        startActivity(moveToGame);
+        startActivity(moveToNextScreen);
         finish();
     }
 }

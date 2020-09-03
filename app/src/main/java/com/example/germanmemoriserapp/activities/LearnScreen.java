@@ -10,7 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
 import com.example.germanmemoriserapp.mechanics.NumberFileManager;
+
+import java.util.ArrayList;
 
 public class LearnScreen extends AppCompatActivity {
 
@@ -39,5 +42,16 @@ public class LearnScreen extends AppCompatActivity {
         ScrollView learnBtnScrollView = findViewById(R.id.learnBtnScrollView);
         learnBtnScrollView.fullScroll(ScrollView.FOCUS_UP);
 
+        for(int id : buttons) {
+
+            ImageButton btn = findViewById(id);
+
+            MoveToNewActivityListener listener =
+                    new MoveToNewActivityListener(
+                            this,this,
+                            false,0);
+
+            btn.setOnClickListener(listener);
+        }
     }
 }

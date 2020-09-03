@@ -3,6 +3,7 @@ package com.example.germanmemoriserapp.audio;
 import android.content.Context;
 
 import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.mechanics.Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,10 @@ public class SoundDirectory {
 
     private final String FOLDER = "raw";
     private final String FILE_PREFIX = "nummer_";
+
+    private final int GAME_MINIMUM_NUMBER = Game.MIN_NUM;
+    private final int GAME_MAXIMUM_NUMBER = Game.MAX_NUM;
+
 
     private ArrayList<Integer> numberArray = new ArrayList<>();
 
@@ -27,9 +32,9 @@ public class SoundDirectory {
 
     ArrayList<Clip> clips;
 
-    protected Queue<Integer> generateIds(Difficulty diff, Context context, int N) {
-        int min = diff.getMin();
-        int max = diff.getMax();
+    protected Queue<Integer> generateIds(Context context, int N) {
+        int min = GAME_MINIMUM_NUMBER;
+        int max = GAME_MAXIMUM_NUMBER;
 
         NumberGenerator generator = new NumberGenerator();
 
@@ -43,20 +48,6 @@ public class SoundDirectory {
             int nxt = generator.generateNumber(min, max);
 
             if (hasID(nxt, context) && !numberArray.contains(nxt)) {
-
-                /*
-                Clip clip = new Clip(String.valueOf(nxt), this);
-
-                ArrayList<Integer> files = clip.getNecessaryFiles();
-
-                for(int f : files) {
-                    int id = getId(getFileStr(f), context);
-                    dirMap.put(id, nxt);
-                    ids.offer(id);
-                }
-
-                numberArray.add(nxt);*/
-
 
                 /*
                 Find ID associated with the number.
@@ -88,6 +79,34 @@ public class SoundDirectory {
             }
         }
 
+        return ids;
+    }
+
+    protected Queue<Integer> loadIds(int min, int max, Context context) {
+        Queue<Integer> ids = new LinkedList<>();
+
+        for(int i = min; i <= max; i++) {
+            if(hasID(i, context)) {
+
+                /*
+                Load ID
+                 */
+                int id = getId(i, context);
+
+                /*
+                Map ID => number.
+                 */
+                dirMap.put(id, i);
+
+                /*
+                Store ID
+                 */
+                ids.offer(id);
+            }
+            else {
+                throw new IllegalArgumentException("Invalid Min/Max");
+            }
+        }
         return ids;
     }
 

@@ -58,11 +58,23 @@ public class MenuScreen extends AppCompatActivity {
         diffNormalBtn.setOnClickListener(difficultyListener);
         diffMasterBtn.setOnClickListener(difficultyListener);
 
+
+
+        int DIFFICULTY = 0; //TODO
         playGameBtn.setOnClickListener(new MoveToNewActivityListener(
-                this,this, LoadScreen.class));
+                this, this, true,
+                DIFFICULTY));
 
-        buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
 
+        howToBtn.setOnClickListener(new MoveToNewActivityListener(
+                this, this, LearnScreen.class
+        ));
+
+
+
+        //buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
+
+        /*
         scoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +87,7 @@ public class MenuScreen extends AppCompatActivity {
             public void onClick(View v) {
                 findViewById(v.getId()).startAnimation(buttonAnimation);
             }
-        });
+        });*/
     }
 }
 

@@ -85,7 +85,7 @@ public class SoundManager {
     /*
     Generate new numbers (audio clips) for a new game.
     */
-    public void init(Difficulty diff, int size, Context context) {
+    public void init(boolean isGame, int info, Context context) {
 
         this.appContext = context;
 
@@ -94,12 +94,19 @@ public class SoundManager {
          */
         soundIterator = 0;
 
-        /*
-        Generate a set of file IDs for number in this
-        difficulty level.
-         */
-        soundIdQueue = directories.generateIds(diff, context, size);
-        numberArray = directories.getIntegerArray();
+
+        if(isGame) {
+            /*
+            Generate a set of file IDs for number in this
+            difficulty level.
+             */
+            soundIdQueue = directories.generateIds(context, info);
+            numberArray = directories.getIntegerArray();
+        }
+        else {
+            //TODO
+            soundIdQueue = directories.loadIds(1,10, context);
+        }
 
         /*
         Load audio clips on a new thread

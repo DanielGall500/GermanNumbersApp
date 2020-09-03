@@ -10,6 +10,9 @@ public class Game {
         NO_CHANGE, NEW_TURN, GAME_OVER
     };
 
+    public final static int MIN_NUM = 0;
+    public final static int MAX_NUM = 100;
+
     private SoundManager soundManager;
     private Score playerScore;
     private int currentNumber;
