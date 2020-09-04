@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class ScoreBoardManager {
 
-    private final int NUM_RECENT_SCORES = 10;
-
     private final String csvSep = ",";
     private Context appContext;
 

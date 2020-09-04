@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class BestScoresScreen extends AppCompatActivity {
 
-    private TextView bestScoreBeginnerTxt;
-    private TextView bestScoreIntermediateTxt;
-    private TextView bestScoreMasterTxt;
+    private TextView bestScoreBeginnerScore;
+    private TextView bestScoreIntermediateScore;
+    private TextView bestScoreMasterScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,25 @@ public class BestScoresScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_best_scores_screen);
 
-        bestScoreBeginnerTxt = findViewById(R.id.bestScoreBeginnerTxt);
-        bestScoreIntermediateTxt = findViewById(R.id.bestScoreIntermediateTxt);
-        bestScoreMasterTxt = findViewById(R.id.bestScoreMasterTxt);
+        bestScoreBeginnerScore = findViewById(R.id.bestScoreBeginnerScore);
+        bestScoreIntermediateScore = findViewById(R.id.bestScoreIntermediateScore);
+        bestScoreMasterScore = findViewById(R.id.bestScoreMasterScore);
 
         ScoreBoardManager scoreBoardManager = new ScoreBoardManager(this);
-        ArrayList<String> scores = scoreBoardManager.getBestScores();
+        ArrayList<ArrayList<String>> scores = scoreBoardManager.getBestScores();
+
+        ArrayList<String> beginnerArr, normalArr, masterArr;
+        beginnerArr = scores.get(0);
+        normalArr = scores.get(1);
+        masterArr = scores.get(2);
+
+        String beginnerScore = beginnerArr.get(1);
+        String normalScore = normalArr.get(1);
+        String masterScore = masterArr.get(1);
+
+        bestScoreBeginnerScore.setText(beginnerScore);
+        bestScoreIntermediateScore.setText(normalScore);
+        bestScoreMasterScore.setText(masterScore);
+
     }
 }
