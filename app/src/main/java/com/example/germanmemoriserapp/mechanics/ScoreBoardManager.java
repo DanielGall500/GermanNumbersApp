@@ -47,41 +47,6 @@ public class ScoreBoardManager {
     }
 
     public ArrayList<ArrayList<String>> getBestScores() {
-        iStream = appContext.getResources().openRawResource(
-                best_scores_id);
-
-        reader = new BufferedReader(
-                new InputStreamReader(iStream, Charset.forName("UTF-8")));
-
-        ArrayList<ArrayList<String>> bestScores = new ArrayList<>();
-
-        String bestScores;
-        String[] scoreTokens;
-
-        String line = "";
-
-        try {
-            while ((line = reader.readLine()) != null) {
-
-                /* Split into tokens */
-                String[] tokens = line.split(csvSep);
-                int diffId = Integer.parseInt(tokens[difficulty_token_indx]);
-                String scoreToken = tokens[score_token_indx];
-
-                ArrayList<String> newEntry = new ArrayList<>();
-
-
-                bestScores.add(newEntry);
-            }
-        }
-        catch(IOException e) {
-            e.printStackTrace();
-            return defaultBestScores;
-        }
-
-    }
-
-    public ArrayList<ArrayList<String>> getBestScores() {
         return readIn(best_scores_file_id);
     }
 
