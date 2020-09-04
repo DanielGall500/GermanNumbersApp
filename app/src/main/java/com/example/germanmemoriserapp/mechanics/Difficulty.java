@@ -2,55 +2,63 @@ package com.example.germanmemoriserapp.mechanics;
 
 public class Difficulty {
 
-    private static int INFINITE = -1;
+    private static int invalidId = -1;
+    private static final int beginnerId = 0;
+    private static final int intermediateId = 1;
+    private static final int masterId = 2;
 
-    private final int BEGINNER_MIN = 0;
-    private final int BEGINNER_MAX = 100;
+    private final String beginnerStr = "BEGINNER";
+    private final String normalStr = "NORMAL";
+    private final String masterStr = "MASTER";
+    private final String invalidStr = "N/A";
 
-    private final int NORMAL_MIN = 100;
-    private final int NORMAL_MAX = 1000;
-
-    private final int MASTER_MIN = 1000;
-    private final int MASTER_MAX = 10000;
+    private Level diffLevel;
 
     public enum Level {
         BEGINNER, NORMAL, MASTER
     };
 
-    private Level diffLevel;
+    public static boolean isValid(int id) {
+        return (id >= beginnerId && id <= masterId);
+    }
 
-    public Difficulty(Level l) {
-        this.diffLevel = l;
+    public Difficulty(int id) {
+        this.diffLevel = getLevel(id);
     }
 
     public void setDifficulty(Level d) {
         this.diffLevel = d;
     }
-
     public Level getDifficulty() {
         return diffLevel;
     }
 
-    public int getMin() {
-        switch(diffLevel) {
-            case BEGINNER:
-                return BEGINNER_MIN;
-            case NORMAL:
-                return NORMAL_MIN;
+    public Level getLevel(int id) {
+        switch(id) {
+            case beginnerId:
+                return Level.BEGINNER;
+            case intermediateId:
+                return Level.NORMAL;
+            case masterId:
+                return Level.MASTER;
             default:
-                return MASTER_MIN;
+                return null;
         }
     }
 
-    public int getMax() {
+    public String toString() {
         switch(diffLevel) {
             case BEGINNER:
-                return BEGINNER_MAX;
+                return beginnerStr;
             case NORMAL:
-                return NORMAL_MAX;
+                return normalStr;
+            case MASTER:
+                return masterStr;
             default:
-                return MASTER_MAX;
+                return invalidStr;
         }
     }
+
+
 
 }
