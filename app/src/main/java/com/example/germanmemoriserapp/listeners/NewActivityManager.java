@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.activities.LoadScreen;
 
-public class MoveToNewActivityListener  {
+public class NewActivityManager {
 
     Context currentContext;
     AppCompatActivity currentActivity;
@@ -21,7 +21,7 @@ public class MoveToNewActivityListener  {
 
     Animation btnAnimation;
 
-    public MoveToNewActivityListener() {}
+    public NewActivityManager() {}
 
     public void move(Context currContext, AppCompatActivity currActivity,
                                      Class newActivity) {

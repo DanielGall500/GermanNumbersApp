@@ -9,8 +9,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.activities.MenuScreen;
-import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
+import com.example.germanmemoriserapp.listeners.NewActivityManager;
 
 public class BackButton {
 
@@ -21,7 +20,7 @@ public class BackButton {
     private ImageButton backButton;
     private Animation backBtnAnimation;
 
-    MoveToNewActivityListener activityListener = new MoveToNewActivityListener();
+    NewActivityManager activityListener = new NewActivityManager();
 
     public BackButton(Context appContext, AppCompatActivity appActivity, int buttonId, Class moveTo) {
         this.appContext = appContext;

@@ -2,9 +2,7 @@ package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
+import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.ui.BackButton;
 
 public class LearnScreen extends AppCompatActivity {
@@ -78,8 +76,8 @@ public class LearnScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            MoveToNewActivityListener newActivity =
-                    new MoveToNewActivityListener();
+            NewActivityManager newActivity =
+                    new NewActivityManager();
 
             newActivity.move(context, activity,
                     false, page);

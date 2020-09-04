@@ -9,19 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LearnSelectionScreen">
-        </activity>
-        <activity android:name=".activities.LearnScreen">
-        </activity>
+        <activity android:name=".activities.RecentScoresScreen"></activity>
+        <activity android:name=".activities.BestScoresScreen" />
+        <activity android:name=".activities.ScoreBoardScreen" />
+        <activity android:name=".activities.LearnSelectionScreen" />
+        <activity android:name=".activities.LearnScreen" />
         <activity android:name=".activities.LoadScreen" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.GameOverScreen" />
-        <activity android:name=".activities.MenuScreen" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.MenuScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

@@ -8,14 +8,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.MoveToNewActivityListener;
+import com.example.germanmemoriserapp.listeners.NewActivityManager;
 
 public class GameOverScreen extends AppCompatActivity {
 
@@ -88,7 +87,7 @@ public class GameOverScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            MoveToNewActivityListener listener = new MoveToNewActivityListener();
+            NewActivityManager listener = new NewActivityManager();
             listener.move(appContext, appActivity, MenuScreen.class);
         }
     }
@@ -105,7 +104,7 @@ public class GameOverScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            MoveToNewActivityListener listener = new MoveToNewActivityListener();
+            NewActivityManager listener = new NewActivityManager();
 
 
             //TODO: FIX DIFFICULTY LEVEL HERE
