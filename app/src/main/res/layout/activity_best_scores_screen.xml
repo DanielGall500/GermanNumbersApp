@@ -31,12 +31,12 @@
 
                 <TextView
                     android:id="@+id/bestScoreBeginnerTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
                     android:fontFamily="@font/baloo"
                     android:text="BEGINNER"
                     android:textColor="@android:color/black"
-                    android:textSize="32dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/bestScoreBeginnerScore"
@@ -70,6 +70,34 @@
                 android:layout_height="72dp"
                 android:background="#eae4cb">
 
+                <TextView
+                    android:id="@+id/bestScoreIntermediateTxt"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/baloo"
+                    android:text="INTERMEDIATE"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/bestScoreIntermediateScore"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bestScoreIntermediateScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:textStyle="normal"
+                    android:text="20 Seconds"
+                    android:textColor="@android:color/black"
+                    android:textSize="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/bestScoreIntermediateTxt"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -85,6 +113,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:background="#eae4cb">
+
+                <TextView
+                    android:id="@+id/bestScoreMasterTxt"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/baloo"
+                    android:text="MASTER"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/bestScoreMasterScore"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bestScoreMasterScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:textStyle="normal"
+                    android:text="20 Seconds"
+                    android:textColor="@android:color/black"
+                    android:textSize="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/bestScoreMasterTxt"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
