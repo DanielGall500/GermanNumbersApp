@@ -22,4 +22,10 @@
     <string name="load_screen_information">INPUT_INFORMATION</string>
 
     <string name="scrollViewColour">#B6B6B6</string>
+
+    <string name="load_score_screen_key">LOAD_SCORE_SCREEN_KEY</string>
+    <string name="bundle_score_array_key">BUNDLE_SCORE_ARRAY_KEY</string>
+    <string name="intent_score_array_key">INTENT_SCORE_ARRAY_KEY</string>
+    <string name="score_load_intent_key">SCORE_LOAD_INTENT_KEY</string>
+
 </resources>

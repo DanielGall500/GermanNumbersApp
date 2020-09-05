@@ -2,15 +2,13 @@ package com.example.germanmemoriserapp.listeners;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
+import android.os.Bundle;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.activities.LoadScreen;
+import com.example.germanmemoriserapp.activities.LoadAudioScreen;
 
 public class NewActivityManager {
 
@@ -19,9 +17,11 @@ public class NewActivityManager {
 
     Intent moveToNewScreen;
 
-    Animation btnAnimation;
-
     public NewActivityManager() {}
+
+    public void setLoadRequest(int id) {
+
+    }
 
     public void move(Context currContext, AppCompatActivity currActivity,
                                      Class newActivity) {
@@ -29,6 +29,18 @@ public class NewActivityManager {
         this.currentActivity = currActivity;
 
         moveToNewScreen = new Intent(currActivity, newActivity);
+
+        currentContext.startActivity(moveToNewScreen);
+        currentActivity.finish();
+    }
+
+    public void move(Context currContext, AppCompatActivity currActivity,
+                     Class newActivity, int request, String key) {
+        this.currentContext = currContext;
+        this.currentActivity = currActivity;
+
+        moveToNewScreen = new Intent(currActivity, newActivity);
+        moveToNewScreen.putExtra(key, request);
 
         currentContext.startActivity(moveToNewScreen);
         currentActivity.finish();
@@ -43,7 +55,7 @@ public class NewActivityManager {
         this.currentActivity = currActivity;
 
         moveToNewScreen = new Intent(
-                currActivity, LoadScreen.class);
+                currActivity, LoadAudioScreen.class);
 
         String isGameKey = currContext.getString(
                 R.string.load_screen_isGameBoolean);

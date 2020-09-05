@@ -68,6 +68,7 @@ public class ScoreBoardManager {
 
                 /* Split into tokens */
                 String[] tokens = line.split(csvSep);
+                System.out.println(tokens[difficulty_token_indx]);
                 int diffId = Integer.parseInt(tokens[difficulty_token_indx]);
                 String scoreToken = tokens[score_token_indx];
 

@@ -3,6 +3,7 @@ package com.example.germanmemoriserapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +17,10 @@ public class ScoreBoardScreen extends AppCompatActivity {
 
     ImageButton scoresBestBtn;
     ImageButton scoresRecentBtn;
+
+    private final Class loadScreen = LoadScoresScreen.class;
+
+    NewActivityManager newActivity = new NewActivityManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,11 @@ public class ScoreBoardScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            NewActivityManager newActivity = new NewActivityManager();
-            newActivity.move(appContext, appActivity, BestScoresScreen.class);
+            String key = appContext.getString(
+                    R.string.score_load_intent_key);
+
+            newActivity.move(appContext, appActivity, loadScreen,
+                    LoadScoresScreen.BEST_SCORES_ID, key);
         }
     }
 
@@ -65,8 +73,11 @@ public class ScoreBoardScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            NewActivityManager newActivity = new NewActivityManager();
-            newActivity.move(appContext, appActivity, RecentScoresScreen.class);
+            String key = appContext.getString(
+                    R.string.score_load_intent_key);
+
+            newActivity.move(appContext, appActivity, loadScreen,
+                    LoadScoresScreen.RECENT_SCORES_ID, key);
         }
     }
 }

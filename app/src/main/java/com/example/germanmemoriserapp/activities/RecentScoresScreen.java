@@ -21,5 +21,8 @@ public class RecentScoresScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_recent_scores_screen);
+
+
+
     }
 }

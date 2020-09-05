@@ -17,7 +17,7 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 
-public class LoadScreen extends AppCompatActivity {
+public class LoadAudioScreen extends AppCompatActivity {
 
     private SoundManager soundPlayer;
     private Intent moveToNextScreen;
