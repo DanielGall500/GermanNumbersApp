@@ -27,8 +27,12 @@ public class ScoreBoardManager {
     /*
     What Each Column Represents In Recent Scores Txt:
      */
-    private int difficulty_token_indx = 0;
-    private int score_token_indx = 1;
+    public static final int difficulty_token_indx = 0;
+    public static final int score_token_indx = 1;
+
+    public static final int beginner_token_indx = 0;
+    public static final int normal_token_indx = 1;
+    public static final int master_token_indx = 2;
 
     private final String[] defaultBestScores = new String[] {
             "None Yet!",
