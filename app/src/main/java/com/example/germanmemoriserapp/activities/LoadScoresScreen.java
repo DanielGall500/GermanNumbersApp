@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ public class LoadScoresScreen extends AppCompatActivity {
     private ImageView loadingScoresBuffer;
 
     private int currentIntent = -1;
+
+    private final int WAIT_TIME = 1000;
 
     Intent nextScreen;
 
@@ -43,10 +46,9 @@ public class LoadScoresScreen extends AppCompatActivity {
         loadBtnAnim = (AnimationDrawable) loadingScoresBuffer.getBackground();
         loadBtnAnim.start();
 
-        Thread t = new Thread(new Runnable() {
+        Runnable loadScoresRunnable = new Runnable() {
             @Override
             public void run() {
-
                 /* Find Which Screen User Wants */
                 currentIntent = loadIntentInfo();
                 setNextIntent(currentIntent);
@@ -58,9 +60,10 @@ public class LoadScoresScreen extends AppCompatActivity {
                 startActivity(nextScreen);
                 finish();
             }
-        });
+        };
 
-        t.run();
+        Handler loadScoresHandler = new Handler();
+        loadScoresHandler.postDelayed(loadScoresRunnable, WAIT_TIME);
     }
 
     private boolean intentIsValid(int intent) {

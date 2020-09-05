@@ -62,23 +62,19 @@ public class BestScoresScreen extends AppCompatActivity {
         setMaster(masterScore);
     }
 
-    public String getScoreFromSet(ArrayList<String> set) {
-        return set.get(ScoreBoardManager.score_token_indx);
-    }
-
-    public void setBeginner(String score) {
+    private void setBeginner(String score) {
         bestScoreBeginnerScore.setText(score);
     }
 
-    public void setNormal(String score) {
+    private void setNormal(String score) {
         bestScoreIntermediateScore.setText(score);
     }
 
-    public void setMaster(String score) {
+    private void setMaster(String score) {
         bestScoreMasterScore.setText(score);
     }
 
-    public ArrayList<ArrayList<String>> getScoresFromLoad() {
+    private ArrayList<ArrayList<String>> getScoresFromLoad() {
         Intent loadIntent = getIntent();
 
         String intentKey = getString(R.string.intent_score_array_key);
@@ -86,5 +82,9 @@ public class BestScoresScreen extends AppCompatActivity {
         Bundle loadedBundle = loadIntent.getBundleExtra(intentKey);
 
         return (ArrayList) loadedBundle.get(bundleKey);
+    }
+
+    private String getScoreFromSet(ArrayList<String> set) {
+        return set.get(ScoreBoardManager.score_token_indx);
     }
 }
