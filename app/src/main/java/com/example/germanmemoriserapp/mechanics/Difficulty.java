@@ -46,6 +46,10 @@ public class Difficulty {
         }
     }
 
+    public Level getLevel() {
+        return getLevel(getId());
+    }
+
     public int getId() {
         return getId(diffLevel);
     }

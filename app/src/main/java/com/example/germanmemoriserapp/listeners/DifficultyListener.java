@@ -22,11 +22,19 @@ public class DifficultyListener implements View.OnClickListener {
 
     Difficulty currDifficulty;
 
+    private ImageButton beginnerBtn;
+    private ImageButton normalBtn;
+    private ImageButton masterBtn;
+
     public DifficultyListener(AppCompatActivity activity, int initialDiff) {
         this.activity = activity;
         this.btnRes = new ButtonResource();
 
         currDifficulty = new Difficulty(initialDiff);
+
+        beginnerBtn = activity.findViewById(R.id.diffBeginnerBtn);
+        normalBtn = activity.findViewById(R.id.diffNormalBtn);
+        masterBtn = activity.findViewById(R.id.diffMasterBtn);
 
         //Set our initial button state
         ImageButton initialBtn = activity.findViewById(currentId);
@@ -43,11 +51,6 @@ public class DifficultyListener implements View.OnClickListener {
 
         //Old and new difficulty buttons
         Difficulty.Level oldDifficulty = current;
-        ImageButton oldBtn = activity.findViewById(currentId);
-        ImageButton newBtn = activity.findViewById(id);
-
-        //Set the new id
-        currentId = id;
 
         switch(id) {
             case R.id.diffBeginnerBtn:
@@ -62,10 +65,19 @@ public class DifficultyListener implements View.OnClickListener {
         }
 
         //Unpress our old difficulty
+        ImageButton oldBtn = activity.findViewById(currentId);
         setButtonState(oldBtn, oldDifficulty, false);
 
+        //Set the new id
+        currentId = id;
+
         //Press our new difficulty
-        setButtonState(newBtn, current, true);
+        ImageButton newBtn = activity.findViewById(currentId);
+        setButtonState(newBtn, currDifficulty.getLevel(), true);
+    }
+
+    public void setButtonState(int difficultyId, boolean isPressed) {
+
     }
 
     public void setButtonState(ImageButton b, Difficulty.Level diff, boolean pressed) {
