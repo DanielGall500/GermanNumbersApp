@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
+import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 import com.example.germanmemoriserapp.ui.ButtonResource;
 import com.example.germanmemoriserapp.ui.Keyboard;
 import com.example.germanmemoriserapp.R;
@@ -51,6 +52,13 @@ public class GameScreen extends AppCompatActivity {
 
     TextView relistenUpdatetxt;
     TextView lifeUpdateTxt;
+
+    private int difficultyId;
+
+    /*
+    Records our score at the end of the game.
+     */
+    ScoreBoardManager scoreBoard = new ScoreBoardManager(this);
 
     /*
     Grabs Buttons Images: Unpressed, Correct, Incorrect
@@ -119,6 +127,16 @@ public class GameScreen extends AppCompatActivity {
                 onGameOver();
             }
         }
+    }
+
+    private int getDifficultyId() {
+        Intent fromLoadScreen = getIntent();
+
+        String key = getString(R.string.load_screen_information);
+
+        int difficultyId = fromLoadScreen.getIntExtra(key, -1);
+
+        return difficultyId;
     }
 
     /*
@@ -257,9 +275,13 @@ public class GameScreen extends AppCompatActivity {
     private void onGameOver() {
         timer.stop();
 
+        int finalScore = timer.getPreviousResult();
+
         //Transfer Score Data
         moveToGOScreen.putExtra(getString(R.string.score_key),
-                String.valueOf(timer.getPreviousResult()));
+                String.valueOf(finalScore));
+
+        scoreBoard.update(getDifficultyId(), finalScore);
 
         startActivity(moveToGOScreen);
 

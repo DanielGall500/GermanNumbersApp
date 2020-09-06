@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activities.GameScreen;
 import com.example.germanmemoriserapp.activities.LoadAudioScreen;
 
 public class NewActivityManager {

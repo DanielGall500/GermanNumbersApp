@@ -47,7 +47,11 @@ public class Difficulty {
     }
 
     public int getId() {
-        switch(diffLevel) {
+        return getId(diffLevel);
+    }
+
+    public static int getId(Level l) {
+        switch(l) {
             case BEGINNER:
                 return beginnerId;
             case NORMAL:

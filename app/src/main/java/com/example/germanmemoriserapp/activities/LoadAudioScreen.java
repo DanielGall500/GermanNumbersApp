@@ -14,11 +14,11 @@ import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
+import com.example.germanmemoriserapp.listeners.NewActivityManager;
 
 public class LoadAudioScreen extends AppCompatActivity {
 
     private SoundManager soundPlayer;
-    private Intent moveToNextScreen;
 
     private ProgressBar audioProgressBar;
     private AnimationDrawable loadBtnAnim;
@@ -30,7 +30,7 @@ public class LoadAudioScreen extends AppCompatActivity {
     class AudioHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            loadComplete();
+            loadComplete(getNextScreen(isGame));
         }
     }
 
@@ -65,6 +65,16 @@ public class LoadAudioScreen extends AppCompatActivity {
     private boolean isGame;
     private int loadInformation;
 
+    NewActivityManager moveToNextScreen = new NewActivityManager();
+
+    public Class getNextScreen(boolean isGame) {
+        if(isGame) {
+            return GameScreen.class;
+        }
+        else {
+            return LearnSelectionScreen.class;
+        }
+    }
 
     private void retrieveLoadScreenInput() {
         Intent inputToLoadScreen = getIntent();
@@ -122,37 +132,21 @@ public class LoadAudioScreen extends AppCompatActivity {
 
 
         if(isGame) {
-            /*
-            Load Audio Files
-             */
             soundPlayer.init(true, NUM_CLIPS, this);
-
-
-            /*
-            Move To Game
-             */
-            moveToNextScreen = new Intent(this, GameScreen.class);
         } else {
-
-
-            /*Load Audio Files*/
             soundPlayer.init(false, loadInformation, this);
-
-            /*
-            Move To Learn Page
-             */
-            moveToNextScreen = new Intent(this, LearnSelectionScreen.class);
-
-            /*
-            Store relevant information for learning page.
-             */
-            String key = getString(R.string.load_screen_information);
-            moveToNextScreen.putExtra(key, loadInformation);
         }
     }
 
-    private void loadComplete() {
-        startActivity(moveToNextScreen);
-        finish();
+    private void loadComplete(Class nextScreen) {
+        /*
+        Store relevant information for learning page.
+        */
+        String key = getString(R.string.load_screen_information);
+
+        /*
+        Move To Learn Page
+        */
+        moveToNextScreen.move(this, this, nextScreen, loadInformation, key);
     }
 }

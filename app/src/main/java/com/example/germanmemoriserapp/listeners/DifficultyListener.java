@@ -20,13 +20,21 @@ public class DifficultyListener implements View.OnClickListener {
     private Activity activity;
     private ButtonResource btnRes;
 
-    public DifficultyListener(AppCompatActivity activity) {
+    Difficulty currDifficulty;
+
+    public DifficultyListener(AppCompatActivity activity, int initialDiff) {
         this.activity = activity;
         this.btnRes = new ButtonResource();
+
+        currDifficulty = new Difficulty(initialDiff);
 
         //Set our initial button state
         ImageButton initialBtn = activity.findViewById(currentId);
         setButtonState(initialBtn, current, true);
+    }
+
+    public int getId() {
+        return currDifficulty.getId();
     }
 
     @Override
@@ -43,13 +51,13 @@ public class DifficultyListener implements View.OnClickListener {
 
         switch(id) {
             case R.id.diffBeginnerBtn:
-                current = Difficulty.Level.BEGINNER;
+                currDifficulty.setDifficulty(Difficulty.Level.BEGINNER);
                 break;
             case R.id.diffNormalBtn:
-                current = Difficulty.Level.NORMAL;
+                currDifficulty.setDifficulty(Difficulty.Level.NORMAL);
                 break;
             case R.id.diffMasterBtn:
-                current = Difficulty.Level.MASTER;
+                currDifficulty.setDifficulty(Difficulty.Level.MASTER);
                 break;
         }
 

@@ -15,15 +15,14 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
-import com.example.germanmemoriserapp.mechanics.Score;
-import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 
 public class MenuScreen extends AppCompatActivity {
 
     private ImageButton playGameBtn, scoreBtn, learnbtn;
     private ImageButton diffBeginnerBtn, diffNormalBtn, diffMasterBtn;
 
-    private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
+    private final Difficulty INITIAL_DIFFICULTY = new Difficulty(
+            Difficulty.getId(Difficulty.Level.NORMAL));
 
     private int[] difficultyBtns = new int[] {
             R.id.diffBeginnerBtn,
@@ -55,15 +54,14 @@ public class MenuScreen extends AppCompatActivity {
         diffNormalBtn = findViewById(R.id.diffNormalBtn);
         diffMasterBtn = findViewById(R.id.diffMasterBtn);
 
-        difficultyListener = new DifficultyListener(this);
+        difficultyListener = new DifficultyListener(this, INITIAL_DIFFICULTY.getId());
 
         diffBeginnerBtn.setOnClickListener(difficultyListener);
         diffNormalBtn.setOnClickListener(difficultyListener);
         diffMasterBtn.setOnClickListener(difficultyListener);
 
-        int DIFFICULTY = 0; //TODO
-        NewActivityManager moveListener = new NewActivityManager();
-        playGameBtn.setOnClickListener(new PlayListener(this, this, DIFFICULTY));
+        playGameBtn.setOnClickListener(new PlayListener(this, this,
+                difficultyListener.getId()));
         
         learnbtn.setOnClickListener(new LearnListener(this, this));
 
@@ -96,12 +94,10 @@ public class MenuScreen extends AppCompatActivity {
 
         private Context appContext;
         AppCompatActivity appActivity;
-        int difficulty;
 
         public PlayListener(Context context, AppCompatActivity activity, int difficulty) {
             this.appContext = context;
             this.appActivity = activity;
-            this.difficulty = difficulty;
         }
 
         @Override
@@ -109,7 +105,8 @@ public class MenuScreen extends AppCompatActivity {
             findViewById(v.getId()).startAnimation(buttonAnimation);
 
             NewActivityManager moveListener = new NewActivityManager();
-            moveListener.move(appContext, appActivity, true, difficulty);
+            moveListener.move(appContext, appActivity, true,
+                    difficultyListener.getId());
         }
     }
 
