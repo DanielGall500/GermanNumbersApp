@@ -27,7 +27,7 @@ import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class GameScreen extends AppCompatActivity {
 
     //10 Digits + 1 Back Button
     final int SIZE_KEYB = 11;
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-        moveToGOScreen = new Intent(MainActivity.this,
+        moveToGOScreen = new Intent(GameScreen.this,
                 GameOverScreen.class);
 
         //Match particular button Ids to their numerical value

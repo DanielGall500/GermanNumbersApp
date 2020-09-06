@@ -17,7 +17,7 @@
         <activity android:name=".activities.LearnSelectionScreen" />
         <activity android:name=".activities.LearnScreen" />
         <activity android:name=".activities.LoadAudioScreen" />
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.GameScreen" />
         <activity android:name=".activities.GameOverScreen" />
         <activity android:name=".activities.MenuScreen">
             <intent-filter>

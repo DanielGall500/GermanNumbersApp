@@ -61,13 +61,6 @@ public class MenuScreen extends AppCompatActivity {
         diffNormalBtn.setOnClickListener(difficultyListener);
         diffMasterBtn.setOnClickListener(difficultyListener);
 
-        ScoreBoardManager manager = new ScoreBoardManager(this);
-        //manager.update(0, 50);
-        //manager.update(1,20);
-        manager.update(0,10);
-
-
-
         int DIFFICULTY = 0; //TODO
         NewActivityManager moveListener = new NewActivityManager();
         playGameBtn.setOnClickListener(new PlayListener(this, this, DIFFICULTY));

@@ -9,13 +9,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.audio.SoundManager;
-import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 public class LoadAudioScreen extends AppCompatActivity {
 
@@ -133,7 +131,7 @@ public class LoadAudioScreen extends AppCompatActivity {
             /*
             Move To Game
              */
-            moveToNextScreen = new Intent(this, MainActivity.class);
+            moveToNextScreen = new Intent(this, GameScreen.class);
         } else {
 
 
