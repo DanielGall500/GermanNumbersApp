@@ -10,7 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class ScoreBoardManager {
@@ -38,6 +41,8 @@ public class ScoreBoardManager {
     String bestScoresFileName = "txt_file_best_scores.txt";
     String recentScoresFileName = "txt_file_recent_scores.txt";
 
+    private final String LINE_SEP = System.getProperty("line.separator");
+
     public ScoreBoardManager(Context context) {
         this.appContext = context;
     }
@@ -61,7 +66,15 @@ public class ScoreBoardManager {
 
         try {
 
-            fis = appContext.openFileInput(file);
+            try {
+                fis = appContext.openFileInput(file);
+            }
+            catch(FileNotFoundException e) {
+                initTextFiles();
+
+                fis = appContext.openFileInput(file);
+            }
+
             iStreamReader = new InputStreamReader(fis);
             reader = new BufferedReader(iStreamReader);
 
@@ -105,12 +118,8 @@ public class ScoreBoardManager {
             }
 
         }
-        catch(FileNotFoundException e) {
-            e.printStackTrace();
-
-            init();
-        }
         catch(IOException e) {
+            System.out.println("IO EXCEPTION");
             e.printStackTrace();
         }
         finally {
@@ -126,13 +135,43 @@ public class ScoreBoardManager {
             }
         }
 
+        System.out.println("Finished");
+
         return scores;
     }
 
-    private void init() {
+    private void initTextFiles() {
+        initFile(best_scores_file_id, bestScoresFileName);
+        initFile(recent_scores_file_id, recentScoresFileName);
+    }
+
+    private void initFile(int fromFileId, String toNewFile) {
         /*
         Create Text Files On Initial Download
          */
+
+        InputStream iStream =
+                appContext.getResources().openRawResource(
+                        fromFileId);
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(iStream, Charset.forName("UTF-8")));
+
+        String line = "";
+
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append(LINE_SEP);
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        updateFile(sb.toString(), toNewFile);
     }
 
     public void update(int difficultyId, int score) {
@@ -237,7 +276,6 @@ public class ScoreBoardManager {
     }
 
     public String listToCSV(ArrayList<ArrayList<String>> list) {
-        final String lineSep = System.getProperty("line.separator");
         StringBuilder sb = new StringBuilder();
 
         int N = list.size();
@@ -251,15 +289,13 @@ public class ScoreBoardManager {
             String line = String.format("%s,%s", difficulty,score);
 
             sb.append(line);
-            sb.append(lineSep);
+            sb.append(LINE_SEP);
         }
 
         return sb.toString();
     }
 
-    private void updateFile(ArrayList<ArrayList<String>> bestScores, String file) {
-        String updatedFile = listToCSV(bestScores);
-
+    private void updateFile(String updatedFile, String file) {
         FileOutputStream fos = null;
 
         try {
@@ -282,6 +318,11 @@ public class ScoreBoardManager {
                 }
             }
         }
+    }
+
+    private void updateFile(ArrayList<ArrayList<String>> bestScores, String file) {
+        String updatedFile = listToCSV(bestScores);
+        updateFile(updatedFile, file);
     }
 
     private String createScoreString(String score) {
