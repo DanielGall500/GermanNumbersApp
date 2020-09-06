@@ -15,6 +15,8 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.mechanics.Score;
+import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 
 public class MenuScreen extends AppCompatActivity {
 
@@ -58,6 +60,11 @@ public class MenuScreen extends AppCompatActivity {
         diffBeginnerBtn.setOnClickListener(difficultyListener);
         diffNormalBtn.setOnClickListener(difficultyListener);
         diffMasterBtn.setOnClickListener(difficultyListener);
+
+        ScoreBoardManager manager = new ScoreBoardManager(this);
+        manager.update(0, 50);
+        manager.update(1,20);
+        manager.update(0,10);
 
 
 

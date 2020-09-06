@@ -46,6 +46,19 @@ public class Difficulty {
         }
     }
 
+    public int getId() {
+        switch(diffLevel) {
+            case BEGINNER:
+                return beginnerId;
+            case NORMAL:
+                return intermediateId;
+            case MASTER:
+                return masterId;
+            default:
+                return -1;
+        }
+    }
+
     public String toString() {
         switch(diffLevel) {
             case BEGINNER:
