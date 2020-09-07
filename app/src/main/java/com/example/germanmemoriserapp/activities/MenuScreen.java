@@ -15,20 +15,41 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.ui.DifficultyButton;
 
 public class MenuScreen extends AppCompatActivity {
 
     private ImageButton playGameBtn, scoreBtn, learnbtn;
-    private ImageButton diffBeginnerBtn, diffNormalBtn, diffMasterBtn;
 
-    private final Difficulty INITIAL_DIFFICULTY = new Difficulty(
-            Difficulty.getId(Difficulty.Level.NORMAL));
+    private final boolean INITIAL_BEGINNER_IS_PRESSED = false;
+    private final boolean INITIAL_NORMAL_IS_PRESSED = true;
+    private final boolean INITIAL_MASTER_IS_PRESSED = false;
 
-    private int[] difficultyBtns = new int[] {
+    private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
+
+    private int[] difficultyBtnIds = new int[] {
             R.id.diffBeginnerBtn,
             R.id.diffNormalBtn,
             R.id.diffMasterBtn
     };
+
+    private int[] unpressedImgIds = new int[] {
+            R.drawable.beginner_btn,
+            R.drawable.normal_btn,
+            R.drawable.master_btn
+    };
+
+    private int[] pressedImgIds = new int[] {
+            R.drawable.beginner_btn_pressed,
+            R.drawable.normal_btn_pressed,
+            R.drawable.master_btn_pressed
+    };
+
+    private final int beginnerId = Difficulty.getId(Difficulty.Level.BEGINNER);
+    private final int normalId = Difficulty.getId(Difficulty.Level.NORMAL);
+    private final int masterId = Difficulty.getId(Difficulty.Level.MASTER);
+
+    DifficultyButton beginnerBtn, normalBtn, masterBtn;
 
     DifficultyListener difficultyListener;
 
@@ -50,15 +71,28 @@ public class MenuScreen extends AppCompatActivity {
         scoreBtn = findViewById(R.id.menuScoresBtn);
         learnbtn = findViewById(R.id.menuLearnBtn);
 
-        diffBeginnerBtn = findViewById(R.id.diffBeginnerBtn);
-        diffNormalBtn = findViewById(R.id.diffNormalBtn);
-        diffMasterBtn = findViewById(R.id.diffMasterBtn);
 
-        difficultyListener = new DifficultyListener(this, INITIAL_DIFFICULTY.getId());
+        DifficultyButton beginnerBtn = new DifficultyButton(
+                this, difficultyBtnIds[beginnerId],
+                unpressedImgIds[beginnerId], pressedImgIds[beginnerId],
+                beginnerId,INITIAL_BEGINNER_IS_PRESSED);
 
-        diffBeginnerBtn.setOnClickListener(difficultyListener);
-        diffNormalBtn.setOnClickListener(difficultyListener);
-        diffMasterBtn.setOnClickListener(difficultyListener);
+        DifficultyButton normalBtn = new DifficultyButton(
+                this, difficultyBtnIds[normalId],
+                unpressedImgIds[normalId], pressedImgIds[normalId],
+                normalId,INITIAL_NORMAL_IS_PRESSED);
+
+        DifficultyButton masterBtn = new DifficultyButton(
+                this, difficultyBtnIds[masterId],
+                unpressedImgIds[masterId], pressedImgIds[masterId],
+                masterId,INITIAL_MASTER_IS_PRESSED);
+
+        difficultyListener = new DifficultyListener(beginnerBtn,normalBtn,
+                masterBtn,Difficulty.getId(INITIAL_DIFFICULTY));
+
+        beginnerBtn.setListener(difficultyListener);
+        normalBtn.setListener(difficultyListener);
+        masterBtn.setListener(difficultyListener);
 
         playGameBtn.setOnClickListener(new PlayListener(this, this,
                 difficultyListener.getId()));

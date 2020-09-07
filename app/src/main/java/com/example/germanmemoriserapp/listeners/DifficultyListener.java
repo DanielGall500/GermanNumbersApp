@@ -1,44 +1,27 @@
 package com.example.germanmemoriserapp.listeners;
 
-import android.app.Activity;
 import android.view.View;
-import android.widget.ImageButton;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
-import com.example.germanmemoriserapp.ui.ButtonResource;
+import com.example.germanmemoriserapp.ui.DifficultyButton;
 
 public class DifficultyListener implements View.OnClickListener {
 
-    private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
-
-    private Difficulty.Level current = INITIAL_DIFFICULTY;
-    private int currentId = R.id.diffNormalBtn;
-
-    private Activity activity;
-    private ButtonResource btnRes;
-
     Difficulty currDifficulty;
 
-    private ImageButton beginnerBtn;
-    private ImageButton normalBtn;
-    private ImageButton masterBtn;
+    private DifficultyButton beginnerBtn;
+    private DifficultyButton normalBtn;
+    private DifficultyButton masterBtn;
 
-    public DifficultyListener(AppCompatActivity activity, int initialDiff) {
-        this.activity = activity;
-        this.btnRes = new ButtonResource();
+    public DifficultyListener(DifficultyButton beginnerBtn,
+                              DifficultyButton normalBtn, DifficultyButton masterBtn,
+                              int initialDiff) {
 
         currDifficulty = new Difficulty(initialDiff);
 
-        beginnerBtn = activity.findViewById(R.id.diffBeginnerBtn);
-        normalBtn = activity.findViewById(R.id.diffNormalBtn);
-        masterBtn = activity.findViewById(R.id.diffMasterBtn);
-
-        //Set our initial button state
-        ImageButton initialBtn = activity.findViewById(currentId);
-        setButtonState(initialBtn, current, true);
+        this.beginnerBtn = beginnerBtn;
+        this.normalBtn = normalBtn;
+        this.masterBtn = masterBtn;
     }
 
     public int getId() {
@@ -49,39 +32,53 @@ public class DifficultyListener implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
 
-        //Old and new difficulty buttons
-        Difficulty.Level oldDifficulty = current;
+        Difficulty.Level btnDiffLevel = getButtonLevel(id);
 
-        switch(id) {
-            case R.id.diffBeginnerBtn:
-                currDifficulty.setDifficulty(Difficulty.Level.BEGINNER);
-                break;
-            case R.id.diffNormalBtn:
-                currDifficulty.setDifficulty(Difficulty.Level.NORMAL);
-                break;
-            case R.id.diffMasterBtn:
-                currDifficulty.setDifficulty(Difficulty.Level.MASTER);
-                break;
+        /*
+        If we clicked the button that our difficulty is
+        still set to, do nothing.
+         */
+        if(btnDiffLevel == currDifficulty.getLevel()) {
+            return;
         }
 
-        //Unpress our old difficulty
-        ImageButton oldBtn = activity.findViewById(currentId);
-        setButtonState(oldBtn, oldDifficulty, false);
+        //Flip Old Button
+        flipBtn(btnDiffLevel);
 
-        //Set the new id
-        currentId = id;
+        //Flip Current Button
+        flipBtn(currDifficulty.getLevel());
 
-        //Press our new difficulty
-        ImageButton newBtn = activity.findViewById(currentId);
-        setButtonState(newBtn, currDifficulty.getLevel(), true);
+        //Update Current Difficulty State
+        currDifficulty = new Difficulty(btnDiffLevel);
     }
 
-    public void setButtonState(int difficultyId, boolean isPressed) {
-
+    public Difficulty.Level getButtonLevel(int resId) {
+        if(resId == beginnerBtn.getId()) {
+            return Difficulty.Level.BEGINNER;
+        }
+        else if(resId == normalBtn.getId()) {
+            return Difficulty.Level.NORMAL;
+        }
+        else if(resId == masterBtn.getId()) {
+            return Difficulty.Level.MASTER;
+        }
+        else {
+            throw new IllegalArgumentException("Invalid Res Id");
+        }
     }
 
-    public void setButtonState(ImageButton b, Difficulty.Level diff, boolean pressed) {
-        int res = btnRes.getMenuBtn(diff, pressed);
-        b.setImageResource(res);
+    public void flipBtn(Difficulty.Level d) {
+        switch(d) {
+            case BEGINNER:
+                beginnerBtn.flipState();
+                break;
+            case NORMAL:
+                normalBtn.flipState();
+                break;
+            case MASTER:
+                masterBtn.flipState();
+                break;
+        }
     }
+
 }

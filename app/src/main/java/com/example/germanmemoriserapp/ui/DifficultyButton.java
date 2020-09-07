@@ -1,15 +1,16 @@
 package com.example.germanmemoriserapp.ui;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.appcompat.widget.AppCompatImageButton;
 
+import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 
-public class DifficultyButton {
+public class DifficultyButton{
 
     ImageButton diffBtn;
     AppCompatActivity appActivity;
@@ -22,11 +23,16 @@ public class DifficultyButton {
 
     Difficulty currDifficulty;
 
-    public void DifficultyButton(AppCompatActivity activity, int btnId, int resUnpressed, int resPressed, int difficultyId, boolean isPressed) {
+    final int btnResId;
+
+    public DifficultyButton(AppCompatActivity activity, int btnId,
+                                 int resUnpressed, int resPressed,
+                                 int difficultyId, boolean isPressed) {
         diffBtn = activity.findViewById(btnId);
         appActivity = activity;
         resourcePressed = resPressed;
         this.isPressed = isPressed;
+        this.btnResId = btnId;
 
         currDifficulty = new Difficulty(difficultyId);
 
@@ -34,8 +40,23 @@ public class DifficultyButton {
         unpressedImg = ResourcesCompat.getDrawable(appActivity.getResources(), resUnpressed, null);
     }
 
+    public void setListener(DifficultyListener l) {
+        diffBtn.setOnClickListener(l);
+    }
+
+    public int getId() {
+        return btnResId;
+    }
+
     public void flipState() {
-        setState(!isPressed);
+        boolean flippedState = !isPressed;
+
+        setState(flippedState);
+        this.isPressed = flippedState;
+    }
+
+    public boolean isPressed() {
+        return isPressed;
     }
 
     public int getDifficultyId() {
@@ -43,6 +64,7 @@ public class DifficultyButton {
     }
 
     private void setState(boolean isPressed) {
+        System.out.println("Setting " + currDifficulty.getLevel().toString() + " To " + isPressed);
         Drawable nextImg = isPressed ? pressedImg : unpressedImg;
         diffBtn.setBackground(nextImg);
     }

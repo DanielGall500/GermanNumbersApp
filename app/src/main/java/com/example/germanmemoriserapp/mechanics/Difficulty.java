@@ -26,6 +26,10 @@ public class Difficulty {
         this.diffLevel = getLevel(id);
     }
 
+    public Difficulty(Level l) {
+        this.diffLevel = l;
+    }
+
     public void setDifficulty(Level d) {
         this.diffLevel = d;
     }
