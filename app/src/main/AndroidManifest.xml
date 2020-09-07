@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.LoadScoresScreen">
         </activity>
-        <activity android:name=".activities.RecentScoresScreen" />
+        <activity android:name=".activities.RecentScoresScreen" >
+        </activity>
         <activity android:name=".activities.BestScoresScreen" />
         <activity android:name=".activities.ScoreBoardScreen" />
         <activity android:name=".activities.LearnSelectionScreen" />

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.Score;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
+import com.example.germanmemoriserapp.ui.BackButton;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class BestScoresScreen extends AppCompatActivity {
     private TextView bestScoreMasterScore;
 
     ArrayList<ArrayList<String>> bestScores;
+
+    BackButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,10 @@ public class BestScoresScreen extends AppCompatActivity {
                 ScoreBoardManager.master_token_indx);
 
         String masterScore = getScoreFromSet(masterSet);
+
+        /* Setup Back Button */
+        backButton = new BackButton(this,this,
+                R.id.bestScoresBackBtn,ScoreBoardScreen.class);
 
         /*Set Scores*/
         setBeginner(beginnerScore);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.ui.BackButton;
 
 public class ScoreBoardScreen extends AppCompatActivity {
 
@@ -21,6 +23,8 @@ public class ScoreBoardScreen extends AppCompatActivity {
     private final Class loadScreen = LoadScoresScreen.class;
 
     NewActivityManager newActivity = new NewActivityManager();
+
+    private BackButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,8 @@ public class ScoreBoardScreen extends AppCompatActivity {
 
         scoresBestBtn = findViewById(R.id.scoresBestBtn);
         scoresRecentBtn = findViewById(R.id.scoresRecentBtn);
+
+        backButton = new BackButton(this, this, R.id.scoresBackBtn, MenuScreen.class);
 
         scoresBestBtn.setOnClickListener(new BestButtonListener(this, this));
         scoresRecentBtn.setOnClickListener(new RecentButtonListener(this, this));

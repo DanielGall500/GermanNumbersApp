@@ -21,8 +21,6 @@ public class MenuScreen extends AppCompatActivity {
 
     /*
     TODO
-
-    - Losing the game
     - Sound effects
     - Polish UI
     - Setup 100-1000

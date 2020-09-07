@@ -7,389 +7,434 @@
     android:background="@drawable/empty_background"
     tools:context=".activities.RecentScoresScreen">
 
-    <ScrollView
-        android:id="@+id/learnScrollView"
-        android:layout_width="416dp"
-        android:layout_height="400dp"
+    <RelativeLayout
+        android:id="@+id/recentScoresLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <LinearLayout
-            android:id="@+id/learnScrollViewContainer"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/bestScoresBackBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="316dp"
+            android:layout_marginRight="316dp"
+            android:layout_marginBottom="21dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bestScoresTitle"
+            app:srcCompat="@drawable/back_arrow" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard1"
+        <ImageView
+            android:id="@+id/bestScoresTitle"
+            android:layout_width="362dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            app:srcCompat="@drawable/recent_scores_title" />
+
+        <ScrollView
+            android:id="@+id/learnScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="457dp"
+            android:layout_below="@+id/bestScoresTitle"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bestScoresTitle">
+
+            <LinearLayout
+                android:id="@+id/learnScrollViewContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard1"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard1Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard1Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard1Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard1Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard1Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard1Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard1Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard1Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard2"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard2Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard2Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard2Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard2Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard2Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard2Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard2Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard2Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard3"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard3Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard3Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard3Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard3Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard3Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard3Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard3Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard3Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard4"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard4Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard4Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard4Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard4Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard4Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard4Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard4Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard4Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard5"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard5Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard5Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard5Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard5Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard5Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard5Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard5Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard5Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard6"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard6Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard6Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard6Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard6Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard6Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard6Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard6Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard6Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard7"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard7Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard7Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard7Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard7Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard7Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard7Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard7Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard7Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard8"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard8Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard8Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard8Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard8Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard8Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard8Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard8Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard8Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard9"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard9Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard9Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard9Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard9Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard9Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard9Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard9Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard9Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/recentScoresCard10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp">
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/recentScoresCard10"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:background="#eae4cb">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp" >
 
-                    <TextView
-                        android:id="@+id/recentScoresCard10Difficulty"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="BEGINNER"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/recentScoresCard10Score"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:background="#eae4cb">
 
-                    <TextView
-                        android:id="@+id/recentScoresCard10Score"
-                        android:layout_width="150dp"
-                        android:layout_height="40dp"
-                        android:text="20 Seconds"
-                        android:gravity="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/recentScoresCard10Difficulty"/>
+                        <TextView
+                            android:id="@+id/recentScoresCard10Difficulty"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="BEGINNER"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/recentScoresCard10Score"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/recentScoresCard10Score"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:text="20 Seconds"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/recentScoresCard10Difficulty"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-    </ScrollView>
-
-
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

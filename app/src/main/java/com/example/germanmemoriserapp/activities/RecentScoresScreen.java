@@ -10,11 +10,11 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
+import com.example.germanmemoriserapp.ui.BackButton;
 
 import java.util.ArrayList;
 
@@ -36,6 +36,8 @@ public class RecentScoresScreen extends AppCompatActivity {
 
     private ArrayList<ArrayList<String>> recentScores;
 
+    private BackButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class RecentScoresScreen extends AppCompatActivity {
         setContentView(R.layout.activity_recent_scores_screen);
 
         recentScores = getScoresFromLoad();
+
+        backButton = new BackButton(this, this, R.id.bestScoresBackBtn, ScoreBoardScreen.class);
 
         int N = cardIds.length;
 
