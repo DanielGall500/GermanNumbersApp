@@ -10,30 +10,66 @@ public class Game {
         NO_CHANGE, NEW_TURN, GAME_OVER
     };
 
-    public final static int MIN_NUM = 0;
-    public final static int MAX_NUM = 100;
-    public final static int GAME_LOST_VALUE = -1;
+    public static final int MIN_NUM = 0;
+    public static final int MAX_NUM = 99;
 
-    public final static String GAME_LOST_TEXT = "Out Of Lives!";
+    public static final int BEGINNER_GAME_LIVES = 15;
+    public static final int BEGINNER_LISTENS = 15;
+
+    public static final int NORMAL_GAME_LIVES = 10;
+    public static final int NORMAL_LISTENS = 10;
+
+    public static final int MASTER_GAME_LIVES = 1;
+    public static final int MASTER_LISTENS = 3;
+
+    public static int GAME_LOST_VALUE = -1;
+    public static String GAME_LOST_TEXT = "Out Of Lives!";
 
     private SoundManager soundManager;
     private Score playerScore;
     private int currentNumber;
 
     /*testing*/
-    private final int nLives = 5;
-    private final int nRelistens = 5;
+    private int nLives;
+    private int nRelistens;
     private LifeManager gameLives;
     private RelistenManager gameRelistens;
 
     private boolean gameIsLost = false;
 
-    public Game() {
+    public Game(Difficulty.Level level) {
         playerScore = new Score();
         soundManager = SoundManager.get();
 
+        setupDifficultySettings(level);
+
         gameLives = new LifeManager(nLives);
         gameRelistens = new RelistenManager(nRelistens);
+    }
+
+    public void setupDifficultySettings(Difficulty.Level diff) {
+        switch(diff) {
+            case BEGINNER:
+                this.nLives = BEGINNER_GAME_LIVES;
+                this.nRelistens = BEGINNER_LISTENS;
+                break;
+            case NORMAL:
+                this.nLives = NORMAL_GAME_LIVES;
+                this.nRelistens = NORMAL_LISTENS;
+                break;
+            case MASTER:
+                this.nLives = MASTER_GAME_LIVES;
+                this.nRelistens = MASTER_LISTENS;
+                break;
+        }
+    }
+
+    public int getLives() {
+        return nLives;
+    }
+
+    public int getRelistens() {
+        return nRelistens;
     }
 
     public boolean gameLost() {

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
@@ -53,7 +54,7 @@ public class GameScreen extends AppCompatActivity {
     TextView relistenUpdatetxt;
     TextView lifeUpdateTxt;
 
-    private int difficultyId;
+    private Difficulty.Level gameDifficulty;
 
     /*
     Records our score at the end of the game.
@@ -202,33 +203,55 @@ public class GameScreen extends AppCompatActivity {
 
         //Match particular button Ids to their numerical value
         digitIdReference = setupDigitRef(digitIds);
-
-        //Find UI Elements
         enterNumberBox = findViewById(R.id.enterNumberBox);
         timerView = findViewById(R.id.timeUpdateTxt);
 
+        /* Setup Keyboard */
         digitKeyboard = new Keyboard(inputFieldH, buttonUiH, gameStateH,
                 digitIdReference, GAME);
 
         setAllButtonListeners(digitKeyboard);
 
-        GAME = new Game();
-        GAME.begin();
+        /* Setup New Game */
+        gameDifficulty = getDifficultyIdFromLoad();
+        GAME = new Game(gameDifficulty);
 
-        onNewTurn();
-
-        timer = new Timer(timerView);
-        timer.begin();
-
+        /* Lives/Listens Buttons */
         relistenBtn = findViewById(R.id.relistenBtn);
         relistenAnim = AnimationUtils.loadAnimation(this, R.anim.relisten_anim);
-
         relistenBtn.setOnClickListener(new RelistenBtnHandler());
 
+        /* Lives/Listens Text */
         relistenUpdatetxt = findViewById(R.id.relistenUpdateTxt);
-        relistenUpdatetxt.setText(String.valueOf(GAME.getStartingRelistens()));
-
         lifeUpdateTxt = findViewById(R.id.lifeUpdateTxt);
+        setupLives();
+
+        /* Begin Game */
+        GAME.begin();
+        onNewTurn();
+
+        /* Start Timer */
+        timer = new Timer(timerView);
+        timer.begin();
+    }
+
+    private void setupLives() {
+        int nLives = GAME.getLives();
+        int nRelistens = GAME.getRelistens();
+
+        lifeUpdateTxt.setText(String.valueOf(nLives));
+        relistenUpdatetxt.setText(String.valueOf(nRelistens));
+    }
+
+    private Difficulty.Level getDifficultyIdFromLoad() {
+        String key = getString(
+                R.string.load_screen_information);
+
+        Intent fromLoad = getIntent();
+
+        int diffId = fromLoad.getIntExtra(key, -1);
+
+        return Difficulty.getLevel(diffId);
     }
 
     private void onNewTurn() {

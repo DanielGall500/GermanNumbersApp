@@ -37,7 +37,7 @@ public class Difficulty {
         return diffLevel;
     }
 
-    public Level getLevel(int id) {
+    public static Level getLevel(int id) {
         switch(id) {
             case beginnerId:
                 return Level.BEGINNER;

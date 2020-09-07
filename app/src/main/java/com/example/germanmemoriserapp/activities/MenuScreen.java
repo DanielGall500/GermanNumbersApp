@@ -25,6 +25,7 @@ public class MenuScreen extends AppCompatActivity {
     - Losing the game
     - Sound effects
     - Polish UI
+    - Setup 100-1000
      */
 
     private ImageButton playGameBtn, scoreBtn, learnbtn;
