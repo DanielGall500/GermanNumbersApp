@@ -12,6 +12,9 @@ public class Game {
 
     public final static int MIN_NUM = 0;
     public final static int MAX_NUM = 100;
+    public final static int GAME_LOST_VALUE = -1;
+
+    public final static String GAME_LOST_TEXT = "Out Of Lives!";
 
     private SoundManager soundManager;
     private Score playerScore;
@@ -23,12 +26,18 @@ public class Game {
     private LifeManager gameLives;
     private RelistenManager gameRelistens;
 
+    private boolean gameIsLost = false;
+
     public Game() {
         playerScore = new Score();
         soundManager = SoundManager.get();
 
         gameLives = new LifeManager(nLives);
         gameRelistens = new RelistenManager(nRelistens);
+    }
+
+    public boolean gameLost() {
+        return gameIsLost;
     }
 
     /*
@@ -102,7 +111,6 @@ public class Game {
     public GAME_STATE getState(String input, TextView lifeTxtView) {
 
         boolean gameOver = !soundManager.hasNext();
-        System.out.println("GAmeover? " + gameOver);
 
         if(inputIsCorrect(input))
             incrementScore();
@@ -115,8 +123,18 @@ public class Game {
 
             //Check If Out Of Lives
             if(gameLives.isOutOfLives()) {
+
+                /*
+                We've lost the game!
+                 */
+                gameIsLost = true;
+
                 return GAME_STATE.GAME_OVER;
             } else {
+
+                /*
+                We haven't lost yet..
+                 */
                 return GAME_STATE.NO_CHANGE;
             }
         }

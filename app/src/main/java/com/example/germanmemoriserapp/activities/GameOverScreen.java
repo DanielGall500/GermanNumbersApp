@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.mechanics.Game;
 
 public class GameOverScreen extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class GameOverScreen extends AppCompatActivity {
     private String gameScore;
     private Animation congratsAnim;
     private TextView congratsTxtView;
+
+    private boolean gameLost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +46,24 @@ public class GameOverScreen extends AppCompatActivity {
         menuBtn = findViewById(R.id.menuBtn);
         scoreResultView = findViewById(R.id.scoreView);
 
+        updateResultsView();
+
+        /* Listeners */
+        menuBtn.setOnClickListener(new MenuButtonListener(this,this));
+        retryBtn.setOnClickListener(new RetryButtonListener(this,this));
+
+    }
+
+    private void updateResultsView() {
         String scoreKey = getString(R.string.score_key);
         String score = retrieveScoreFromGame(scoreKey);
 
-        scoreResultView.setText(getScoreString(score));
-
-        menuBtn.setOnClickListener(new MenuButtonListener(this,this));
-
-        retryBtn.setOnClickListener(new RetryButtonListener(this,this));
-
+        if(!gameLost) {
+            scoreResultView.setText(getScoreString(score));
+        }
+        else {
+            scoreResultView.setText(Game.GAME_LOST_TEXT);
+        }
     }
 
     private TextView getScoreView() {
@@ -64,7 +76,13 @@ public class GameOverScreen extends AppCompatActivity {
 
     private String retrieveScoreFromGame(String key) {
         Intent moveFromGame = getIntent();
-        return moveFromGame.getStringExtra(key);
+        int result = moveFromGame.getIntExtra(key, Game.GAME_LOST_VALUE);
+
+        if(result == Game.GAME_LOST_VALUE) {
+            gameLost = true;
+        }
+
+        return String.valueOf(result);
     }
 
     public String getScore() {

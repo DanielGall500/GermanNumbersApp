@@ -275,13 +275,23 @@ public class GameScreen extends AppCompatActivity {
     private void onGameOver() {
         timer.stop();
 
-        int finalScore = timer.getPreviousResult();
+        int timerValue = timer.getPreviousResult();
 
-        //Transfer Score Data
-        moveToGOScreen.putExtra(getString(R.string.score_key),
-                String.valueOf(finalScore));
+        String scoreDataKey = getString(R.string.score_key);
 
-        scoreBoard.update(getDifficultyId(), finalScore);
+
+        if(!GAME.gameLost()) {
+
+            /* Transfer Score Data To Game Over Screen */
+            moveToGOScreen.putExtra(scoreDataKey, timerValue);
+
+            /* Update Scores File */
+            scoreBoard.update(getDifficultyId(), timerValue);
+        }
+        else {
+            /*  */
+            moveToGOScreen.putExtra(scoreDataKey, GAME.GAME_LOST_VALUE);
+        }
 
         startActivity(moveToGOScreen);
 
