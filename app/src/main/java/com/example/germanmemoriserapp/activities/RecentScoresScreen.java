@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 import com.example.germanmemoriserapp.ui.BackButton;
 
@@ -33,6 +34,8 @@ public class RecentScoresScreen extends AppCompatActivity {
     private final int CARD_TEXT_STYLE = Typeface.BOLD;
     private final int CARD_TEXT_SIZE = 25;
     private final int CARD_TEXT_COLOUR = Color.BLACK;
+
+    private final String EMPTY_TXT = "";
 
     private ArrayList<ArrayList<String>> recentScores;
 
@@ -87,14 +90,21 @@ public class RecentScoresScreen extends AppCompatActivity {
             scoreTxt.setTextColor(CARD_TEXT_COLOUR);
 
             /*
-            Set Text
+            Retrieve Level/Score & Set Text
              */
             ArrayList<String> nextScoreSet = recentScores.get(i);
-            String nextDiff = getDifficultyFromSet(nextScoreSet);
-            String nextScore = getScoreFromSet(nextScoreSet);
 
-            diffTxt.setText(nextDiff);
-            scoreTxt.setText(nextScore);
+            Difficulty nextDiff = getDifficultyFromSet(nextScoreSet);
+            diffTxt.setText(nextDiff.toString());
+
+            // If our slot is not empty, fill our score
+            if(!nextDiff.getLevel().equals(Difficulty.Level.NONE)) {
+                String nextScore = getScoreFromSet(nextScoreSet);
+                scoreTxt.setText(nextScore);
+            }
+            else {
+                scoreTxt.setText(EMPTY_TXT);
+            }
         }
 
     }
@@ -109,11 +119,24 @@ public class RecentScoresScreen extends AppCompatActivity {
         return (ArrayList) loadedBundle.get(bundleKey);
     }
 
-    private String getDifficultyFromSet(ArrayList<String> set) {
-        return set.get(ScoreBoardManager.difficulty_token_indx);
+    private Difficulty getDifficultyFromSet(ArrayList<String> set) {
+        String diffIdStr = set.get(ScoreBoardManager.difficulty_token_indx);
+        int diffId = Integer.parseInt(diffIdStr);
+
+        System.out.println(diffId);
+
+        Difficulty.Level level = Difficulty.getLevel(diffId);
+
+        return new Difficulty(level);
     }
 
     private String getScoreFromSet(ArrayList<String> set) {
-        return set.get(ScoreBoardManager.score_token_indx);
+        String score = set.get(ScoreBoardManager.score_token_indx);
+
+        return convertToScoreText(score);
+    }
+
+    private String convertToScoreText(String seconds) {
+        return String.format("%s Seconds", seconds);
     }
 }

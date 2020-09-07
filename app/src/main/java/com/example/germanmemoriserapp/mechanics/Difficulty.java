@@ -10,12 +10,12 @@ public class Difficulty {
     private final String beginnerStr = "BEGINNER";
     private final String normalStr = "NORMAL";
     private final String masterStr = "MASTER";
-    private final String invalidStr = "N/A";
+    private final String invalidStr = "EMPTY SLOT";
 
     private Level diffLevel;
 
     public enum Level {
-        BEGINNER, NORMAL, MASTER
+        BEGINNER, NORMAL, MASTER, NONE
     };
 
     public static boolean isValid(int id) {
@@ -46,7 +46,7 @@ public class Difficulty {
             case masterId:
                 return Level.MASTER;
             default:
-                return null;
+                return Level.NONE;
         }
     }
 

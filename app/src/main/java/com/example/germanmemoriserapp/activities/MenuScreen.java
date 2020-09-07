@@ -26,8 +26,6 @@ public class MenuScreen extends AppCompatActivity {
     - Setup 100-1000
      */
 
-    private ImageButton playGameBtn, scoreBtn, learnbtn;
-
     private final boolean INITIAL_BEGINNER_IS_PRESSED = false;
     private final boolean INITIAL_NORMAL_IS_PRESSED = true;
     private final boolean INITIAL_MASTER_IS_PRESSED = false;
@@ -52,11 +50,14 @@ public class MenuScreen extends AppCompatActivity {
             R.drawable.master_btn_pressed
     };
 
+    private int buttonAnimationId = R.anim.fly_right;
+
     private final int beginnerId = Difficulty.getId(Difficulty.Level.BEGINNER);
     private final int normalId = Difficulty.getId(Difficulty.Level.NORMAL);
     private final int masterId = Difficulty.getId(Difficulty.Level.MASTER);
 
-    DifficultyButton beginnerBtn, normalBtn, masterBtn;
+    private DifficultyButton beginnerBtn, normalBtn, masterBtn;
+    private ImageButton playGameBtn, scoreBtn, learnBtn;
 
     DifficultyListener difficultyListener;
 
@@ -76,7 +77,7 @@ public class MenuScreen extends AppCompatActivity {
 
         playGameBtn = findViewById(R.id.menuPlayBtn);
         scoreBtn = findViewById(R.id.menuScoresBtn);
-        learnbtn = findViewById(R.id.menuLearnBtn);
+        learnBtn = findViewById(R.id.menuLearnBtn);
 
 
         beginnerBtn = new DifficultyButton(
@@ -104,11 +105,53 @@ public class MenuScreen extends AppCompatActivity {
         playGameBtn.setOnClickListener(new PlayListener(this, this,
                 difficultyListener.getId()));
         
-        learnbtn.setOnClickListener(new LearnListener(this, this));
+        learnBtn.setOnClickListener(new LearnListener(this, this));
 
         scoreBtn.setOnClickListener(new ScoreListener(this,this));
 
-        buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
+        /* Choose The Animation For Our Buttons */
+        buttonAnimation = AnimationUtils.loadAnimation(this, buttonAnimationId);
+        buttonAnimation.setAnimationListener(new OnAnimEndListener());
+
+    }
+
+    private final int gameButtonRef = 0;
+    private final int learnButtonRef = 1;
+    private final int scoreButtonRef = 2;
+
+    private int clickedBtn;
+    boolean buttonClicked = false;
+
+    public class OnAnimEndListener implements Animation.AnimationListener {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            switch (clickedBtn) {
+                case gameButtonRef:
+                    playGameBtn.setVisibility(View.INVISIBLE);
+                    onMovingToGame();
+                    break;
+                case learnButtonRef:
+                    learnBtn.setVisibility(View.INVISIBLE);
+                    onMovingToLearn();
+                    break;
+                case scoreButtonRef:
+                    scoreBtn.setVisibility(View.INVISIBLE);
+                    onMovingToScoreBoard();
+                    break;
+                default:
+                    throw new IllegalArgumentException("invalid Reference");
+            }
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
 
     public class LearnListener implements View.OnClickListener {
@@ -119,15 +162,18 @@ public class MenuScreen extends AppCompatActivity {
         public LearnListener(Context context, AppCompatActivity activity) {
             this.appContext = context;
             this.appActivity = activity;
-        }
 
+        }
 
         @Override
         public void onClick(View v) {
-            findViewById(v.getId()).startAnimation(buttonAnimation);
 
-            NewActivityManager moveListener = new NewActivityManager();
-            moveListener.move(appContext, appActivity, LearnScreen.class);
+            if(buttonClicked)
+                return;
+
+            clickedBtn = learnButtonRef;
+            buttonClicked = true;
+            findViewById(v.getId()).startAnimation(buttonAnimation);
         }
     }
 
@@ -143,11 +189,14 @@ public class MenuScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            findViewById(v.getId()).startAnimation(buttonAnimation);
 
-            NewActivityManager moveListener = new NewActivityManager();
-            moveListener.move(appContext, appActivity, true,
-                    difficultyListener.getId());
+            if(buttonClicked)
+                return;
+
+
+            clickedBtn = gameButtonRef;
+            buttonClicked = true;
+            findViewById(v.getId()).startAnimation(buttonAnimation);
         }
     }
 
@@ -163,11 +212,30 @@ public class MenuScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            findViewById(v.getId()).startAnimation(buttonAnimation);
 
-            NewActivityManager moveListener = new NewActivityManager();
-            moveListener.move(appContext, appActivity, ScoreBoardScreen.class);
+            if(buttonClicked)
+                return;
+
+            clickedBtn = scoreButtonRef;
+            buttonClicked = true;
+            findViewById(v.getId()).startAnimation(buttonAnimation);
         }
+    }
+
+    /* Call On Moving To A New Activity */
+    NewActivityManager moveListener = new NewActivityManager();
+
+    private void onMovingToGame() {
+        moveListener.move(this, this, true,
+                difficultyListener.getId());
+    }
+
+    private void onMovingToLearn() {
+        moveListener.move(this, this, LearnScreen.class);
+    }
+
+    private void onMovingToScoreBoard() {
+        moveListener.move(this,this, ScoreBoardScreen.class);
     }
 }
 

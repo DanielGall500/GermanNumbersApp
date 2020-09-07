@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.mechanics.Score;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 import com.example.germanmemoriserapp.ui.BackButton;
@@ -69,6 +70,23 @@ public class BestScoresScreen extends AppCompatActivity {
         setMaster(masterScore);
     }
 
+    private Difficulty getDifficulty(String diffIdStr) {
+        int diffId = Integer.parseInt(diffIdStr);
+        Difficulty.Level level = Difficulty.getLevel(diffId);
+
+        return new Difficulty(level);
+    }
+
+    private String getScoreFromSet(ArrayList<String> set) {
+        String score = set.get(ScoreBoardManager.score_token_indx);
+
+        return convertToScoreText(score);
+    }
+
+    private String convertToScoreText(String seconds) {
+        return String.format("%s Seconds", seconds);
+    }
+
     private void setBeginner(String score) {
         bestScoreBeginnerScore.setText(score);
     }
@@ -89,9 +107,5 @@ public class BestScoresScreen extends AppCompatActivity {
         Bundle loadedBundle = loadIntent.getBundleExtra(intentKey);
 
         return (ArrayList) loadedBundle.get(bundleKey);
-    }
-
-    private String getScoreFromSet(ArrayList<String> set) {
-        return set.get(ScoreBoardManager.score_token_indx);
     }
 }
