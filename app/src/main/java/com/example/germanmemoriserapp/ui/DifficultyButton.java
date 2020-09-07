@@ -1,73 +1,71 @@
 package com.example.germanmemoriserapp.ui;
 
-import android.graphics.drawable.Drawable;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 
 public class DifficultyButton{
 
-    ImageButton diffBtn;
-    AppCompatActivity appActivity;
-    int resourcePressed;
+    private ImageButton diffBtn;
 
-    Drawable pressedImg;
-    Drawable unpressedImg;
+    private int btnResourceId;
+    private int resourcePressedImgId;
+    private int resourceUnpressedImgId;
 
-    boolean isPressed = false;
+    private boolean isPressed;
 
-    Difficulty currDifficulty;
-
-    final int btnResId;
+    private Difficulty currDifficulty;
 
     public DifficultyButton(AppCompatActivity activity, int btnId,
                                  int resUnpressed, int resPressed,
                                  int difficultyId, boolean isPressed) {
-        diffBtn = activity.findViewById(btnId);
-        appActivity = activity;
-        resourcePressed = resPressed;
-        this.isPressed = isPressed;
-        this.btnResId = btnId;
 
+        diffBtn = activity.findViewById(btnId);
         currDifficulty = new Difficulty(difficultyId);
 
-        pressedImg = ResourcesCompat.getDrawable(appActivity.getResources(), resPressed, null);
-        unpressedImg = ResourcesCompat.getDrawable(appActivity.getResources(), resUnpressed, null);
+        /* Resources */
+        resourcePressedImgId = resPressed;
+        resourceUnpressedImgId = resUnpressed;
+        btnResourceId = btnId;
+
+        /* Initial State */
+        setState(isPressed);
     }
 
     public void setListener(DifficultyListener l) {
         diffBtn.setOnClickListener(l);
     }
 
-    public int getId() {
-        return btnResId;
-    }
-
     public void flipState() {
-        boolean flippedState = !isPressed;
-
-        setState(flippedState);
-        this.isPressed = flippedState;
+        setState(!isPressed);
     }
 
-    public boolean isPressed() {
-        return isPressed;
+    public int getId() {
+        return btnResourceId;
     }
 
-    public int getDifficultyId() {
-        return currDifficulty.getId();
+    private void pressBtnUI() {
+        diffBtn.setImageResource(resourcePressedImgId);
+    }
+
+    private void unpressBtnUI() {
+        diffBtn.setImageResource(resourceUnpressedImgId);
     }
 
     private void setState(boolean isPressed) {
-        System.out.println("Setting " + currDifficulty.getLevel().toString() + " To " + isPressed);
-        Drawable nextImg = isPressed ? pressedImg : unpressedImg;
-        diffBtn.setBackground(nextImg);
+
+        //Update External State
+        if(isPressed) {
+            pressBtnUI();
+        }
+        else {
+            unpressBtnUI();
+        }
+
+        //Update Internal State
+        this.isPressed = isPressed;
     }
-
-
 }

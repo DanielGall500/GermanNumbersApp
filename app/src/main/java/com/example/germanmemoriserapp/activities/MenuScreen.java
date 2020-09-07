@@ -19,6 +19,13 @@ import com.example.germanmemoriserapp.ui.DifficultyButton;
 
 public class MenuScreen extends AppCompatActivity {
 
+    /*
+    TODO
+
+    - Losing the game
+    - Sound effects
+     */
+
     private ImageButton playGameBtn, scoreBtn, learnbtn;
 
     private final boolean INITIAL_BEGINNER_IS_PRESSED = false;
@@ -72,17 +79,17 @@ public class MenuScreen extends AppCompatActivity {
         learnbtn = findViewById(R.id.menuLearnBtn);
 
 
-        DifficultyButton beginnerBtn = new DifficultyButton(
+        beginnerBtn = new DifficultyButton(
                 this, difficultyBtnIds[beginnerId],
                 unpressedImgIds[beginnerId], pressedImgIds[beginnerId],
                 beginnerId,INITIAL_BEGINNER_IS_PRESSED);
 
-        DifficultyButton normalBtn = new DifficultyButton(
+        normalBtn = new DifficultyButton(
                 this, difficultyBtnIds[normalId],
                 unpressedImgIds[normalId], pressedImgIds[normalId],
                 normalId,INITIAL_NORMAL_IS_PRESSED);
 
-        DifficultyButton masterBtn = new DifficultyButton(
+        masterBtn = new DifficultyButton(
                 this, difficultyBtnIds[masterId],
                 unpressedImgIds[masterId], pressedImgIds[masterId],
                 masterId,INITIAL_MASTER_IS_PRESSED);
