@@ -7,116 +7,162 @@
     android:background="@drawable/empty_background"
     tools:context=".activities.LearnScreen">
 
-    <ScrollView
-        android:id="@+id/learnBtnScrollView"
-        android:layout_width="277dp"
-        android:layout_height="513dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/menuBtnLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <ImageButton
-                android:id="@+id/zero_to_nine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/zero_to_nine_btn" />
-
-            <ImageButton
-                android:id="@+id/ten_to_nineteen_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/ten_to_nineteen_btn" />
-
-            <ImageButton
-                android:id="@+id/twenty_to_twentynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/twenty_to_twentynine_btn" />
-
-            <ImageButton
-                android:id="@+id/thirty_to_thirtynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/thirty_to_thirtynine_btn" />
-
-            <ImageButton
-                android:id="@+id/forty_to_fortynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/forty_to_fortynine_btn" />
-
-            <ImageButton
-                android:id="@+id/fifty_to_fiftynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/fifty_to_fiftynine_btn" />
-
-            <ImageButton
-                android:id="@+id/sixty_to_sixtynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/sixty_to_sixtynine_btn" />
-
-            <ImageButton
-                android:id="@+id/seventy_to_seventynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/seventy_to_seventynine_btn" />
-
-            <ImageButton
-                android:id="@+id/eighty_to_eightynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/eighty_to_eightynine_btn" />
-
-            <ImageButton
-                android:id="@+id/ninety_to_ninetynine_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/ninety_to_ninetynine_btn" />
-
-            <ImageButton
-                android:id="@+id/hundred_plus_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="25dp"
-                android:background="@drawable/hundred_plus_btn" />
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <ImageButton
-        android:id="@+id/learnScreenBackBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/learnBtnScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002"
-        app:srcCompat="@drawable/back_arrow" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ScrollView
+            android:id="@+id/learnBtnScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="432dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="82dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/menuBtnLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <ImageButton
+                    android:id="@+id/zero_to_nine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/zero_to_nine_btn" />
+
+                <ImageButton
+                    android:id="@+id/ten_to_nineteen_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ten_to_nineteen_btn" />
+
+                <ImageButton
+                    android:id="@+id/twenty_to_twentynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/twenty_to_twentynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/thirty_to_thirtynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/thirty_to_thirtynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/forty_to_fortynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/forty_to_fortynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/fifty_to_fiftynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/fifty_to_fiftynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/sixty_to_sixtynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/sixty_to_sixtynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/seventy_to_seventynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/seventy_to_seventynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/eighty_to_eightynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/eighty_to_eightynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/ninety_to_ninetynine_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ninety_to_ninetynine_btn" />
+
+                <ImageButton
+                    android:id="@+id/hundred_plus_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/hundred_plus_btn" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="356dp"
+            android:layout_above="@+id/learnBtnScrollView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp">
+
+            <ImageButton
+                android:id="@+id/learnScreenBackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toTopOf="@+id/learnPageTitleView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.17000002"
+                app:srcCompat="@drawable/back_arrow" />
+
+            <ImageView
+                android:id="@+id/learnPageTitleView"
+                android:layout_width="365dp"
+                android:layout_height="153dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/learnScreenBackBtn"
+                app:srcCompat="@drawable/learn_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

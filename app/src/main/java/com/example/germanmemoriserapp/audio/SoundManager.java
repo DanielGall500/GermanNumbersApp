@@ -83,6 +83,33 @@ public class SoundManager {
         return soundManager;
     }
 
+
+
+
+    /*
+    In order to load a clip, we need it to
+    (1) be in the sound id queue
+    (2) have an identifier so we can reference it
+     */
+
+    public void loadClip(String file) {
+
+    }
+
+    public void unloadClip(String file) {
+
+    }
+
+    public void loadNumberClips(ArrayList<Integer> numbers, Queue<Integer> soundsIds) {
+
+    }
+
+    public void loadAllNumberClips() {
+
+    }
+
+
+
     /*
     Generate new numbers (audio clips) for a new game.
     */
