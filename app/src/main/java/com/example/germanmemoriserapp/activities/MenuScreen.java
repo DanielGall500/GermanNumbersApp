@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.audio.SoundManager;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
@@ -69,16 +68,6 @@ public class MenuScreen extends AppCompatActivity {
 
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
-
-        /*
-        Load In Sounds
-         */
-
-        SoundManager soundManager = SoundManager.get();
-
-
-
 
 
         //Make fullscreen

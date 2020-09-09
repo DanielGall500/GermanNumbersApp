@@ -13,8 +13,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.audio.SoundManager;
+import com.example.germanmemoriserapp.mechanics.Game;
+import com.example.germanmemoriserapp.sound.NumberGenerator;
+import com.example.germanmemoriserapp.sound.SoundElement;
+import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
+
+import java.util.ArrayList;
 
 public class LoadAudioScreen extends AppCompatActivity {
 
@@ -24,28 +29,28 @@ public class LoadAudioScreen extends AppCompatActivity {
     private AnimationDrawable loadBtnAnim;
     private ImageView loadBtn;
 
-    private int NUM_CLIPS = 4;
+    private int NUM_CLIPS = Game.NUM_CLIPS;
     private int audioProgress = 0;
 
     class AudioHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            loadComplete(getNextScreen(isGame));
-        }
-    }
 
-    class ProgressHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
             audioProgress++;
+            System.out.println("AudioProgress: " + audioProgress);
 
-            //Run on UI thread
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    audioProgressBar.setProgress(audioProgress);
-                }
-            });
+            if(audioProgress == NUM_CLIPS) {
+                loadComplete(getNextScreen(isGame));
+            }
+            else {
+                //Run on UI thread
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        audioProgressBar.setProgress(audioProgress);
+                    }
+                });
+            }
         }
     }
 
@@ -93,7 +98,6 @@ public class LoadAudioScreen extends AppCompatActivity {
          */
         final String infoKey = getString(R.string.load_screen_information);
         loadInformation = inputToLoadScreen.getIntExtra(infoKey, 1);
-        System.out.println("LOAD INFORMATION: " + loadInformation);
 
     }
 
@@ -119,23 +123,18 @@ public class LoadAudioScreen extends AppCompatActivity {
 
         /* Get our singleton implementation of
          * an audio manager. */
-        soundPlayer = SoundManager.get();
+        soundPlayer = SoundManager.get(this, new AudioHandler());
+
+        /*Load Sounds For Game*/
+        NumberGenerator generator = new NumberGenerator();
+        ArrayList<SoundElement> generatedArr = generator.generate(
+                Game.MIN_NUM, Game.MAX_NUM, NUM_CLIPS);
+        soundPlayer.loadAll(generatedArr);
 
         /*
         Handle Input to Load Screen
          */
         retrieveLoadScreenInput();
-
-        //Possibly cause problems
-        soundPlayer.setLoadCompleteHandler(new AudioHandler());
-        soundPlayer.setProgressHandler(new ProgressHandler());
-
-
-        if(isGame) {
-            soundPlayer.init(true, NUM_CLIPS, this);
-        } else {
-            soundPlayer.init(false, loadInformation, this);
-        }
     }
 
     private void loadComplete(Class nextScreen) {

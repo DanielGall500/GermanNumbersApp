@@ -7,19 +7,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.audio.SoundManager;
 import com.example.germanmemoriserapp.mechanics.LearnPage;
 import com.example.germanmemoriserapp.mechanics.NumberFileManager;
+import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.BackButton;
 
 public class LearnSelectionScreen extends AppCompatActivity {
@@ -44,7 +43,7 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
     private BackButton learnScreenSelectedBackBtn;
 
-    private SoundManager audioManager = SoundManager.get();
+    private SoundManager audioManager = SoundManager.get(this, new Handler());
 
     private class MediaListener implements View.OnClickListener {
 
@@ -144,7 +143,5 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
             nextNumber++;
         }
-
     }
-
 }

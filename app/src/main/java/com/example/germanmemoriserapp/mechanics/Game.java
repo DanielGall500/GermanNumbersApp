@@ -1,14 +1,21 @@
 package com.example.germanmemoriserapp.mechanics;
 
+import android.content.Context;
+import android.os.Handler;
 import android.widget.TextView;
 
-import com.example.germanmemoriserapp.audio.SoundManager;
+import com.example.germanmemoriserapp.sound.NumberClip;
+import com.example.germanmemoriserapp.sound.SoundManager;
+
+import java.util.ArrayList;
 
 public class Game {
 
     public enum GAME_STATE {
         NO_CHANGE, NEW_TURN, GAME_OVER
     };
+
+    public static final int NUM_CLIPS = 10;
 
     public static final int MIN_NUM = 0;
     public static final int MAX_NUM = 99;
@@ -25,9 +32,8 @@ public class Game {
     public static int GAME_LOST_VALUE = -1;
     public static String GAME_LOST_TEXT = "Out Of Lives!";
 
-    private SoundManager soundManager;
     private Score playerScore;
-    private int currentNumber;
+    private SoundManager soundManager;
 
     /*testing*/
     private int nLives;
@@ -35,11 +41,24 @@ public class Game {
     private LifeManager gameLives;
     private RelistenManager gameRelistens;
 
+    private ArrayList<NumberClip> loadedNumbers;
+    private int loadedNumbersCurrentIndx = 0;
+
     private boolean gameIsLost = false;
 
-    public Game(Difficulty.Level level) {
+    private Context appContext;
+
+    public Game(Context appContext, Difficulty.Level level, ArrayList<NumberClip> numberArr) {
         playerScore = new Score();
-        soundManager = SoundManager.get();
+
+        this.appContext = appContext;
+        this.loadedNumbers = numberArr;
+
+        soundManager = SoundManager.get(appContext, new Handler());
+
+        if(numberArr.size() != NUM_CLIPS) {
+            throw new IllegalArgumentException("Invalid Number Array");
+        }
 
         setupDifficultySettings(level);
 
@@ -116,11 +135,11 @@ public class Game {
     }
 
     private void onGameOver() {
-        soundManager = null;
+       soundManager.releaseAllNumbers();
     }
 
     public void playAudioClip() {
-        soundManager.play(currentNumber);
+        soundManager.play(getCurrentNumber());
     }
 
     /*
@@ -146,7 +165,7 @@ public class Game {
      */
     public GAME_STATE getState(String input, TextView lifeTxtView) {
 
-        boolean gameOver = !soundManager.hasNext();
+        boolean gameOver = isEndOfGame();
 
         if(inputIsCorrect(input))
             incrementScore();
@@ -179,12 +198,12 @@ public class Game {
     }
 
     private boolean inputIsCorrect(String input) {
-        return input.equals(String.valueOf(currentNumber));
+        return input.equals(String.valueOf(getCurrentNumber()));
     }
 
     private void newNumber() {
         System.out.println("new number: ");
-        if(soundManager.hasNext()) {
+        if(!isEndOfGame()) {
             setNewCorrectNumber();
         }
         else {
@@ -193,7 +212,7 @@ public class Game {
     }
 
     public int getNumber() {
-        return currentNumber;
+        return getCurrentNumber();
     }
 
     public int getScore() {
@@ -205,11 +224,15 @@ public class Game {
     }
 
     public boolean isEndOfGame() {
-        return !soundManager.hasNext();
+        return (loadedNumbersCurrentIndx == NUM_CLIPS-1);
     }
 
     private void setNewCorrectNumber() {
-        currentNumber = soundManager.next();
+        loadedNumbersCurrentIndx++;
+    }
+
+    private int getCurrentNumber() {
+        return loadedNumbers.get(loadedNumbersCurrentIndx).get();
     }
 
 }

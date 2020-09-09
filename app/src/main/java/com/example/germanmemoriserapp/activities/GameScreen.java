@@ -20,6 +20,9 @@ import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
+import com.example.germanmemoriserapp.sound.NumberClip;
+import com.example.germanmemoriserapp.sound.SoundElement;
+import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.ButtonResource;
 import com.example.germanmemoriserapp.ui.Keyboard;
 import com.example.germanmemoriserapp.R;
@@ -27,6 +30,7 @@ import com.example.germanmemoriserapp.mechanics.Timer;
 
 import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameScreen extends AppCompatActivity {
@@ -213,8 +217,11 @@ public class GameScreen extends AppCompatActivity {
         setAllButtonListeners(digitKeyboard);
 
         /* Setup New Game */
+        ArrayList<NumberClip> loadedNumbersArr = SoundManager.get(
+                this, new Handler()).getLoadedNumbers();
+
         gameDifficulty = getDifficultyIdFromLoad();
-        GAME = new Game(gameDifficulty);
+        GAME = new Game(this, gameDifficulty, loadedNumbersArr);
 
         /* Lives/Listens Buttons */
         relistenBtn = findViewById(R.id.relistenBtn);

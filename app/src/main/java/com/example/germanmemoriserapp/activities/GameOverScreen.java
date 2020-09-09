@@ -52,6 +52,8 @@ public class GameOverScreen extends AppCompatActivity {
         menuBtn.setOnClickListener(new MenuButtonListener(this,this));
         retryBtn.setOnClickListener(new RetryButtonListener(this,this));
 
+        //TODO RELEASE
+
     }
 
     private void updateResultsView() {
