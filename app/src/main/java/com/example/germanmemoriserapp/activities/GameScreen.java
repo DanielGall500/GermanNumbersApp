@@ -21,7 +21,6 @@ import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
 import com.example.germanmemoriserapp.mechanics.ScoreBoardManager;
 import com.example.germanmemoriserapp.sound.NumberClip;
-import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.ButtonResource;
 import com.example.germanmemoriserapp.ui.Keyboard;
@@ -111,11 +110,7 @@ public class GameScreen extends AppCompatActivity {
         public void handleMessage(Message msg) {
             String userInput = (String) msg.obj;
 
-            System.out.println("NEW GAME STATE");
-
-            /*
-            Update our text entry field.
-             */
+            /* Update our text entry field. */
             updateFieldText(digitKeyboard.getInput());
 
             //Retrieve next state of the game
@@ -127,8 +122,17 @@ public class GameScreen extends AppCompatActivity {
             //Execute this action in the frontend
             if(nextState.equals(GAME_STATE.NEW_TURN)) {
                 onNewTurn();
+
+                int nextNum = GAME.getNumber();
+                digitKeyboard.updateCorrectNumber(nextNum);
             }
-            else if(nextState.equals(GAME_STATE.GAME_OVER)) {
+            else if(nextState.equals(GAME_STATE.FIRST_CORRECT)) {
+                onFirstCorrect();
+            }
+            else if(nextState.equals(GAME_STATE.GAME_WON)) {
+                onGameOver();
+            }
+            else if(nextState.equals(GAME_STATE.GAME_LOST)) {
                 onGameOver();
             }
         }
@@ -168,11 +172,6 @@ public class GameScreen extends AppCompatActivity {
     private void sendMsgToHandler(Handler h, String s) {
         Message msg = new Message();
         msg.obj = s;
-        msg.setTarget(h);
-        msg.sendToTarget();
-    }
-
-    private void sendMsgToHandler(Handler h, Message msg) {
         msg.setTarget(h);
         msg.sendToTarget();
     }
@@ -218,7 +217,7 @@ public class GameScreen extends AppCompatActivity {
 
         /* Setup New Game */
         ArrayList<NumberClip> loadedNumbersArr = SoundManager.get(
-                this, new Handler()).getLoadedNumbers();
+                this).getLoadedNumbers();
 
         gameDifficulty = getDifficultyIdFromLoad();
         GAME = new Game(this, gameDifficulty, loadedNumbersArr);
@@ -278,6 +277,10 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
+    private void onFirstCorrect() {
+
+    }
+
     private void onNoChange(boolean valid) {
 
         enterNumberBox.setTextColor(Color.RED);
@@ -291,14 +294,6 @@ public class GameScreen extends AppCompatActivity {
             }
         }, 1000);
 
-
-    }
-
-    private void onValidInput() {
-
-    }
-
-    private void onInvalidInput() {
 
     }
 

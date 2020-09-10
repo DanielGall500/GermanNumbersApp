@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,7 +16,12 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.sound.SoundElement;
+import com.example.germanmemoriserapp.sound.SoundManager;
+import com.example.germanmemoriserapp.sound.UIClip;
 import com.example.germanmemoriserapp.ui.DifficultyButton;
+
+import java.util.ArrayList;
 
 public class MenuScreen extends AppCompatActivity {
 
@@ -59,6 +65,8 @@ public class MenuScreen extends AppCompatActivity {
     private DifficultyButton beginnerBtn, normalBtn, masterBtn;
     private ImageButton playGameBtn, scoreBtn, learnBtn;
 
+    private SoundManager soundManager;
+
     DifficultyListener difficultyListener;
 
     Animation buttonAnimation;
@@ -66,7 +74,7 @@ public class MenuScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setTheme(R.style.AppTheme);
+        //setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
 
@@ -78,10 +86,11 @@ public class MenuScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu_screen);
 
+        soundManager = SoundManager.get(this);
+
         playGameBtn = findViewById(R.id.menuPlayBtn);
         scoreBtn = findViewById(R.id.menuScoresBtn);
         learnBtn = findViewById(R.id.menuLearnBtn);
-
 
         beginnerBtn = new DifficultyButton(
                 this, difficultyBtnIds[beginnerId],
@@ -114,7 +123,7 @@ public class MenuScreen extends AppCompatActivity {
 
         /* Choose The Animation For Our Buttons */
         buttonAnimation = AnimationUtils.loadAnimation(this, buttonAnimationId);
-        buttonAnimation.setAnimationListener(new OnAnimEndListener());
+        buttonAnimation.setAnimationListener(new OnAnimListener());
 
     }
 
@@ -125,7 +134,7 @@ public class MenuScreen extends AppCompatActivity {
     private int clickedBtn;
     boolean buttonClicked = false;
 
-    public class OnAnimEndListener implements Animation.AnimationListener {
+    public class OnAnimListener implements Animation.AnimationListener {
         @Override
         public void onAnimationStart(Animation animation) {
 
@@ -174,6 +183,9 @@ public class MenuScreen extends AppCompatActivity {
             if(buttonClicked)
                 return;
 
+            //Play Audio
+            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
+
             clickedBtn = learnButtonRef;
             buttonClicked = true;
             findViewById(v.getId()).startAnimation(buttonAnimation);
@@ -195,6 +207,9 @@ public class MenuScreen extends AppCompatActivity {
 
             if(buttonClicked)
                 return;
+
+            //Play Audio
+            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
 
 
             clickedBtn = gameButtonRef;
@@ -218,6 +233,9 @@ public class MenuScreen extends AppCompatActivity {
 
             if(buttonClicked)
                 return;
+
+            //Play Audio
+            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
 
             clickedBtn = scoreButtonRef;
             buttonClicked = true;

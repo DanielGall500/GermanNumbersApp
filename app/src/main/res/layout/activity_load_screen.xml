@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19999999"
-        app:srcCompat="@drawable/main_title" />
+        app:srcCompat="@drawable/klang_logo_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loadLayout"

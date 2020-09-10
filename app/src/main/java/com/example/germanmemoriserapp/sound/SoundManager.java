@@ -43,7 +43,7 @@ public class SoundManager {
     private ArrayList<SoundElement> loadedSoundElements = new ArrayList<>();
     private Handler onAudioLoadedHandler;
 
-    private SoundManager(Context context, Handler onAudioLoadedHandler) {
+    private SoundManager(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -61,19 +61,22 @@ public class SoundManager {
 
         this.appContext = context;
         this.soundDir = new SoundDirectory(appContext);
-        this.onAudioLoadedHandler = onAudioLoadedHandler;
         this.soundPlayer.setOnLoadCompleteListener(new QueueListener());
     }
 
     /*
     Singleton implementation.
      */
-    public static synchronized SoundManager get(Context context, Handler onAudioLoadedHandler) {
+    public static synchronized SoundManager get(Context context) {
         if (soundManager == null) {
-            soundManager = new SoundManager(context, onAudioLoadedHandler);
+            soundManager = new SoundManager(context);
         }
 
         return soundManager;
+    }
+
+    public void setOnAudioLoadedHandler(Handler h) {
+        this.onAudioLoadedHandler = h;
     }
 
     public void load(SoundElement sound) {
@@ -180,7 +183,6 @@ public class SoundManager {
         return soundPlayer.load(appContext, resId, 1);
     }
 
-
     private boolean existsInLoadedClips(String file) {
         SoundElement element = getLoadedClip(file);
         return element != null;
@@ -221,19 +223,22 @@ public class SoundManager {
     private void removeFromLoadedSounds(SoundElement sound) {
         loadedSoundElements.remove(sound);
     }
-    private void alertSoundLoaded() {
-        onAudioLoadedHandler.sendEmptyMessage(0);
-    }
 
     private void invalidElementException() {
         throw new IllegalArgumentException("Invalid Sound Element");
     }
 
+    private void alertSoundLoaded() {
+        System.out.println("Sending Message to " + onAudioLoadedHandler.toString());
+        onAudioLoadedHandler.sendEmptyMessage(0);
+    }
+
     private class QueueListener implements SoundPool.OnLoadCompleteListener {
         @Override
         public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-            loadAllInQueue();
+            System.out.println("New load inside manager");
             alertSoundLoaded();
+            loadAllInQueue();
         }
     }
 }

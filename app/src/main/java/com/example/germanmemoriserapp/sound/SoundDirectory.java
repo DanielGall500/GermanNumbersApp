@@ -40,6 +40,10 @@ public class SoundDirectory {
     private int getResource(String file, String folder) {
         String resPackage = appContext.getPackageName();
 
+        System.out.println("File: " + file);
+        System.out.println("Folder: " + folder);
+        System.out.println("Package: " + resPackage);
+
         return appContext.getResources().getIdentifier(
                 file, folder, resPackage);
     }

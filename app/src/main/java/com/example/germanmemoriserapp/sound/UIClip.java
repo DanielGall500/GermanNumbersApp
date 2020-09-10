@@ -14,11 +14,11 @@ public enum UIClip implements SoundElement {
     private int localStorageId = -1;
     private boolean isLoaded = false;
 
-    final String GENERAL_BUTTON_CLICK_STR = "button_click.wav";
-    final String GAME_LOST_STR = "game_lost.wav";
-    final String GAME_WON_STR = "game_won.wav";
-    final String GAME_CORRECT_STR = "game_correct_click.wav";
-    final String GAME_INCORRECT_STR = "game_incorrect_click.wav";
+    final String GENERAL_BUTTON_CLICK_STR = "button_click";
+    final String GAME_LOST_STR = "game_lost";
+    final String GAME_WON_STR = "game_won";
+    final String GAME_CORRECT_STR = "game_correct_click";
+    final String GAME_INCORRECT_STR = "game_incorrect_click";
 
     @Override
     public String getFileName() {

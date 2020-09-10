@@ -43,7 +43,7 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
     private BackButton learnScreenSelectedBackBtn;
 
-    private SoundManager audioManager = SoundManager.get(this, new Handler());
+    private SoundManager audioManager = SoundManager.get(this);
 
     private class MediaListener implements View.OnClickListener {
 

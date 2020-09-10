@@ -1,21 +1,25 @@
 package com.example.germanmemoriserapp.mechanics;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.widget.TextView;
 
 import com.example.germanmemoriserapp.sound.NumberClip;
 import com.example.germanmemoriserapp.sound.SoundManager;
+import com.example.germanmemoriserapp.sound.UIClip;
 
 import java.util.ArrayList;
 
 public class Game {
 
     public enum GAME_STATE {
-        NO_CHANGE, NEW_TURN, GAME_OVER
+        NO_CHANGE, NEW_TURN, FIRST_CORRECT, GAME_WON, GAME_LOST
     };
 
-    public static final int NUM_CLIPS = 10;
+    /* Audio */
+    public static final int NUMBER_CLIPS = 10;
+    public static final int UI_CLIPS = 4;
 
     public static final int MIN_NUM = 0;
     public static final int MAX_NUM = 99;
@@ -54,9 +58,9 @@ public class Game {
         this.appContext = appContext;
         this.loadedNumbers = numberArr;
 
-        soundManager = SoundManager.get(appContext, new Handler());
+        soundManager = SoundManager.get(appContext);
 
-        if(numberArr.size() != NUM_CLIPS) {
+        if(numberArr.size() != NUMBER_CLIPS) {
             throw new IllegalArgumentException("Invalid Number Array");
         }
 
@@ -86,18 +90,12 @@ public class Game {
     public int getLives() {
         return nLives;
     }
-
     public int getRelistens() {
         return nRelistens;
     }
-
     public boolean gameLost() {
         return gameIsLost;
     }
-
-    /*
-    Actions
-     */
 
     public void relisten(TextView relistenTxtView) {
 
@@ -115,11 +113,6 @@ public class Game {
 
         }
     }
-
-    public int getStartingRelistens() {
-        return nRelistens;
-    }
-
     public boolean canRelisten() {
         return !gameRelistens.isOutOfListens();
     }
@@ -130,12 +123,33 @@ public class Game {
     }
 
     private void onNewTurn() {
+
+        soundManager.play(UIClip.GAME_CORRECT);
         newNumber();
-        playAudioClip();
+
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                playAudioClip();
+            }
+        }, 2000);
+
+
     }
 
-    private void onGameOver() {
-       soundManager.releaseAllNumbers();
+    private void onGameWon() {
+        soundManager.play(UIClip.GAME_WON);
+        soundManager.releaseAllNumbers();
+    }
+
+    private void onGameLost() {
+        soundManager.play(UIClip.GAME_LOST);
+        soundManager.releaseAllNumbers();
+    }
+
+    private void onFirstCorrect() {
+        soundManager.play(UIClip.GAME_CORRECT);
     }
 
     public void playAudioClip() {
@@ -151,12 +165,25 @@ public class Game {
             case NEW_TURN:
                 onNewTurn();
                 break;
-            case GAME_OVER:
-                onGameOver();
+            case GAME_WON:
+                onGameWon();
+                break;
+            case GAME_LOST:
+                onGameLost();
+                break;
+            case FIRST_CORRECT:
+                onFirstCorrect();
                 break;
             case NO_CHANGE:
                 break;
         }
+    }
+
+    public boolean beginsNumberCorrectly(String input) {
+        String curr = String.valueOf(getCurrentNumber());
+        char first = curr.charAt(0);
+
+        return (first == input.charAt(0));
     }
 
     /*
@@ -165,16 +192,25 @@ public class Game {
      */
     public GAME_STATE getState(String input, TextView lifeTxtView) {
 
-        boolean gameOver = isEndOfGame();
+        boolean isOneDigit = (input.length() == 1);
 
-        if(inputIsCorrect(input))
+        if(inputIsCorrect(input)) {
             incrementScore();
+
+            return isEndOfGame() ? GAME_STATE.GAME_WON : GAME_STATE.NEW_TURN;
+
+        }
+        else if(beginsNumberCorrectly(input) && isOneDigit) {
+            return GAME_STATE.FIRST_CORRECT;
+        }
         else {
 
             //Take Away A Life
             if(gameLives.hasLives()) {
                 gameLives.decrementWithUIUpdate(lifeTxtView);
             }
+
+            soundManager.play(UIClip.GAME_INCORRECT);
 
             //Check If Out Of Lives
             if(gameLives.isOutOfLives()) {
@@ -184,7 +220,7 @@ public class Game {
                  */
                 gameIsLost = true;
 
-                return GAME_STATE.GAME_OVER;
+                return GAME_STATE.GAME_LOST;
             } else {
 
                 /*
@@ -193,11 +229,11 @@ public class Game {
                 return GAME_STATE.NO_CHANGE;
             }
         }
-
-        return gameOver ? GAME_STATE.GAME_OVER : GAME_STATE.NEW_TURN;
     }
 
     private boolean inputIsCorrect(String input) {
+        System.out.println("Input: " + input);
+        System.out.println("Current: " + getCurrentNumber());
         return input.equals(String.valueOf(getCurrentNumber()));
     }
 
@@ -224,7 +260,7 @@ public class Game {
     }
 
     public boolean isEndOfGame() {
-        return (loadedNumbersCurrentIndx == NUM_CLIPS-1);
+        return (loadedNumbersCurrentIndx == NUMBER_CLIPS-1);
     }
 
     private void setNewCorrectNumber() {

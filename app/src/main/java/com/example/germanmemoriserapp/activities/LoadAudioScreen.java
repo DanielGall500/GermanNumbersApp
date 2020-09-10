@@ -18,6 +18,7 @@ import com.example.germanmemoriserapp.sound.NumberGenerator;
 import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.sound.UIClip;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,10 @@ public class LoadAudioScreen extends AppCompatActivity {
     private AnimationDrawable loadBtnAnim;
     private ImageView loadBtn;
 
-    private int NUM_CLIPS = Game.NUM_CLIPS;
+    private int NUMBER_CLIPS = Game.NUMBER_CLIPS;
+    private int UI_CLIPS = Game.UI_CLIPS;
+    private int TOTAL_CLIPS = NUMBER_CLIPS + UI_CLIPS;
+
     private int audioProgress = 0;
 
     class AudioHandler extends Handler {
@@ -37,9 +41,11 @@ public class LoadAudioScreen extends AppCompatActivity {
         public void handleMessage(Message msg) {
 
             audioProgress++;
-            System.out.println("AudioProgress: " + audioProgress);
 
-            if(audioProgress == NUM_CLIPS) {
+            System.out.println("Loaded: " + audioProgress);
+            System.out.println("Total: " + TOTAL_CLIPS);
+
+            if(audioProgress == TOTAL_CLIPS) {
                 loadComplete(getNextScreen(isGame));
             }
             else {
@@ -118,22 +124,28 @@ public class LoadAudioScreen extends AppCompatActivity {
         loadBtnAnim.start();
 
         audioProgressBar = findViewById(R.id.audioProgressBar);
-        audioProgressBar.setMax(NUM_CLIPS);
+        audioProgressBar.setMax(TOTAL_CLIPS);
         audioProgressBar.setProgress(audioProgress);
 
         /* Get our singleton implementation of
          * an audio manager. */
-        soundPlayer = SoundManager.get(this, new AudioHandler());
+        soundPlayer = SoundManager.get(this);
+        soundPlayer.setOnAudioLoadedHandler(new AudioHandler());
 
-        /*Load Sounds For Game*/
+        /* Sounds For Number Pronunciation */
         NumberGenerator generator = new NumberGenerator();
         ArrayList<SoundElement> generatedArr = generator.generate(
-                Game.MIN_NUM, Game.MAX_NUM, NUM_CLIPS);
+                Game.MIN_NUM, Game.MAX_NUM, NUMBER_CLIPS);
+
+        /* UI Sound Effects */
+        generatedArr.add(UIClip.GAME_CORRECT);
+        generatedArr.add(UIClip.GAME_INCORRECT);
+        generatedArr.add(UIClip.GAME_WON);
+        generatedArr.add(UIClip.GAME_LOST);
+
         soundPlayer.loadAll(generatedArr);
 
-        /*
-        Handle Input to Load Screen
-         */
+        /* Handle Input to Load Screen */
         retrieveLoadScreenInput();
     }
 
