@@ -32,6 +32,9 @@ public abstract class GeneralButton {
         loadComponents();
     }
 
+    //Implement What To Do Once Animation Finishes
+    protected abstract void onAnimEnd();
+
     public Context getContext() {
         return this.appContext;
     }
@@ -56,9 +59,6 @@ public abstract class GeneralButton {
         //this.btn = getActivity().findViewById(resId);
         btn.setOnClickListener(new ClickListener());
     }
-
-    //Implement What To Do Once Animation Finishes
-    protected abstract void onAnimEnd();
 
     class ClickListener implements View.OnClickListener {
         @Override

@@ -14,29 +14,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.sound.SoundManager;
+import com.example.germanmemoriserapp.ui.MenuButton;
+import com.example.germanmemoriserapp.ui.RetryButton;
 
 public class GameOverScreen extends AppCompatActivity {
 
-    private ImageButton retryBtn, menuBtn;
     private TextView scoreResultView;
-    private String gameScore;
-    private Animation congratsAnim;
-    private TextView congratsTxtView;
 
     private boolean gameLost;
     private SoundManager soundManager;
 
     private int difficulty;
-
-    /*
-    TODO:
-    fix difficulty
-
-    fix buttons
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +41,11 @@ public class GameOverScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_game_over_screen);
 
-        congratsAnim = AnimationUtils.loadAnimation(this, R.anim.congrats_spin);
-        congratsTxtView = findViewById(R.id.congratTxtView);
-        congratsTxtView.startAnimation(congratsAnim);
-
-        retryBtn = findViewById(R.id.retryBtn);
-        menuBtn = findViewById(R.id.menuBtn);
         scoreResultView = findViewById(R.id.scoreView);
+
+        /* Get Information From Previous Screen */
+        updateResultsView();
+        updateDifficulty();
 
         /* Unload Game Sounds */
         soundManager = SoundManager.get(this);
@@ -70,13 +60,10 @@ public class GameOverScreen extends AppCompatActivity {
 
         releaseClips.run();
 
-        updateResultsView();
-
-        this.difficulty = getDifficulty();
-
-        /* Listeners */
-        menuBtn.setOnClickListener(new MenuButtonListener(this,this));
-        retryBtn.setOnClickListener(new RetryButtonListener(this,this));
+        /* Buttons */
+        new RetryButton(this,this,R.id.retryBtn,difficulty);
+        new MenuButton(this,this, R.id.menuBtn,
+                new MenuActivityManager(this,this));
     }
 
     private void updateResultsView() {
@@ -91,18 +78,11 @@ public class GameOverScreen extends AppCompatActivity {
         }
     }
 
-    private int getDifficulty() {
+    private int updateDifficulty() {
         String key = getString(R.string.game_load_difficulty_key);
 
-        int diff = getIntent().getIntExtra(key,-1);
-
-        return diff;
+        this.difficulty = getIntent().getIntExtra(key,-1);
     }
-
-    private TextView getScoreView() {
-        return this.scoreResultView;
-    }
-
     public String getScoreString(String score) {
         return String.format("%s seconds!", score);
     }
@@ -117,58 +97,4 @@ public class GameOverScreen extends AppCompatActivity {
 
         return String.valueOf(result);
     }
-
-    public String getScore() {
-        return gameScore;
-    }
-
-    private void setScore(String score) {
-        gameScore = score;
-    }
-
-    private class MenuButtonListener implements View.OnClickListener {
-
-        private Context appContext;
-        private AppCompatActivity appActivity;
-
-        public MenuButtonListener(Context mContext, AppCompatActivity mActivity) {
-            this.appContext = mContext;
-            this.appActivity = mActivity;
-        }
-
-        @Override
-        public void onClick(View v) {
-            NextActivityManager nextActivityManager = new NextActivityManager(
-                    appContext,appActivity);
-            nextActivityManager.setNextActivity(MenuScreen.class);
-            nextActivityManager.run();
-        }
-    }
-
-    private class RetryButtonListener implements View.OnClickListener {
-
-        private Context context;
-        private AppCompatActivity activity;
-
-        public RetryButtonListener(Context context, AppCompatActivity activity) {
-            this.context = context;
-            this.activity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-            NextActivityManager nextActivityManager = new NextActivityManager(context,activity);
-            nextActivityManager.setNextActivity(LoadAudioScreen.class);
-
-            String isGameKey = getString(R.string.load_screen_isGameBoolean);
-            String loadInfoKey = getString(R.string.load_screen_information);
-
-            nextActivityManager.addInformation(isGameKey, true);
-            nextActivityManager.addInformation(loadInfoKey,difficulty);
-
-            nextActivityManager.run();
-        }
-    }
-
-
 }
