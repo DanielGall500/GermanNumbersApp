@@ -2,24 +2,21 @@ package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
-import com.example.germanmemoriserapp.sound.SoundManager;
-import com.example.germanmemoriserapp.sound.UIClip;
 import com.example.germanmemoriserapp.ui.DifficultyButton;
+import com.example.germanmemoriserapp.ui.GeneralButton;
+import com.example.germanmemoriserapp.ui.LearnMenuButton;
 import com.example.germanmemoriserapp.ui.MenuButton;
+import com.example.germanmemoriserapp.ui.PlayMenuButton;
+import com.example.germanmemoriserapp.ui.ScoresMenuButton;
 
 public class MenuScreen extends AppCompatActivity {
 
@@ -27,7 +24,8 @@ public class MenuScreen extends AppCompatActivity {
     private final boolean INITIAL_NORMAL_IS_PRESSED = true;
     private final boolean INITIAL_MASTER_IS_PRESSED = false;
 
-    private final Difficulty.Level INITIAL_DIFFICULTY = Difficulty.Level.NORMAL;
+    private final Difficulty INITIAL_DIFFICULTY =
+            new Difficulty(Difficulty.Level.NORMAL);
 
     private int[] difficultyBtnIds = new int[] {
             R.id.diffBeginnerBtn,
@@ -55,6 +53,10 @@ public class MenuScreen extends AppCompatActivity {
 
     DifficultyListener difficultyListener;
 
+    private PlayMenuButton playMenuButton;
+    private LearnMenuButton learnMenuButton;
+    private ScoresMenuButton scoreMenuButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -68,6 +70,12 @@ public class MenuScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_menu_screen);
 
+        /* Primary Menu Buttons */
+        playMenuButton = new PlayMenuButton(this,this,R.id.menuPlayBtn, INITIAL_DIFFICULTY.getId());
+        learnMenuButton = new LearnMenuButton(this,this,R.id.menuLearnBtn);
+        scoreMenuButton = new ScoresMenuButton(this,this,R.id.menuScoresBtn);
+
+        /* Difficulty Menu Buttons */
         beginnerBtn = new DifficultyButton(
                 this, difficultyBtnIds[beginnerId],
                 unpressedImgIds[beginnerId], pressedImgIds[beginnerId],
@@ -84,33 +92,18 @@ public class MenuScreen extends AppCompatActivity {
                 masterId,INITIAL_MASTER_IS_PRESSED);
 
         difficultyListener = new DifficultyListener(beginnerBtn,normalBtn,
-                masterBtn,Difficulty.getId(INITIAL_DIFFICULTY));
+                masterBtn, new DifficultyHandler(), INITIAL_DIFFICULTY.getId());
 
         beginnerBtn.setListener(difficultyListener);
         normalBtn.setListener(difficultyListener);
         masterBtn.setListener(difficultyListener);
+    }
 
-        NewActivityManager playActivityManager = new NewActivityManager(
-                this, this, true,
-                difficultyListener.getId()
-        );
-
-        NewActivityManager learnActivityManager = new NewActivityManager(
-                this, this, LearnScreen.class
-        );
-
-        NewActivityManager scoresActivityManager = new NewActivityManager(
-                this,this, ScoreBoardScreen.class
-        );
-
-        new MenuButton(MenuButton.TYPE.PLAY, R.id.menuPlayBtn,
-                this,this, playActivityManager);
-
-        new MenuButton(MenuButton.TYPE.LEARN, R.id.menuLearnBtn,
-                this,this, learnActivityManager);
-
-        new MenuButton(MenuButton.TYPE.SCORES, R.id.menuScoresBtn,
-                this,this, scoresActivityManager);
+    private class DifficultyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            playMenuButton.setDifficulty(msg.arg1);
+        }
 
     }
 }

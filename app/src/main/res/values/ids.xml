@@ -3,4 +3,5 @@
     <item name="germanTextViewId" type="id"/>
     <item name="digitTextViewId" type="id"/>
     <item name="playBtnId" type="id"/>
+    <item name="menuPlayBtn" type="id" />
 </resources>

@@ -1,31 +1,24 @@
 package com.example.germanmemoriserapp.ui;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 
 public class MenuButton extends GeneralButton {
 
-    public enum TYPE {
-        PLAY, LEARN, SCORES
-    }
+    private NextActivityManager nextActivityManager;
 
-    private TYPE btnType;
-    private NewActivityManager moveToActivity;
-
-    public MenuButton(TYPE type, int resId, Context context,
-                      AppCompatActivity activity, NewActivityManager btnNewActivityManager) {
-        super(resId,context,activity);
-        this.btnType = type;
-        this.moveToActivity = btnNewActivityManager;
+    public MenuButton(Context context, AppCompatActivity activity, int resId,
+                      NextActivityManager nextActivityManager) {
+        super(context, activity, resId);
+        this.nextActivityManager = nextActivityManager;
     }
 
     @Override
     protected void onAnimEnd() {
-        moveToActivity.move();
+        nextActivityManager.run();
     }
 
 }

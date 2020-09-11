@@ -32,6 +32,8 @@ import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//TODO: WAIT TIME BEFORE CAN RELISTEN
+
 public class GameScreen extends AppCompatActivity {
 
     //10 Digits + 1 Back Button
@@ -256,6 +258,8 @@ public class GameScreen extends AppCompatActivity {
         Intent fromLoad = getIntent();
 
         int diffId = fromLoad.getIntExtra(key, -1);
+
+        System.out.println("Retrieved Difficulty ID: " + diffId);
 
         return Difficulty.getLevel(diffId);
     }

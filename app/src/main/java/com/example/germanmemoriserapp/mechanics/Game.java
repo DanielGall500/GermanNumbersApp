@@ -18,7 +18,7 @@ public class Game {
     };
 
     /* Audio */
-    public static final int NUMBER_CLIPS = 10;
+    public static final int NUMBER_CLIPS = 1;
     public static final int UI_CLIPS = 4;
 
     public static final int MIN_NUM = 0;
@@ -46,7 +46,7 @@ public class Game {
     private RelistenManager gameRelistens;
 
     private ArrayList<NumberClip> loadedNumbers;
-    private int loadedNumbersCurrentIndx = 0;
+    private int loadedNumbersCurrentIndx = -1;
 
     private boolean gameIsLost = false;
 
@@ -118,7 +118,7 @@ public class Game {
     }
 
     public void begin() {
-        newNumber();
+        setNewCorrectNumber();
         playAudioClip();
     }
 
@@ -266,6 +266,7 @@ public class Game {
     }
 
     private int getCurrentNumber() {
+        System.out.println(loadedNumbersCurrentIndx);
         return loadedNumbers.get(loadedNumbersCurrentIndx).get();
     }
 

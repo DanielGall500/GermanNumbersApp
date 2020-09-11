@@ -10,8 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
-import com.example.germanmemoriserapp.sound.NumberClip;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.sound.UIClip;
@@ -53,7 +52,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private class OnAudioLoadCompleteHandler extends Handler {
 
-        NewActivityManager nextActivityManager = new NewActivityManager();
+        NextActivityManager nextActivityManager;
         Context appContext;
         AppCompatActivity appActivity;
         Class nextActivity;
@@ -71,12 +70,12 @@ public class SplashScreen extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message m) {
-
-            System.out.println("message received");
            numLoaded++;
 
            if(numLoaded == NUM_UI_CLIPS) {
-               nextActivityManager.move(appContext,appActivity,nextActivity);
+               nextActivityManager = new NextActivityManager(appContext,appActivity);
+               nextActivityManager.setNextActivity(nextActivity);
+               nextActivityManager.run();
            }
         }
     }

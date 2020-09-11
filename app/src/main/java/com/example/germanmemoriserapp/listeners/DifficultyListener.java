@@ -1,9 +1,12 @@
 package com.example.germanmemoriserapp.listeners;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.ui.DifficultyButton;
+import com.example.germanmemoriserapp.ui.PlayMenuButton;
 
 public class DifficultyListener implements View.OnClickListener {
 
@@ -13,8 +16,11 @@ public class DifficultyListener implements View.OnClickListener {
     private DifficultyButton normalBtn;
     private DifficultyButton masterBtn;
 
+    private Handler updateDifficultyHandler;
+
     public DifficultyListener(DifficultyButton beginnerBtn,
                               DifficultyButton normalBtn, DifficultyButton masterBtn,
+                              Handler updateDifficulty,
                               int initialDiff) {
 
         currDifficulty = new Difficulty(initialDiff);
@@ -22,6 +28,8 @@ public class DifficultyListener implements View.OnClickListener {
         this.beginnerBtn = beginnerBtn;
         this.normalBtn = normalBtn;
         this.masterBtn = masterBtn;
+
+        this.updateDifficultyHandler = updateDifficulty;
     }
 
     public int getId() {
@@ -50,6 +58,11 @@ public class DifficultyListener implements View.OnClickListener {
 
         //Update Current Difficulty State
         currDifficulty = new Difficulty(btnDiffLevel);
+
+        //Update the menu's difficulty
+        Message newDiff = new Message();
+        newDiff.arg1 = currDifficulty.getId();
+        updateDifficultyHandler.sendMessage(newDiff);
     }
 
     public Difficulty.Level getButtonLevel(int resId) {

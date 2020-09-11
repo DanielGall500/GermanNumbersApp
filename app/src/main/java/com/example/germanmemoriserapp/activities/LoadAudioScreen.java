@@ -13,12 +13,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.LearnPage;
 import com.example.germanmemoriserapp.sound.NumberGenerator;
 import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.sound.UIClip;
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class LoadAudioScreen extends AppCompatActivity {
     private boolean isGame;
     private int loadInformation;
 
-    NewActivityManager moveToNextScreen = new NewActivityManager();
+    NextActivityManager moveToNextScreen;
 
     public Class getNextScreen(boolean isGame) {
         if(isGame) {
@@ -193,6 +193,9 @@ public class LoadAudioScreen extends AppCompatActivity {
         /*
         Move To Learn Page
         */
-        moveToNextScreen.move(this, this, nextScreen, loadInformation, key);
+        moveToNextScreen = new NextActivityManager(this,this);
+        moveToNextScreen.setNextActivity(nextScreen);
+        moveToNextScreen.addInformation(key,loadInformation);
+        moveToNextScreen.run();
     }
 }

@@ -4,22 +4,25 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 
 public class LearnPageButton extends GeneralButton {
 
     private int pageToLoad;
 
-    public LearnPageButton(int resId, Context context, AppCompatActivity activity,
-                           int pageId) {
-        super(resId, context, activity);
+    public LearnPageButton(Context context, AppCompatActivity activity,
+                           int resId, int pageId) {
+        super(context, activity, resId);
         this.pageToLoad = pageId;
     }
 
     @Override
     protected void onAnimEnd() {
-        NewActivityManager manager = new NewActivityManager();
-        manager.move(super.getContext(),super.getActivity(),
-                false, pageToLoad);
+        NextActivityManager manager = new NextActivityManager(getContext(),getActivity());
+
+        String key = getContext().getString(R.string.score_load_intent_key);
+
+        manager.addInformation(key, pageToLoad);
     }
 }

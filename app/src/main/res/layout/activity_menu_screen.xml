@@ -47,7 +47,6 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:src="@drawable/learn_btn"
-            android:text="@string/btn_item_rank"
             app:layout_constraintBottom_toTopOf="@+id/menuScoresBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

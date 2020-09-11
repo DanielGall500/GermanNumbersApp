@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.sound.SoundManager;
 
@@ -28,6 +28,13 @@ public class GameOverScreen extends AppCompatActivity {
 
     private boolean gameLost;
     private SoundManager soundManager;
+
+    /*
+    TODO:
+    fix difficulty
+
+    fix buttons
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +56,23 @@ public class GameOverScreen extends AppCompatActivity {
         scoreResultView = findViewById(R.id.scoreView);
 
         /* Unload Game Sounds */
-        SoundManager soundManager = SoundManager.get(this);
-        soundManager.releaseAllGameUIClips();
-        soundManager.releaseAllNumberClips();
+        soundManager = SoundManager.get(this);
+
+        Thread releaseClips = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                soundManager.releaseAllGameUIClips();
+                soundManager.releaseAllNumberClips();
+            }
+        });
+
+        releaseClips.run();
 
         updateResultsView();
 
         /* Listeners */
         menuBtn.setOnClickListener(new MenuButtonListener(this,this));
         retryBtn.setOnClickListener(new RetryButtonListener(this,this));
-
-        /* Release All Game-Sound Clips */
-        soundManager = SoundManager.get(this);
-        soundManager.releaseAllNumberClips();
-        soundManager.releaseAllGameUIClips();
-
     }
 
     private void updateResultsView() {
@@ -117,8 +126,10 @@ public class GameOverScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            NewActivityManager listener = new NewActivityManager();
-            listener.move(appContext, appActivity, MenuScreen.class);
+            NextActivityManager nextActivityManager = new NextActivityManager(
+                    appContext,appActivity);
+            nextActivityManager.setNextActivity(MenuScreen.class);
+            nextActivityManager.run();
         }
     }
 
@@ -134,11 +145,18 @@ public class GameOverScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            NewActivityManager listener = new NewActivityManager();
+            NextActivityManager nextActivityManager = new NextActivityManager(context,activity);
+            nextActivityManager.setNextActivity(LoadAudioScreen.class);
+
+            String isGameKey = getString(R.string.load_screen_isGameBoolean);
+            String loadInfoKey = getString(R.string.load_screen_information);
+
+            nextActivityManager.addInformation(isGameKey, true);
+            nextActivityManager.addInformation(loadInfoKey,0);
 
 
             //TODO: FIX DIFFICULTY LEVEL HERE
-            listener.move(context,activity,true,0);
+            nextActivityManager.run();
         }
     }
 

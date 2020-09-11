@@ -175,7 +175,9 @@ public class SoundManager {
         ArrayList<SoundElement> elementsToUnload = new ArrayList<>();
 
         for(SoundElement element : loadedSoundElements) {
+            System.out.println("Checking If Number : " + element.getFileName());
             if(element.isNumber()) {
+                System.out.println("is number: unloading");
                 elementsToUnload.add(element);
             }
         }
@@ -215,11 +217,17 @@ public class SoundManager {
     }
 
     private SoundElement getLoadedClip(String file) {
+        System.out.println("Size: " + loadedSoundElements.size());
         for (SoundElement nextElement : loadedSoundElements) {
 
             String nextFileName = nextElement.getFileName();
 
+            System.out.println("Checking: " + nextElement.getFileName());
+            System.out.println("Against : " + file);
+            System.out.println("----");
+
             if (nextFileName.equals(file)) {
+                System.out.println("Found");
                 return nextElement;
             }
         }

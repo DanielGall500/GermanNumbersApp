@@ -2,42 +2,34 @@ package com.example.germanmemoriserapp.ui;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.sound.UIClip;
 
-public class GeneralButton {
+public abstract class GeneralButton {
+    private Animation btnAnimation;
+    private SoundManager soundManager;
+    private AppCompatActivity appActivity;
+    private Context appContext;
 
     private ImageButton btn;
-    private Animation btnAnimation;
-    private Context appContext;
-    private AppCompatActivity appActivity;
-    private SoundManager soundManager;
 
-    public GeneralButton(int resId, Context context,
-                         AppCompatActivity activity) {
-        this.appContext = context;
+    public GeneralButton(Context context, AppCompatActivity activity, int resId) {
         this.appActivity = activity;
-        this.soundManager = SoundManager.get(appContext);
+        this.appContext = context;
 
-        this.btnAnimation = AnimationUtils.loadAnimation(
-                context, R.anim.fly_right);
+        btn = appActivity.findViewById(resId);
 
-        this.btnAnimation.setAnimationListener(new OnAnimListener(
-                appContext, appActivity));
-
-        this.btn = activity.findViewById(resId);
-        this.btn.setOnClickListener(new ClickListener());
-    }
-
-    protected void onAnimEnd() {
+        loadComponents();
     }
 
     public Context getContext() {
@@ -47,6 +39,26 @@ public class GeneralButton {
     public AppCompatActivity getActivity() {
         return this.appActivity;
     }
+
+    public ImageButton getButton() {
+        return this.btn;
+    }
+
+    private void loadComponents() {
+        this.soundManager = SoundManager.get(getContext());
+
+        this.btnAnimation = AnimationUtils.loadAnimation(
+                getContext(), R.anim.fly_right);
+
+        this.btnAnimation.setAnimationListener(new OnAnimListener(
+                getContext(), getActivity()));
+
+        //this.btn = getActivity().findViewById(resId);
+        btn.setOnClickListener(new ClickListener());
+    }
+
+    //Implement What To Do Once Animation Finishes
+    protected abstract void onAnimEnd();
 
     class ClickListener implements View.OnClickListener {
         @Override

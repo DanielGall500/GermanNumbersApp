@@ -55,7 +55,7 @@ public class LearnScreen extends AppCompatActivity {
 
 
         for(int i = 0; i < N; i++) {
-            new LearnPageButton(buttons[i], this, this, i);
+            new LearnPageButton(this, this,buttons[i], i);
         }
 
         /* We need to ensure everything unnecessary is released

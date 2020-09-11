@@ -2,17 +2,11 @@ package com.example.germanmemoriserapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.ui.BackButton;
 import com.example.germanmemoriserapp.ui.ScorePageButton;
 
@@ -33,12 +27,10 @@ public class ScoreBoardScreen extends AppCompatActivity {
         new BackButton(this, this,
                 R.id.scoresBackBtn, MenuScreen.class);
 
-        new ScorePageButton(R.id.scoresBestBtn,
-                this,this,
+        new ScorePageButton(this,this,R.id.scoresBestBtn,
                 LoadScoresScreen.BEST_SCORES_ID);
 
-        new ScorePageButton(R.id.scoresRecentBtn,
-                this,this,
+        new ScorePageButton(this,this, R.id.scoresRecentBtn,
                 LoadScoresScreen.RECENT_SCORES_ID);
     }
 }

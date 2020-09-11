@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 
 public class BackButton {
 
@@ -20,16 +20,18 @@ public class BackButton {
     private ImageButton backButton;
     private Animation backBtnAnimation;
 
-    NewActivityManager activityListener = new NewActivityManager();
+    NextActivityManager activityListener;
 
     public BackButton(Context appContext, AppCompatActivity appActivity, int buttonId, Class moveTo) {
         this.appContext = appContext;
         this.appActivity = appActivity;
         this.moveToActivity = moveTo;
 
+        activityListener = new NextActivityManager(appContext,appActivity);
+        activityListener.setNextActivity(moveTo);
+
         this.backButton = appActivity.findViewById(buttonId);
         this.backButton.setOnClickListener(new BackButtonListener());
-
 
         backBtnAnimation = AnimationUtils.loadAnimation(appContext, R.anim.fly_left);
         backBtnAnimation.setAnimationListener(new BackButtonAnimationListener());
@@ -47,7 +49,7 @@ public class BackButton {
         @Override
         public void onAnimationEnd(Animation animation) {
             backButton.setVisibility(View.INVISIBLE);
-            activityListener.move(appContext, appActivity, moveToActivity);
+            activityListener.run();
         }
     }
 
