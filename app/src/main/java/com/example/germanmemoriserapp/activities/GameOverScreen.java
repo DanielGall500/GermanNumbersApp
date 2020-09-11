@@ -29,6 +29,8 @@ public class GameOverScreen extends AppCompatActivity {
     private boolean gameLost;
     private SoundManager soundManager;
 
+    private int difficulty;
+
     /*
     TODO:
     fix difficulty
@@ -70,6 +72,8 @@ public class GameOverScreen extends AppCompatActivity {
 
         updateResultsView();
 
+        this.difficulty = getDifficulty();
+
         /* Listeners */
         menuBtn.setOnClickListener(new MenuButtonListener(this,this));
         retryBtn.setOnClickListener(new RetryButtonListener(this,this));
@@ -85,6 +89,14 @@ public class GameOverScreen extends AppCompatActivity {
         else {
             scoreResultView.setText(Game.GAME_LOST_TEXT);
         }
+    }
+
+    private int getDifficulty() {
+        String key = getString(R.string.game_load_difficulty_key);
+
+        int diff = getIntent().getIntExtra(key,-1);
+
+        return diff;
     }
 
     private TextView getScoreView() {
@@ -152,10 +164,8 @@ public class GameOverScreen extends AppCompatActivity {
             String loadInfoKey = getString(R.string.load_screen_information);
 
             nextActivityManager.addInformation(isGameKey, true);
-            nextActivityManager.addInformation(loadInfoKey,0);
+            nextActivityManager.addInformation(loadInfoKey,difficulty);
 
-
-            //TODO: FIX DIFFICULTY LEVEL HERE
             nextActivityManager.run();
         }
     }

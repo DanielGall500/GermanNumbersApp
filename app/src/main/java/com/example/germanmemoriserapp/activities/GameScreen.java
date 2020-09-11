@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
 import com.example.germanmemoriserapp.mechanics.Game;
 import com.example.germanmemoriserapp.mechanics.Game.GAME_STATE;
@@ -32,7 +33,7 @@ import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//TODO: WAIT TIME BEFORE CAN RELISTEN
+//TODO: WAIT TIME BEFORE CAN RE-LISTEN
 
 public class GameScreen extends AppCompatActivity {
 
@@ -47,7 +48,6 @@ public class GameScreen extends AppCompatActivity {
             R.id.digitNineBtn, R.id.relistenBtn
     };
 
-    Intent moveToGOScreen;
     EditText enterNumberBox;
     TextView timerView;
     Keyboard digitKeyboard;
@@ -87,15 +87,12 @@ public class GameScreen extends AppCompatActivity {
     class RelistenBtnHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
             if(GAME.canRelisten()) {
-
-                //Relisten button animation
+                //Re-listen button animation
                 findViewById(v.getId()).startAnimation(relistenAnim);
 
                 //Play the clip & Update GFX
                 GAME.relisten(relistenUpdatetxt);
-
             }
             else {
                 //TODO: No Relistens Left
@@ -127,9 +124,6 @@ public class GameScreen extends AppCompatActivity {
 
                 int nextNum = GAME.getNumber();
                 digitKeyboard.updateCorrectNumber(nextNum);
-            }
-            else if(nextState.equals(GAME_STATE.FIRST_CORRECT)) {
-                onFirstCorrect();
             }
             else if(nextState.equals(GAME_STATE.GAME_WON)) {
                 onGameOver();
@@ -202,9 +196,6 @@ public class GameScreen extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-
-        moveToGOScreen = new Intent(GameScreen.this,
-                GameOverScreen.class);
 
         //Match particular button Ids to their numerical value
         digitIdReference = setupDigitRef(digitIds);
@@ -281,50 +272,31 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void onFirstCorrect() {
-
-    }
-
-    private void onNoChange(boolean valid) {
-
-        enterNumberBox.setTextColor(Color.RED);
-
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                enterNumberBox.setText("");
-                enterNumberBox.setTextColor(Color.BLACK);
-            }
-        }, 1000);
-
-
-    }
-
     private void onGameOver() {
         timer.stop();
 
         int timerValue = timer.getPreviousResult();
 
         String scoreDataKey = getString(R.string.score_key);
+        String difficultyKey = getString(R.string.game_load_difficulty_key);
 
+        NextActivityManager nextActivityManager = new NextActivityManager(this,this);
+        nextActivityManager.setNextActivity(GameOverScreen.class);
 
         if(!GAME.gameLost()) {
-
             /* Transfer Score Data To Game Over Screen */
-            moveToGOScreen.putExtra(scoreDataKey, timerValue);
+            nextActivityManager.addInformation(scoreDataKey, timerValue);
 
             /* Update Scores File */
             scoreBoard.update(getDifficultyId(), timerValue);
         }
         else {
-            /*  */
-            moveToGOScreen.putExtra(scoreDataKey, GAME.GAME_LOST_VALUE);
+            nextActivityManager.addInformation(scoreDataKey, GAME.GAME_LOST_VALUE);
         }
 
-        startActivity(moveToGOScreen);
+        nextActivityManager.addInformation(difficultyKey, getDifficultyId());
 
-        this.finish();
+        nextActivityManager.run();
     }
 
     private void clearAllInput(EditText entryBox) {

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class NextActivityManager {
 
-    private Intent activityIntent;
+    private Intent activityIntent = null;
     private Class nextClass;
     private Context appContext;
     private AppCompatActivity appActivity;
@@ -35,15 +35,28 @@ public class NextActivityManager {
     }
 
     public void addInformation(String key, boolean info) {
+        if(!validIntent())
+            throw new IllegalStateException("No Next Activity Set");
+
         activityIntent.putExtra(key, info);
     }
 
     public void addInformation(String key, int info) {
+        if(!validIntent())
+            throw new IllegalStateException("No Next Activity Set");
+
         activityIntent.putExtra(key, info);
     }
 
     public void run() {
+        if(!validIntent())
+            throw new IllegalStateException("No Next Activity Set");
+
         appContext.startActivity(activityIntent);
         appActivity.finish();
+    }
+
+    private boolean validIntent() {
+        return activityIntent != null;
     }
 }

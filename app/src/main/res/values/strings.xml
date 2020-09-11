@@ -28,5 +28,6 @@
     <string name="intent_score_array_key">INTENT_SCORE_ARRAY_KEY</string>
     <string name="score_load_intent_key">SCORE_LOAD_INTENT_KEY</string>
     <string name="game_load_difficulty_key">GAME_LOAD_DIFFICULTY_KEY</string>
+    <string name="game_over_difficulty_key">GAME_OVER_DIFFICULTY_KEY</string>
 
 </resources>
