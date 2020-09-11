@@ -78,11 +78,12 @@ public class GameOverScreen extends AppCompatActivity {
         }
     }
 
-    private int updateDifficulty() {
+    private void updateDifficulty() {
         String key = getString(R.string.game_load_difficulty_key);
 
         this.difficulty = getIntent().getIntExtra(key,-1);
     }
+
     public String getScoreString(String score) {
         return String.format("%s seconds!", score);
     }

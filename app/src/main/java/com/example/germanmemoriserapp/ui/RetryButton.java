@@ -16,7 +16,9 @@ public class RetryButton extends GeneralButton {
 
     public RetryButton(Context context, AppCompatActivity activity,
                        int resId, int diffId) {
-        super(context,activity,resId);
+        super(context, activity, resId);
+        this.appContext = context;
+        this.appActivity = activity;
         this.difficulty = diffId;
     }
 
