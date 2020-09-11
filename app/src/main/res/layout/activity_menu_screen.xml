@@ -5,7 +5,7 @@
     android:background="@drawable/menu_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MenuScreen">
+    tools:context=".activities.menu.MenuScreen">
 
     <ImageView
         android:id="@+id/menuTitleView"

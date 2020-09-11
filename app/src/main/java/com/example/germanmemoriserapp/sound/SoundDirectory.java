@@ -2,6 +2,8 @@ package com.example.germanmemoriserapp.sound;
 
 import android.content.Context;
 
+import com.example.germanmemoriserapp.sound.elements.SoundElement;
+
 public class SoundDirectory {
 
     /*
@@ -29,20 +31,15 @@ public class SoundDirectory {
     }
 
     private int getId(String file) {
-        if(exists(file, RES_FOLDER)) {
+        if (exists(file, RES_FOLDER)) {
             return getResource(file, RES_FOLDER);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Invalid Resource");
         }
     }
 
     private int getResource(String file, String folder) {
         String resPackage = appContext.getPackageName();
-
-        System.out.println("File: " + file);
-        System.out.println("Folder: " + folder);
-        System.out.println("Package: " + resPackage);
 
         return appContext.getResources().getIdentifier(
                 file, folder, resPackage);

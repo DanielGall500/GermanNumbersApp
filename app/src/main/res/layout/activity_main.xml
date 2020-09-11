@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/empty_background"
-    tools:context=".activities.GameScreen">
+    tools:context=".activities.game.GameScreen">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,10 +25,9 @@
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/timerViewConstraint"
-            app:layout_constraintHorizontal_bias="0.14"
+            app:layout_constraintHorizontal_bias="0.105"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13999999">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -56,6 +55,7 @@
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:focusableInTouchMode="false"
+                    android:fontFamily="@font/baloo"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="6"
@@ -63,8 +63,7 @@
                     android:text="10"
                     android:textColor="#000000"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/baloo"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -112,10 +111,11 @@
             android:id="@+id/timerViewConstraint"
             android:layout_width="100dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16000003">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/clockSymbol"

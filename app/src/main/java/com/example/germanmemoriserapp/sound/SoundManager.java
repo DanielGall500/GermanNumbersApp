@@ -7,7 +7,10 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 
-import java.lang.reflect.Array;
+import com.example.germanmemoriserapp.sound.elements.NumberClip;
+import com.example.germanmemoriserapp.sound.elements.SoundElement;
+import com.example.germanmemoriserapp.sound.elements.UIClip;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -122,7 +125,7 @@ public class SoundManager {
     }
 
     public void unloadAll(ArrayList<SoundElement> elements) {
-        for(SoundElement element : elements) {
+        for (SoundElement element : elements) {
             unload(element);
         }
     }
@@ -130,12 +133,8 @@ public class SoundManager {
     /* Play A Loaded Clip */
     public void play(SoundElement element) {
 
-        System.out.println("Attempting To Play: " + element.getFileName());
-
         if (existsInLoadedClips(element)) {
             int localId = element.getLocalId();
-
-            System.out.println("Exists: " + localId);
 
             soundPlayer.play(localId, LEFT_VOL, RIGHT_VOL,
                     PRIORITY, LOOP, RATE);
@@ -150,7 +149,7 @@ public class SoundManager {
     }
 
     public SoundElement getElement(int number) {
-        if(existsInLoadedClips(number)) {
+        if (existsInLoadedClips(number)) {
             return getLoadedClip(number);
         }
         throw new IllegalArgumentException("Invalid Number");
@@ -163,8 +162,8 @@ public class SoundManager {
     public ArrayList<NumberClip> getLoadedNumbers() {
         ArrayList<NumberClip> numbers = new ArrayList<>();
 
-        for(SoundElement element : loadedSoundElements) {
-            if(element.isNumber()) {
+        for (SoundElement element : loadedSoundElements) {
+            if (element.isNumber()) {
                 numbers.add((NumberClip) element);
             }
         }
@@ -174,10 +173,8 @@ public class SoundManager {
     public void releaseAllNumberClips() {
         ArrayList<SoundElement> elementsToUnload = new ArrayList<>();
 
-        for(SoundElement element : loadedSoundElements) {
-            System.out.println("Checking If Number : " + element.getFileName());
-            if(element.isNumber()) {
-                System.out.println("is number: unloading");
+        for (SoundElement element : loadedSoundElements) {
+            if (element.isNumber()) {
                 elementsToUnload.add(element);
             }
         }
@@ -217,17 +214,11 @@ public class SoundManager {
     }
 
     private SoundElement getLoadedClip(String file) {
-        System.out.println("Size: " + loadedSoundElements.size());
         for (SoundElement nextElement : loadedSoundElements) {
 
             String nextFileName = nextElement.getFileName();
 
-            System.out.println("Checking: " + nextElement.getFileName());
-            System.out.println("Against : " + file);
-            System.out.println("----");
-
             if (nextFileName.equals(file)) {
-                System.out.println("Found");
                 return nextElement;
             }
         }
@@ -242,9 +233,11 @@ public class SoundManager {
     private void addToWaitingQueue(SoundElement sound) {
         waitingSoundElements.add(sound);
     }
+
     private void addToLoadedSounds(SoundElement sound) {
         loadedSoundElements.add(sound);
     }
+
     private void removeFromLoadedSounds(SoundElement sound) {
         loadedSoundElements.remove(sound);
     }
@@ -254,14 +247,12 @@ public class SoundManager {
     }
 
     private void alertSoundLoaded() {
-        System.out.println("Sending Message to " + onAudioLoadedHandler.toString());
         onAudioLoadedHandler.sendEmptyMessage(0);
     }
 
     private class QueueListener implements SoundPool.OnLoadCompleteListener {
         @Override
         public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-            System.out.println("New load inside manager");
             alertSoundLoaded();
             loadAllInQueue();
         }

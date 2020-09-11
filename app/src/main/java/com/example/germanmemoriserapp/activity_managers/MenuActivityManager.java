@@ -3,7 +3,8 @@ package com.example.germanmemoriserapp.activity_managers;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.germanmemoriserapp.activities.MenuScreen;
+
+import com.example.germanmemoriserapp.activities.menu.MenuScreen;
 
 public class MenuActivityManager extends NextActivityManager {
     private Class menuScreen = MenuScreen.class;

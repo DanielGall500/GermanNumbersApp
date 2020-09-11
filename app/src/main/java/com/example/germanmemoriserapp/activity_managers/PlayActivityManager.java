@@ -5,8 +5,7 @@ import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.activities.LoadAudioScreen;
-import com.example.germanmemoriserapp.mechanics.Difficulty;
+import com.example.germanmemoriserapp.activities.load.LoadAudioScreen;
 
 public class PlayActivityManager extends NextActivityManager {
 
@@ -37,12 +36,8 @@ public class PlayActivityManager extends NextActivityManager {
         addInformation(isGameKey, true);
         addInformation(loadInfo, difficultyId);
 
-        System.out.println("Setting Difficulty: " + difficultyId);
-
         super.run();
     }
-
-
 
 
 }

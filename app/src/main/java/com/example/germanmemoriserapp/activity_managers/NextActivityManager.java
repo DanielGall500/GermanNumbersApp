@@ -17,13 +17,13 @@ public class NextActivityManager {
         this.appActivity = activity;
     }
 
+    public Class getNextActivity() {
+        return this.nextClass;
+    }
+
     public void setNextActivity(Class next) {
         this.nextClass = next;
         this.activityIntent = new Intent(appContext, nextClass);
-    }
-
-    public Class getNextActivity() {
-        return this.nextClass;
     }
 
     public Context getContext() {
@@ -35,21 +35,21 @@ public class NextActivityManager {
     }
 
     public void addInformation(String key, boolean info) {
-        if(!validIntent())
+        if (!validIntent())
             throw new IllegalStateException("No Next Activity Set");
 
         activityIntent.putExtra(key, info);
     }
 
     public void addInformation(String key, int info) {
-        if(!validIntent())
+        if (!validIntent())
             throw new IllegalStateException("No Next Activity Set");
 
         activityIntent.putExtra(key, info);
     }
 
     public void run() {
-        if(!validIntent())
+        if (!validIntent())
             throw new IllegalStateException("No Next Activity Set");
 
         appContext.startActivity(activityIntent);

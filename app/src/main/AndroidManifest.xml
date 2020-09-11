@@ -9,22 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashScreen">
+        <activity android:name=".activities.menu.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoadScoresScreen" />
-        <activity android:name=".activities.RecentScoresScreen" />
-        <activity android:name=".activities.BestScoresScreen" />
-        <activity android:name=".activities.ScoreBoardScreen" />
-        <activity android:name=".activities.LearnSelectionScreen" />
-        <activity android:name=".activities.LearnScreen" />
-        <activity android:name=".activities.LoadAudioScreen" />
-        <activity android:name=".activities.GameScreen" />
-        <activity android:name=".activities.GameOverScreen" />
-        <activity android:name=".activities.MenuScreen">
+        <activity android:name=".activities.load.LoadScoresScreen" />
+        <activity android:name=".activities.scores.RecentScoresScreen" />
+        <activity android:name=".activities.scores.BestScoresScreen" />
+        <activity android:name=".activities.scores.ScoreBoardScreen" />
+        <activity android:name=".activities.learn.LearnSelectionScreen" />
+        <activity android:name=".activities.learn.LearnScreen" />
+        <activity android:name=".activities.load.LoadAudioScreen" />
+        <activity android:name=".activities.game.GameScreen" />
+        <activity android:name=".activities.game.GameOverScreen" />
+        <activity android:name=".activities.menu.MenuScreen">
         </activity>
 
         <meta-data

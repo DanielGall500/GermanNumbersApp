@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.germanmemoriserapp.activities.ScoreBoardScreen;
+import com.example.germanmemoriserapp.activities.scores.ScoreBoardScreen;
 
 public class ScoresActivityManager extends NextActivityManager {
 

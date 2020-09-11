@@ -4,9 +4,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
-import com.example.germanmemoriserapp.mechanics.Difficulty;
-import com.example.germanmemoriserapp.ui.DifficultyButton;
-import com.example.germanmemoriserapp.ui.PlayMenuButton;
+import com.example.germanmemoriserapp.mechanics.game.Difficulty;
+import com.example.germanmemoriserapp.ui.buttons.DifficultyButton;
 
 public class DifficultyListener implements View.OnClickListener {
 
@@ -46,7 +45,7 @@ public class DifficultyListener implements View.OnClickListener {
         If we clicked the button that our difficulty is
         still set to, do nothing.
          */
-        if(btnDiffLevel == currDifficulty.getLevel()) {
+        if (btnDiffLevel == currDifficulty.getLevel()) {
             return;
         }
 
@@ -66,22 +65,19 @@ public class DifficultyListener implements View.OnClickListener {
     }
 
     public Difficulty.Level getButtonLevel(int resId) {
-        if(resId == beginnerBtn.getId()) {
+        if (resId == beginnerBtn.getId()) {
             return Difficulty.Level.BEGINNER;
-        }
-        else if(resId == normalBtn.getId()) {
+        } else if (resId == normalBtn.getId()) {
             return Difficulty.Level.NORMAL;
-        }
-        else if(resId == masterBtn.getId()) {
+        } else if (resId == masterBtn.getId()) {
             return Difficulty.Level.MASTER;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Invalid Res Id");
         }
     }
 
     public void flipBtn(Difficulty.Level d) {
-        switch(d) {
+        switch (d) {
             case BEGINNER:
                 beginnerBtn.flipState();
                 break;

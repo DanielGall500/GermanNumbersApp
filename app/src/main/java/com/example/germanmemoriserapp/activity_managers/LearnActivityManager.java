@@ -4,8 +4,7 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.germanmemoriserapp.activities.LearnScreen;
-import com.example.germanmemoriserapp.activities.LoadAudioScreen;
+import com.example.germanmemoriserapp.activities.learn.LearnScreen;
 
 public class LearnActivityManager extends NextActivityManager {
     private Class learnScreen = LearnScreen.class;

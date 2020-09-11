@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/empty_background"
-    tools:context=".activities.LearnScreen">
+    tools:context=".activities.learn.LearnScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,22 +113,12 @@
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ninety_to_ninetynine_btn" />
-
-                <ImageButton
-                    android:id="@+id/hundred_plus_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="25dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/hundred_plus_btn" />
-
-
             </LinearLayout>
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="356dp"
+            android:layout_height="352dp"
             android:layout_above="@+id/learnBtnScrollView"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -136,7 +126,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp">
+            android:layout_marginBottom="-53dp">
 
             <ImageButton
                 android:id="@+id/learnScreenBackBtn"

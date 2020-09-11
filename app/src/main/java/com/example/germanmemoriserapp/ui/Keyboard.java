@@ -5,100 +5,26 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
-import com.example.germanmemoriserapp.mechanics.Game;
+import com.example.germanmemoriserapp.mechanics.game.Game;
 
 import java.util.HashMap;
 
 public class Keyboard implements View.OnClickListener {
 
-    public enum BUTTON_STATE {UNPRESSED, VALID, INVALID};
-    public enum KEYBOARD_STATE {VALID, INVALID};
+    final int wait = 1000; //ms
 
     private final String TXT_CLEAR = "";
 
     private final int NUM_DIGITS = 10;
-
     Handler keyboardHandler;
     Handler inputFieldHandler;
     Handler buttonHandler;
     HashMap<Integer, Integer> buttonIdRef;
     Input INPUT;
     Game GAME;
-
     BUTTON_STATE[] buttonStates;
-
-    class Input {
-
-        private String current = "";
-        private String correctNumber = "";
-
-        public Input() {}
-
-
-        public KEYBOARD_STATE parseInput(int digit) {
-
-            add(digit);
-
-            if(isNextDigit(digit)) {
-                return KEYBOARD_STATE.VALID;
-            }
-            else {
-                return KEYBOARD_STATE.INVALID;
-            }
-        }
-
-        private void add(int n) {
-            current += String.valueOf(n);
-        }
-
-        public void clear() {
-            current = "";
-        }
-
-        private boolean isNextDigit(int digit) {
-            int correct = this.getNextDigit();
-            return (correct == digit);
-        }
-
-        private int getNextDigit() {
-            boolean isNextDigit = size() <= correctNumSize();
-
-            System.out.println("GET NEXT DIGIT");
-            System.out.println(size() + ", " + correctNumSize());
-
-            if(isNextDigit) {
-                return Integer.parseInt(String.valueOf(
-                        correctNumber.charAt(size()-1)));
-            } else {
-                throw new IllegalArgumentException("No More Digits");
-            }
-        }
-        /*
-        public void setCorrectNumber(String n) {
-            this.correctNumber = n;
-        }*/
-
-        private int size() {
-            return current.length();
-        }
-
-        private int correctNumSize() {
-            return correctNumber.length();
-        }
-
-        public void newTurn(int num) {
-            this.correctNumber = String.valueOf(num);
-            clear();
-        }
-
-        public String get() {
-            return this.current;
-        }
-    }
-
-    public void updateCorrectNumber(int num) {
-        INPUT.newTurn(num);
-    }
+    Handler mHandler = new Handler();
+    int mDigit;
 
     public Keyboard(Handler inputFieldHandler, Handler buttonHandler,
                     Handler keyboardHandler, HashMap<Integer, Integer> idRef,
@@ -117,12 +43,14 @@ public class Keyboard implements View.OnClickListener {
          */
         buttonStates = new BUTTON_STATE[NUM_DIGITS];
 
-        for(BUTTON_STATE state : buttonStates)
+        for (BUTTON_STATE state : buttonStates)
             state = BUTTON_STATE.UNPRESSED;
 
     }
 
-    Handler mHandler = new Handler();
+    public void updateCorrectNumber(int num) {
+        INPUT.newTurn(num);
+    }
 
     public KEYBOARD_STATE getNextState(int digit) {
         return INPUT.parseInput(digit);
@@ -141,7 +69,7 @@ public class Keyboard implements View.OnClickListener {
         /*
         Update the keyboard button's state.
          */
-        switch(nextState) {
+        switch (nextState) {
             case VALID:
                 onValidMove(digit);
                 break;
@@ -159,8 +87,6 @@ public class Keyboard implements View.OnClickListener {
         keyboardHandler.sendMessage(userInputMsg);
     }
 
-    int mDigit;
-    final int wait = 1000; //ms
     public void onValidMove(int digit) {
 
         mDigit = digit;
@@ -169,8 +95,6 @@ public class Keyboard implements View.OnClickListener {
     }
 
     public void onInvalidMove(int digit) {
-
-        System.out.println("onInvalidMove");
 
         setInvalid(digit);
 
@@ -192,7 +116,7 @@ public class Keyboard implements View.OnClickListener {
     }
 
     private int getDigitFromId(int id) {
-        if(buttonIdRef.containsKey(id))
+        if (buttonIdRef.containsKey(id))
             return buttonIdRef.get(id);
         else
             throw new IllegalArgumentException("Invalid ID");
@@ -222,7 +146,6 @@ public class Keyboard implements View.OnClickListener {
         msg.sendToTarget();
     }
 
-
     public void clearInput() {
         INPUT.clear();
     }
@@ -248,13 +171,83 @@ public class Keyboard implements View.OnClickListener {
 
     /* Reset every button on the keyboard to unpressed */
     public void clear() {
-        for(int d = 0; d < NUM_DIGITS; d++) {
+        for (int d = 0; d < NUM_DIGITS; d++) {
             BUTTON_STATE state = buttonStates[d];
 
             boolean isClear = (state == BUTTON_STATE.UNPRESSED);
 
-            if(!isClear)
+            if (!isClear)
                 setUnpressed(d);
+        }
+    }
+
+    public enum BUTTON_STATE {UNPRESSED, VALID, INVALID}
+
+    public enum KEYBOARD_STATE {VALID, INVALID}
+
+    class Input {
+
+        private String current = "";
+        private String correctNumber = "";
+
+        public Input() {
+        }
+
+
+        public KEYBOARD_STATE parseInput(int digit) {
+
+            add(digit);
+
+            if (isNextDigit(digit)) {
+                return KEYBOARD_STATE.VALID;
+            } else {
+                return KEYBOARD_STATE.INVALID;
+            }
+        }
+
+        private void add(int n) {
+            current += String.valueOf(n);
+        }
+
+        public void clear() {
+            current = "";
+        }
+
+        private boolean isNextDigit(int digit) {
+            int correct = this.getNextDigit();
+            return (correct == digit);
+        }
+
+        private int getNextDigit() {
+            boolean isNextDigit = size() <= correctNumSize();
+
+            if (isNextDigit) {
+                return Integer.parseInt(String.valueOf(
+                        correctNumber.charAt(size() - 1)));
+            } else {
+                throw new IllegalArgumentException("No More Digits");
+            }
+        }
+        /*
+        public void setCorrectNumber(String n) {
+            this.correctNumber = n;
+        }*/
+
+        private int size() {
+            return current.length();
+        }
+
+        private int correctNumSize() {
+            return correctNumber.length();
+        }
+
+        public void newTurn(int num) {
+            this.correctNumber = String.valueOf(num);
+            clear();
+        }
+
+        public String get() {
+            return this.current;
         }
     }
 }
