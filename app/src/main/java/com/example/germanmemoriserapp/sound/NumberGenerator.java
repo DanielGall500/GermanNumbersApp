@@ -11,7 +11,7 @@ public class NumberGenerator {
 
     private Random randGen = new Random();
 
-    public ArrayList<SoundElement> generate(int min, int max, int N) {
+    public ArrayList<SoundElement> generateRandom(int min, int max, int N) {
 
         ArrayList<SoundElement> generated = new ArrayList<>();
         SoundElement nextNumber;
@@ -29,6 +29,16 @@ public class NumberGenerator {
         }
 
         return generated;
+    }
+
+    public ArrayList<SoundElement> generateNormal(int min, int max) {
+        ArrayList<SoundElement> arr = new ArrayList<>();
+
+        for(int i = min; i <= max; i++) {
+            arr.add(new NumberClip(i));
+        }
+
+        return arr;
     }
 
     private int generateNumber(int min, int max) {

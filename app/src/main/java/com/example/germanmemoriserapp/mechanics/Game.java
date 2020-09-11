@@ -140,12 +140,10 @@ public class Game {
 
     private void onGameWon() {
         soundManager.play(UIClip.GAME_WON);
-        soundManager.releaseAllNumbers();
     }
 
     private void onGameLost() {
         soundManager.play(UIClip.GAME_LOST);
-        soundManager.releaseAllNumbers();
     }
 
     private void onFirstCorrect() {

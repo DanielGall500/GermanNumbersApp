@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.mechanics.Game;
+import com.example.germanmemoriserapp.mechanics.LearnPage;
 import com.example.germanmemoriserapp.sound.NumberGenerator;
 import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
@@ -33,19 +34,38 @@ public class LoadAudioScreen extends AppCompatActivity {
     private int NUMBER_CLIPS = Game.NUMBER_CLIPS;
     private int UI_CLIPS = Game.UI_CLIPS;
     private int TOTAL_CLIPS = NUMBER_CLIPS + UI_CLIPS;
+    private int LEARN_PAGE_CLIPS = 10;
 
     private int audioProgress = 0;
 
-    class AudioHandler extends Handler {
+    class GameAudioHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
 
             audioProgress++;
 
-            System.out.println("Loaded: " + audioProgress);
-            System.out.println("Total: " + TOTAL_CLIPS);
-
             if(audioProgress == TOTAL_CLIPS) {
+                loadComplete(getNextScreen(isGame));
+            }
+            else {
+                //Run on UI thread
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        audioProgressBar.setProgress(audioProgress);
+                    }
+                });
+            }
+        }
+    }
+
+    class LearnPageAudioHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+
+            audioProgress++;
+
+            if(audioProgress == LEARN_PAGE_CLIPS) {
                 loadComplete(getNextScreen(isGame));
             }
             else {
@@ -107,6 +127,9 @@ public class LoadAudioScreen extends AppCompatActivity {
 
     }
 
+    NumberGenerator generator = new NumberGenerator();
+    ArrayList<SoundElement> generatedArr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,23 +153,35 @@ public class LoadAudioScreen extends AppCompatActivity {
         /* Get our singleton implementation of
          * an audio manager. */
         soundPlayer = SoundManager.get(this);
-        soundPlayer.setOnAudioLoadedHandler(new AudioHandler());
-
-        /* Sounds For Number Pronunciation */
-        NumberGenerator generator = new NumberGenerator();
-        ArrayList<SoundElement> generatedArr = generator.generate(
-                Game.MIN_NUM, Game.MAX_NUM, NUMBER_CLIPS);
-
-        /* UI Sound Effects */
-        generatedArr.add(UIClip.GAME_CORRECT);
-        generatedArr.add(UIClip.GAME_INCORRECT);
-        generatedArr.add(UIClip.GAME_WON);
-        generatedArr.add(UIClip.GAME_LOST);
-
-        soundPlayer.loadAll(generatedArr);
 
         /* Handle Input to Load Screen */
         retrieveLoadScreenInput();
+
+        if(isGame) {
+            soundPlayer.setOnAudioLoadedHandler(new GameAudioHandler());
+
+            /* Sounds For Number Pronunciation */
+            generator = new NumberGenerator();
+            generatedArr = generator.generateRandom(
+                    Game.MIN_NUM, Game.MAX_NUM, NUMBER_CLIPS);
+
+            /* UI Sound Effects */
+            generatedArr.add(UIClip.GAME_CORRECT);
+            generatedArr.add(UIClip.GAME_INCORRECT);
+            generatedArr.add(UIClip.GAME_WON);
+            generatedArr.add(UIClip.GAME_LOST);
+
+            soundPlayer.loadAll(generatedArr);
+        }
+        else {
+            soundPlayer.setOnAudioLoadedHandler(new LearnPageAudioHandler());
+
+            int[] minMax = LearnPage.getMinMax(loadInformation);
+            generatedArr = generator.generateNormal(minMax[0], minMax[1]);
+            soundPlayer.loadAll(generatedArr);
+        }
+
+
     }
 
     private void loadComplete(Class nextScreen) {

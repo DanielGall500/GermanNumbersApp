@@ -16,21 +16,12 @@ import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.DifficultyListener;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Difficulty;
-import com.example.germanmemoriserapp.sound.SoundElement;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.sound.UIClip;
 import com.example.germanmemoriserapp.ui.DifficultyButton;
-
-import java.util.ArrayList;
+import com.example.germanmemoriserapp.ui.MenuButton;
 
 public class MenuScreen extends AppCompatActivity {
-
-    /*
-    TODO
-    - Sound effects
-    - Polish UI
-    - Setup 100-1000
-     */
 
     private final boolean INITIAL_BEGINNER_IS_PRESSED = false;
     private final boolean INITIAL_NORMAL_IS_PRESSED = true;
@@ -56,27 +47,18 @@ public class MenuScreen extends AppCompatActivity {
             R.drawable.master_btn_pressed
     };
 
-    private int buttonAnimationId = R.anim.fly_right;
-
     private final int beginnerId = Difficulty.getId(Difficulty.Level.BEGINNER);
     private final int normalId = Difficulty.getId(Difficulty.Level.NORMAL);
     private final int masterId = Difficulty.getId(Difficulty.Level.MASTER);
 
     private DifficultyButton beginnerBtn, normalBtn, masterBtn;
-    private ImageButton playGameBtn, scoreBtn, learnBtn;
-
-    private SoundManager soundManager;
 
     DifficultyListener difficultyListener;
-
-    Animation buttonAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
 
         //Make fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -85,12 +67,6 @@ public class MenuScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_menu_screen);
-
-        soundManager = SoundManager.get(this);
-
-        playGameBtn = findViewById(R.id.menuPlayBtn);
-        scoreBtn = findViewById(R.id.menuScoresBtn);
-        learnBtn = findViewById(R.id.menuLearnBtn);
 
         beginnerBtn = new DifficultyButton(
                 this, difficultyBtnIds[beginnerId],
@@ -114,149 +90,28 @@ public class MenuScreen extends AppCompatActivity {
         normalBtn.setListener(difficultyListener);
         masterBtn.setListener(difficultyListener);
 
-        playGameBtn.setOnClickListener(new PlayListener(this, this,
-                difficultyListener.getId()));
-        
-        learnBtn.setOnClickListener(new LearnListener(this, this));
+        NewActivityManager playActivityManager = new NewActivityManager(
+                this, this, true,
+                difficultyListener.getId()
+        );
 
-        scoreBtn.setOnClickListener(new ScoreListener(this,this));
+        NewActivityManager learnActivityManager = new NewActivityManager(
+                this, this, LearnScreen.class
+        );
 
-        /* Choose The Animation For Our Buttons */
-        buttonAnimation = AnimationUtils.loadAnimation(this, buttonAnimationId);
-        buttonAnimation.setAnimationListener(new OnAnimListener());
+        NewActivityManager scoresActivityManager = new NewActivityManager(
+                this,this, ScoreBoardScreen.class
+        );
 
-    }
+        new MenuButton(MenuButton.TYPE.PLAY, R.id.menuPlayBtn,
+                this,this, playActivityManager);
 
-    private final int gameButtonRef = 0;
-    private final int learnButtonRef = 1;
-    private final int scoreButtonRef = 2;
+        new MenuButton(MenuButton.TYPE.LEARN, R.id.menuLearnBtn,
+                this,this, learnActivityManager);
 
-    private int clickedBtn;
-    boolean buttonClicked = false;
+        new MenuButton(MenuButton.TYPE.SCORES, R.id.menuScoresBtn,
+                this,this, scoresActivityManager);
 
-    public class OnAnimListener implements Animation.AnimationListener {
-        @Override
-        public void onAnimationStart(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            switch (clickedBtn) {
-                case gameButtonRef:
-                    playGameBtn.setVisibility(View.INVISIBLE);
-                    onMovingToGame();
-                    break;
-                case learnButtonRef:
-                    learnBtn.setVisibility(View.INVISIBLE);
-                    onMovingToLearn();
-                    break;
-                case scoreButtonRef:
-                    scoreBtn.setVisibility(View.INVISIBLE);
-                    onMovingToScoreBoard();
-                    break;
-                default:
-                    throw new IllegalArgumentException("invalid Reference");
-            }
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-
-        }
-    }
-
-    public class LearnListener implements View.OnClickListener {
-
-        private Context appContext;
-        AppCompatActivity appActivity;
-
-        public LearnListener(Context context, AppCompatActivity activity) {
-            this.appContext = context;
-            this.appActivity = activity;
-
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if(buttonClicked)
-                return;
-
-            //Play Audio
-            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
-
-            clickedBtn = learnButtonRef;
-            buttonClicked = true;
-            findViewById(v.getId()).startAnimation(buttonAnimation);
-        }
-    }
-
-    public class PlayListener implements View.OnClickListener {
-
-        private Context appContext;
-        AppCompatActivity appActivity;
-
-        public PlayListener(Context context, AppCompatActivity activity, int difficulty) {
-            this.appContext = context;
-            this.appActivity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if(buttonClicked)
-                return;
-
-            //Play Audio
-            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
-
-
-            clickedBtn = gameButtonRef;
-            buttonClicked = true;
-            findViewById(v.getId()).startAnimation(buttonAnimation);
-        }
-    }
-
-    public class ScoreListener implements View.OnClickListener {
-
-        private Context appContext;
-        private AppCompatActivity appActivity;
-
-        public ScoreListener(Context context, AppCompatActivity activity) {
-            this.appContext = context;
-            this.appActivity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if(buttonClicked)
-                return;
-
-            //Play Audio
-            soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
-
-            clickedBtn = scoreButtonRef;
-            buttonClicked = true;
-            findViewById(v.getId()).startAnimation(buttonAnimation);
-        }
-    }
-
-    /* Call On Moving To A New Activity */
-    NewActivityManager moveListener = new NewActivityManager();
-
-    private void onMovingToGame() {
-        moveListener.move(this, this, true,
-                difficultyListener.getId());
-    }
-
-    private void onMovingToLearn() {
-        moveListener.move(this, this, LearnScreen.class);
-    }
-
-    private void onMovingToScoreBoard() {
-        moveListener.move(this,this, ScoreBoardScreen.class);
     }
 }
 

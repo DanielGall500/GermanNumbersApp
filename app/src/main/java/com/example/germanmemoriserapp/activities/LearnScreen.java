@@ -4,17 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.ScrollView;
 
 import com.example.germanmemoriserapp.R;
-import com.example.germanmemoriserapp.listeners.NewActivityManager;
+import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.BackButton;
+import com.example.germanmemoriserapp.ui.GeneralButton;
+import com.example.germanmemoriserapp.ui.LearnPageButton;
 
 public class LearnScreen extends AppCompatActivity {
 
@@ -29,8 +32,7 @@ public class LearnScreen extends AppCompatActivity {
             R.id.hundred_plus_btn
     };
 
-    private BackButton backBtn;
-    Animation btnAnimation;
+    SoundManager soundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,41 +48,26 @@ public class LearnScreen extends AppCompatActivity {
         ScrollView learnBtnScrollView = findViewById(R.id.learnBtnScrollView);
         learnBtnScrollView.fullScroll(ScrollView.FOCUS_UP);
 
-        btnAnimation = AnimationUtils.loadAnimation(this, R.anim.button_fly);
-
-        backBtn = new BackButton(this, this,
+        new BackButton(this, this,
                 R.id.learnScreenBackBtn, MenuScreen.class);
 
         int N = buttons.length;
+
+
         for(int i = 0; i < N; i++) {
-
-            ImageButton btn = findViewById(buttons[i]);
-
-            Listener btnListener = new Listener(this, this, i);
-
-            btn.setOnClickListener(btnListener);
+            new LearnPageButton(buttons[i], this, this, i);
         }
+
+        /* We need to ensure everything unnecessary is released
+         * before we begin loading new numbers. */
+        soundManager = SoundManager.get(this);
+        soundManager.releaseAllNumberClips();
     }
 
-    public class Listener implements View.OnClickListener {
-
-        private int page;
-        private Context context;
-        private AppCompatActivity activity;
-
-        public Listener(Context context, AppCompatActivity activity, int page) {
-            this.context = context;
-            this.activity = activity;
-            this.page = page;
-        }
-
+    public class ButtonReadyHandler extends Handler {
         @Override
-        public void onClick(View v) {
-            NewActivityManager newActivity =
-                    new NewActivityManager();
-
-            newActivity.move(context, activity,
-                    false, page);
+        public void handleMessage(Message msg) {
+            System.out.println("Message: Clicked");
         }
     }
 }

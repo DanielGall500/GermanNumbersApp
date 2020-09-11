@@ -13,38 +13,83 @@ import com.example.germanmemoriserapp.activities.LoadAudioScreen;
 
 public class NewActivityManager {
 
-    Context currentContext;
-    AppCompatActivity currentActivity;
+    Context currContext;
+    AppCompatActivity currActivity;
+    Class moveTo;
+    boolean isGame;
+    int info;
 
     Intent moveToNewScreen;
 
     public NewActivityManager() {}
 
-    public void setLoadRequest(int id) {
-
+    public NewActivityManager(Context context, AppCompatActivity activity,
+                              Class newActivity) {
+        this.currContext = context;
+        this.currActivity = activity;
+        this.moveTo = newActivity;
+        this.isGame = false;
     }
+
+    public NewActivityManager(Context context, AppCompatActivity activity,
+                              boolean isGame, int info) {
+        this.currContext = context;
+        this.currActivity = activity;
+        this.isGame = isGame;
+        this.info = info;
+    }
+
+    public void move() {
+        if(isGame) {
+            moveToNewScreen = new Intent(
+                    currActivity, LoadAudioScreen.class);
+
+            String isGameKey = currContext.getString(
+                    R.string.load_screen_isGameBoolean);
+            String loadInfo = currContext.getString(
+                    R.string.load_screen_information);
+
+            /*
+            Pass relevant information to loading screen.
+             */
+            moveToNewScreen.putExtra(isGameKey, isGame);
+            moveToNewScreen.putExtra(loadInfo, info);
+
+            currContext.startActivity(moveToNewScreen);
+            currActivity.finish();
+        }
+        else {
+            moveToNewScreen = new Intent(currActivity, moveTo);
+
+            currContext.startActivity(moveToNewScreen);
+            currActivity.finish();
+        }
+    }
+
+
+
 
     public void move(Context currContext, AppCompatActivity currActivity,
                                      Class newActivity) {
-        this.currentContext = currContext;
-        this.currentActivity = currActivity;
+        this.currContext = currContext;
+        this.currActivity = currActivity;
 
         moveToNewScreen = new Intent(currActivity, newActivity);
 
-        currentContext.startActivity(moveToNewScreen);
-        currentActivity.finish();
+        currContext.startActivity(moveToNewScreen);
+        currActivity.finish();
     }
 
     public void move(Context currContext, AppCompatActivity currActivity,
                      Class newActivity, int request, String key) {
-        this.currentContext = currContext;
-        this.currentActivity = currActivity;
+        this.currContext = currContext;
+        this.currActivity = currActivity;
 
         moveToNewScreen = new Intent(currActivity, newActivity);
         moveToNewScreen.putExtra(key, request);
 
-        currentContext.startActivity(moveToNewScreen);
-        currentActivity.finish();
+        currContext.startActivity(moveToNewScreen);
+        currActivity.finish();
     }
 
     /*
@@ -52,8 +97,8 @@ public class NewActivityManager {
      */
     public void move(Context currContext, AppCompatActivity currActivity,
                                      boolean isGame, int info) {
-        this.currentContext = currContext;
-        this.currentActivity = currActivity;
+        this.currContext = currContext;
+        this.currActivity = currActivity;
 
         moveToNewScreen = new Intent(
                 currActivity, LoadAudioScreen.class);
@@ -69,8 +114,8 @@ public class NewActivityManager {
         moveToNewScreen.putExtra(isGameKey, isGame);
         moveToNewScreen.putExtra(loadInfo, info);
 
-        currentContext.startActivity(moveToNewScreen);
-        currentActivity.finish();
+        currContext.startActivity(moveToNewScreen);
+        currActivity.finish();
 
     }
 

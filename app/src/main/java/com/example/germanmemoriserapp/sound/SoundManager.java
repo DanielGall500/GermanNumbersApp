@@ -121,6 +121,12 @@ public class SoundManager {
         loadAllInQueue();
     }
 
+    public void unloadAll(ArrayList<SoundElement> elements) {
+        for(SoundElement element : elements) {
+            unload(element);
+        }
+    }
+
     /* Play A Loaded Clip */
     public void play(SoundElement element) {
 
@@ -165,12 +171,23 @@ public class SoundManager {
         return numbers;
     }
 
-    public void releaseAllNumbers() {
+    public void releaseAllNumberClips() {
+        ArrayList<SoundElement> elementsToUnload = new ArrayList<>();
+
         for(SoundElement element : loadedSoundElements) {
             if(element.isNumber()) {
-                unload(element);
+                elementsToUnload.add(element);
             }
         }
+
+        unloadAll(elementsToUnload);
+    }
+
+    public void releaseAllGameUIClips() {
+        unload(UIClip.GAME_WON);
+        unload(UIClip.GAME_LOST);
+        unload(UIClip.GAME_CORRECT);
+        unload(UIClip.GAME_INCORRECT);
     }
 
     private void loadAllInQueue() {

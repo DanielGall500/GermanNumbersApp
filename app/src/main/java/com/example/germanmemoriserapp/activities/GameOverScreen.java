@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.mechanics.Game;
+import com.example.germanmemoriserapp.sound.SoundManager;
 
 public class GameOverScreen extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class GameOverScreen extends AppCompatActivity {
     private TextView congratsTxtView;
 
     private boolean gameLost;
+    private SoundManager soundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,21 @@ public class GameOverScreen extends AppCompatActivity {
         menuBtn = findViewById(R.id.menuBtn);
         scoreResultView = findViewById(R.id.scoreView);
 
+        /* Unload Game Sounds */
+        SoundManager soundManager = SoundManager.get(this);
+        soundManager.releaseAllGameUIClips();
+        soundManager.releaseAllNumberClips();
+
         updateResultsView();
 
         /* Listeners */
         menuBtn.setOnClickListener(new MenuButtonListener(this,this));
         retryBtn.setOnClickListener(new RetryButtonListener(this,this));
 
-        //TODO RELEASE
+        /* Release All Game-Sound Clips */
+        soundManager = SoundManager.get(this);
+        soundManager.releaseAllNumberClips();
+        soundManager.releaseAllGameUIClips();
 
     }
 

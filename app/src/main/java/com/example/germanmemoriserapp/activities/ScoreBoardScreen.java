@@ -14,17 +14,9 @@ import android.widget.ImageButton;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.listeners.NewActivityManager;
 import com.example.germanmemoriserapp.ui.BackButton;
+import com.example.germanmemoriserapp.ui.ScorePageButton;
 
 public class ScoreBoardScreen extends AppCompatActivity {
-
-    ImageButton scoresBestBtn;
-    ImageButton scoresRecentBtn;
-
-    private final Class loadScreen = LoadScoresScreen.class;
-
-    NewActivityManager newActivity = new NewActivityManager();
-
-    private BackButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,52 +30,15 @@ public class ScoreBoardScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_score_board_screen);
 
-        scoresBestBtn = findViewById(R.id.scoresBestBtn);
-        scoresRecentBtn = findViewById(R.id.scoresRecentBtn);
+        new BackButton(this, this,
+                R.id.scoresBackBtn, MenuScreen.class);
 
-        backButton = new BackButton(this, this, R.id.scoresBackBtn, MenuScreen.class);
+        new ScorePageButton(R.id.scoresBestBtn,
+                this,this,
+                LoadScoresScreen.BEST_SCORES_ID);
 
-        scoresBestBtn.setOnClickListener(new BestButtonListener(this, this));
-        scoresRecentBtn.setOnClickListener(new RecentButtonListener(this, this));
-    }
-
-    private class BestButtonListener implements View.OnClickListener {
-
-        private Context appContext;
-        private AppCompatActivity appActivity;
-
-        public BestButtonListener(Context context, AppCompatActivity activity) {
-            this.appContext = context;
-            this.appActivity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-            String key = appContext.getString(
-                    R.string.score_load_intent_key);
-
-            newActivity.move(appContext, appActivity, loadScreen,
-                    LoadScoresScreen.BEST_SCORES_ID, key);
-        }
-    }
-
-    private class RecentButtonListener implements View.OnClickListener {
-
-        private Context appContext;
-        private AppCompatActivity appActivity;
-
-        public RecentButtonListener(Context context, AppCompatActivity activity) {
-            this.appContext = context;
-            this.appActivity = activity;
-        }
-
-        @Override
-        public void onClick(View v) {
-            String key = appContext.getString(
-                    R.string.score_load_intent_key);
-
-            newActivity.move(appContext, appActivity, loadScreen,
-                    LoadScoresScreen.RECENT_SCORES_ID, key);
-        }
+        new ScorePageButton(R.id.scoresRecentBtn,
+                this,this,
+                LoadScoresScreen.RECENT_SCORES_ID);
     }
 }
