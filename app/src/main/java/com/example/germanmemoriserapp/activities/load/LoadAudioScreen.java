@@ -142,9 +142,10 @@ public class LoadAudioScreen extends AppCompatActivity {
         */
         String key = getString(R.string.load_screen_information);
 
-        /*
-        Move To Learn Page
-        */
+        /* Move To Learn Page */
+        System.out.println("Passing : " + loadInformation +
+                " To " + key);
+
         moveToNextScreen = new NextActivityManager(this, this);
         moveToNextScreen.setNextActivity(nextScreen);
         moveToNextScreen.addInformation(key, loadInformation);

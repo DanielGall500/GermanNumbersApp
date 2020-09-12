@@ -46,7 +46,6 @@ public class LearnScreen extends AppCompatActivity {
 
         int N = buttons.length;
 
-
         for (int i = 0; i < N; i++) {
             new LearnPageButton(this, this, buttons[i], i);
         }

@@ -28,7 +28,7 @@ public class LearnPageButton extends GeneralButton {
         NextActivityManager manager = new NextActivityManager(getContext(), getActivity());
         manager.setNextActivity(nextScreen);
 
-        String scoreLoadKey = getContext().getString(R.string.score_load_intent_key);
+        String scoreLoadKey = getContext().getString(R.string.load_screen_information);
         manager.addInformation(scoreLoadKey, pageToLoad);
 
         String isGameKey = appActivity.getString(R.string.load_screen_isGameBoolean);

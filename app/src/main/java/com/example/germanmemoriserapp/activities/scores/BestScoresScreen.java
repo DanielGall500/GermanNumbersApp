@@ -23,6 +23,8 @@ public class BestScoresScreen extends AppCompatActivity {
     private TextView bestScoreIntermediateScore;
     private TextView bestScoreMasterScore;
 
+    private String NEVER_PLAYED = "None Yet!";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,27 +43,26 @@ public class BestScoresScreen extends AppCompatActivity {
 
         bestScores = getScoresFromLoad();
 
-        /* Retrieve Scores */
-        ArrayList<String> beginnerSet = bestScores.get(
-                ScoreBoardManager.beginner_token_indx);
-
-        String beginnerScore = getScoreFromSet(beginnerSet);
-
-        ArrayList<String> normalSet = bestScores.get(
-                ScoreBoardManager.normal_token_indx);
-
-        String normalScore = getScoreFromSet(normalSet);
-
-        ArrayList<String> masterSet = bestScores.get(
-                ScoreBoardManager.master_token_indx);
-
-        String masterScore = getScoreFromSet(masterSet);
-
         /* Setup Back Button */
         backButton = new BackButton(this, this,
                 R.id.bestScoresBackBtn, ScoreBoardScreen.class);
 
-        /*Set Scores*/
+        /* Retrieve Scores */
+        ArrayList<String> beginnerSet = bestScores.get(
+                ScoreBoardManager.beginner_token_indx);
+
+        ArrayList<String> normalSet = bestScores.get(
+                ScoreBoardManager.normal_token_indx);
+
+        ArrayList<String> masterSet = bestScores.get(
+                ScoreBoardManager.master_token_indx);
+
+        /* Convert To Game Text */
+        String beginnerScore = getScoreFromSet(beginnerSet);
+        String normalScore = getScoreFromSet(normalSet);
+        String masterScore = getScoreFromSet(masterSet);
+
+        /* Set Score s*/
         setBeginner(beginnerScore);
         setNormal(normalScore);
         setMaster(masterScore);
@@ -76,6 +77,10 @@ public class BestScoresScreen extends AppCompatActivity {
 
     private String getScoreFromSet(ArrayList<String> set) {
         String score = set.get(ScoreBoardManager.score_token_indx);
+
+        if(Integer.parseInt(score) == -1) {
+            return NEVER_PLAYED;
+        }
 
         return convertToScoreText(score);
     }

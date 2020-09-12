@@ -27,6 +27,7 @@ public class LearnSelectionScreen extends AppCompatActivity {
     final int CARD_TEXT_STYLE = Typeface.BOLD;
     final int CARD_TEXT_SIZE = 25;
     final int CARD_TEXT_COLOUR = Color.BLACK;
+
     int[] cardIds = new int[]{
             R.id.cardView1, R.id.cardView2,
             R.id.cardView3, R.id.cardView4,
@@ -45,7 +46,7 @@ public class LearnSelectionScreen extends AppCompatActivity {
     public void retrieveInformationFromLoadScreen() {
         Intent fromLoadScreen = getIntent();
         String key = getString(R.string.load_screen_information);
-        loadScreenInformation = fromLoadScreen.getIntExtra(key, 0);
+        loadScreenInformation = fromLoadScreen.getIntExtra(key, -1);
 
         int[] minMax = LearnPage.getMinMax(loadScreenInformation);
         minNumber = minMax[0];
