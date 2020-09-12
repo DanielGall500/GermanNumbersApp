@@ -1,5 +1,6 @@
 package com.example.germanmemoriserapp.activities.menu;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -84,7 +85,7 @@ public class MenuScreen extends AppCompatActivity {
                 unpressedImgIds[masterId], pressedImgIds[masterId],
                 masterId, INITIAL_MASTER_IS_PRESSED);
 
-        difficultyListener = new DifficultyListener(beginnerBtn, normalBtn,
+        difficultyListener = new DifficultyListener(this, beginnerBtn, normalBtn,
                 masterBtn, new DifficultyHandler(), INITIAL_DIFFICULTY.getId());
 
         beginnerBtn.setListener(difficultyListener);

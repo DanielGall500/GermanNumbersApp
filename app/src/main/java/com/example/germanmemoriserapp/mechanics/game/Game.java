@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Game {
 
     /* Audio */
-    public static final int NUMBER_CLIPS = 1;
+    public static final int NUMBER_CLIPS = 10;
 
     public static final int UI_CLIPS = 4;
     public static final int MIN_NUM = 0;

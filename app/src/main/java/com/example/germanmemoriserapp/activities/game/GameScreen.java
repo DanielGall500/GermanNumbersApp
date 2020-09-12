@@ -2,6 +2,7 @@ package com.example.germanmemoriserapp.activities.game;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -39,7 +40,7 @@ public class GameScreen extends AppCompatActivity {
     final int SIZE_KEYB = 11;
     final int NUM_DIGITS = 10;
 
-    final int WAIT_BEFORE_PLAYING = 3000;
+    final int WAIT_BEFORE_PLAYING = 1000;
 
     int[] digitIds = new int[]{
             R.id.digitZeroBtn, R.id.digitOneBtn, R.id.digitTwoBtn,

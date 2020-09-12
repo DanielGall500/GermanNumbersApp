@@ -24,7 +24,7 @@ public class SoundManager {
      */
     private final int MAX_STREAMS = 1;
     private final int SRC_QUALITY = 1;
-    private final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
+    private final int STREAM_TYPE = AudioAttributes.USAGE_MEDIA;
     /*
     Audio Attributes
      */

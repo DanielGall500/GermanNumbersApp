@@ -1,6 +1,7 @@
 package com.example.germanmemoriserapp.activities.menu;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
