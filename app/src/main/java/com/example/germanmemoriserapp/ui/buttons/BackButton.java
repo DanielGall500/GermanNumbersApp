@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
+import com.example.germanmemoriserapp.sound.SoundManager;
+import com.example.germanmemoriserapp.sound.elements.UIClip;
 
 public class BackButton {
 
@@ -19,11 +21,14 @@ public class BackButton {
     private Class moveToActivity;
     private ImageButton backButton;
     private Animation backBtnAnimation;
+    private SoundManager soundManager;
 
     public BackButton(Context appContext, AppCompatActivity appActivity, int buttonId, Class moveTo) {
         this.appContext = appContext;
         this.appActivity = appActivity;
         this.moveToActivity = moveTo;
+
+        this.soundManager = SoundManager.get(appContext);
 
         activityListener = new NextActivityManager(appContext, appActivity);
         activityListener.setNextActivity(moveTo);
@@ -39,6 +44,7 @@ public class BackButton {
     private class BackButtonAnimationListener implements Animation.AnimationListener {
         @Override
         public void onAnimationStart(Animation animation) {
+            soundManager.play(UIClip.BACK_BUTTON_CLICK);
         }
 
         @Override

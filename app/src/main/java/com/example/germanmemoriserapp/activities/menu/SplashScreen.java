@@ -47,6 +47,7 @@ public class SplashScreen extends AppCompatActivity {
         ArrayList<SoundElement> uiSounds = new ArrayList<>();
 
         uiSounds.add(UIClip.GENERAL_BUTTON_CLICK);
+        uiSounds.add(UIClip.BACK_BUTTON_CLICK);
 
         soundManager.loadAll(uiSounds);
     }

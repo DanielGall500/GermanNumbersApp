@@ -26,9 +26,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="316dp"
             android:layout_marginRight="316dp"
             android:layout_marginBottom="21dp"
@@ -41,17 +41,10 @@
             android:id="@+id/bestScoresTitle"
             android:layout_width="362dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="25dp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            app:srcCompat="@drawable/recent_scores_title" />
+            app:srcCompat="@drawable/scores_most_recent_title" />
 
         <ScrollView
             android:id="@+id/learnScrollView"
@@ -59,7 +52,7 @@
             android:layout_height="457dp"
             android:layout_below="@+id/bestScoresTitle"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -400,7 +393,7 @@
                     android:id="@+id/recentScoresCard10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="25dp" >
+                    android:layout_marginVertical="25dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
