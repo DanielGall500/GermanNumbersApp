@@ -19,14 +19,11 @@
 
         <ImageView
             android:id="@+id/learnSelectionTitleView"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/learnScreenSelectedBackBtn"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="89dp"
-            android:layout_marginRight="89dp"
             app:srcCompat="@drawable/learn_selection_screen_title" />
 
         <ImageButton
@@ -83,8 +80,9 @@
 
                         <TextView
                             android:id="@+id/learnGermanView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +91,9 @@
 
                         <TextView
                             android:id="@+id/learnDigitView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView"
@@ -129,8 +128,9 @@
 
                         <TextView
                             android:id="@+id/learnGermanView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -139,8 +139,9 @@
 
                         <TextView
                             android:id="@+id/learnDigitView2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView2"
@@ -174,9 +175,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -184,9 +186,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView3"
@@ -220,9 +223,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -230,9 +234,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView4"
@@ -265,9 +270,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -275,9 +281,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView5"
@@ -310,9 +317,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -320,9 +328,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView6"
@@ -355,9 +364,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -365,9 +375,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView7"
@@ -400,9 +411,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -410,9 +422,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView8"
@@ -445,9 +458,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -455,9 +469,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView9"
@@ -490,9 +505,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="220dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnGermanView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -500,9 +516,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
                             android:id="@+id/learnDigitView10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView10"
