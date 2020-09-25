@@ -7,55 +7,55 @@
     android:background="@drawable/empty_background"
     tools:context=".activities.scores.ScoreBoardScreen">
 
-    <ImageView
-        android:id="@+id/scoresTitle"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/scoresScreenBtnLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/scores_title" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/scoresScreenBtnLayout"
-        android:layout_width="413dp"
-        android:layout_height="243dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoresTitle">
-
-        <ImageButton
-            android:id="@+id/scoresBestBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/scoresRecentBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/best_score_btn" />
-
-        <ImageButton
-            android:id="@+id/scoresRecentBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scoresBestBtn"
-            app:srcCompat="@drawable/recent_score_btn" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoresScreenBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scoresTitle"
+            android:layout_marginTop="100dp">
+
+            <ImageButton
+                android:id="@+id/scoresBestBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/scoresRecentBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/scores_screen_best_btn" />
+
+            <ImageButton
+                android:id="@+id/scoresRecentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scoresBestBtn"
+                app:srcCompat="@drawable/scores_screen_recent_btn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/scoresTitle"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="54dp"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="150dp"
+            app:srcCompat="@drawable/scores_title" />
 
         <ImageButton
             android:id="@+id/scoresBackBtn"

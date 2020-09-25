@@ -15,5 +15,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/klang_logo_text" />
+        app:srcCompat="@drawable/splash_screen_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>
