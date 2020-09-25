@@ -31,7 +31,7 @@
         <ImageView
             android:id="@+id/bestScoresTitle"
             android:layout_width="364dp"
-            android:layout_height="141dp"
+            android:layout_height="134dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="110dp"

@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/learnSelectionTitleView"
-            android:layout_width="366dp"
-            android:layout_height="132dp"
+            android:layout_width="367dp"
+            android:layout_height="97dp"
             android:layout_below="@+id/learnScreenSelectedBackBtn"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"

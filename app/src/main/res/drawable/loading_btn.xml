@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/lifesymbolsmall1of3" android:duration="150"/>
-    <item android:drawable="@drawable/lifesymbolsmall2of3" android:duration="150"/>
-    <item android:drawable="@drawable/lifesymbolsmall3of3" android:duration="150"/>
+    <item android:drawable="@drawable/flag_1_of_3" android:duration="100"/>
+    <item android:drawable="@drawable/flag_2_of_3" android:duration="100"/>
+    <item android:drawable="@drawable/flag_3_of_3" android:duration="100"/>
 
 </animation-list>

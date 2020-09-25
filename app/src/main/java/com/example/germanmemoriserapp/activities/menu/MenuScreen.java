@@ -37,14 +37,14 @@ public class MenuScreen extends AppCompatActivity {
             R.id.diffMasterBtn
     };
     private int[] unpressedImgIds = new int[]{
-            R.drawable.beginner_btn,
-            R.drawable.normal_btn,
-            R.drawable.master_btn
+            R.drawable.menu_beginner_btn_unpressed,
+            R.drawable.menu_normal_btn_unpressed,
+            R.drawable.menu_master_btn_unpressed
     };
     private int[] pressedImgIds = new int[]{
-            R.drawable.beginner_btn_pressed,
-            R.drawable.normal_btn_pressed,
-            R.drawable.master_btn_pressed
+            R.drawable.menu_beginner_btn_pressed,
+            R.drawable.menu_normal_btn_pressed,
+            R.drawable.menu_master_btn_pressed
     };
     private DifficultyButton beginnerBtn, normalBtn, masterBtn;
     private PlayMenuButton playMenuButton;
