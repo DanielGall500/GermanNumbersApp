@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/menuTitleView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="193dp"
         app:layout_constraintBottom_toTopOf="@id/difficultyLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/main_title" />
+        app:srcCompat="@drawable/menu_klang_title" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menuBtnLayout"
@@ -29,12 +29,12 @@
 
         <ImageButton
             android:id="@+id/menuPlayBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="412dp"
+            android:layout_height="98dp"
             android:background="@android:color/transparent"
             android:foregroundGravity="center"
             android:scaleType="fitCenter"
-            android:src="@drawable/play_btn"
+            android:src="@drawable/menu_play_btn"
             app:layout_constraintBottom_toTopOf="@id/menuLearnBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -43,10 +43,11 @@
 
         <ImageButton
             android:id="@+id/menuLearnBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="411dp"
+            android:layout_height="117dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/learn_btn"
+            android:scaleType="fitCenter"
+            android:src="@drawable/menu_learn_btn"
             app:layout_constraintBottom_toTopOf="@+id/menuScoresBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,10 +55,11 @@
 
         <ImageButton
             android:id="@+id/menuScoresBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="409dp"
+            android:layout_height="105dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/scores_btn"
+            android:scaleType="fitCenter"
+            android:src="@drawable/menu_scores_btn"
             app:layout_constraintBottom_toBottomOf="@id/menuBtnLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +81,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/difficultuBtnLayout"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu_bar" />
+            app:srcCompat="@drawable/menu_title_bar" />
 
         <ImageView
             android:id="@+id/diffBottomBar"
@@ -87,7 +89,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/difficultuBtnLayout"
-            app:srcCompat="@drawable/menu_bar" />
+            app:srcCompat="@drawable/menu_title_bar" />
 
         <LinearLayout
             android:id="@+id/difficultuBtnLayout"
@@ -105,21 +107,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/beginner_btn" />
+                app:srcCompat="@drawable/menu_beginner_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/diffNormalBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/normal_btn" />
+                app:srcCompat="@drawable/menu_normal_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/diffMasterBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/master_btn" />
+                app:srcCompat="@drawable/menu_master_btn_unpressed" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

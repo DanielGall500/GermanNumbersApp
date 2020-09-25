@@ -35,7 +35,7 @@
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/bestScoresTitle"
-            app:srcCompat="@drawable/back_arrow" />
+            app:srcCompat="@drawable/back_btn" />
 
         <ImageView
             android:id="@+id/bestScoresTitle"

@@ -18,11 +18,11 @@ public class LearnScreen extends AppCompatActivity {
     final int NUM_BTNS = 10;
 
     int[] buttons = new int[]{
-            R.id.zero_to_nine_btn, R.id.ten_to_nineteen_btn,
-            R.id.twenty_to_twentynine_btn, R.id.thirty_to_thirtynine_btn,
-            R.id.forty_to_fortynine_btn, R.id.fifty_to_fiftynine_btn,
-            R.id.sixty_to_sixtynine_btn, R.id.seventy_to_seventynine_btn,
-            R.id.eighty_to_eightynine_btn, R.id.ninety_to_ninetynine_btn,
+            R.id.learn_zero_to_nine_btn, R.id.learn_ten_to_nineteen_btn,
+            R.id.learn_twenty_to_twenty_nine_btn, R.id.learn_thirty_to_thirty_nine_btn,
+            R.id.learn_forty_to_forty_nine_btn, R.id.learn_fifty_to_fifty_nine_btn,
+            R.id.learn_sixty_to_sixty_nine_btn, R.id.learn_seventy_to_seventy_nine_btn,
+            R.id.learn_eighty_to_eighty_nine_btn, R.id.learn_ninety_to_ninety_nine_btn,
     };
 
     SoundManager soundManager;

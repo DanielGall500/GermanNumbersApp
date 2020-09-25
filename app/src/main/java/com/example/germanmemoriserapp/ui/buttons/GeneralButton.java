@@ -53,7 +53,6 @@ public abstract class GeneralButton {
         this.btnAnimation.setAnimationListener(new OnAnimListener(
                 getContext(), getActivity()));
 
-        //this.btn = getActivity().findViewById(resId);
         btn.setOnClickListener(new ClickListener());
     }
 

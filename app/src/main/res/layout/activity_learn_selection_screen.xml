@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/learnScreenSelectedBackBtn"
             android:layout_marginTop="30dp"
-            app:srcCompat="@drawable/learn_selection_screen_title" />
+            app:srcCompat="@drawable/learn_title_two" />
 
         <ImageButton
             android:id="@+id/learnScreenSelectedBackBtn"
@@ -37,7 +37,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="25dp"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/back_arrow" />
+            app:srcCompat="@drawable/back_btn" />
 
         <ScrollView
             android:id="@+id/learnScrollView"
