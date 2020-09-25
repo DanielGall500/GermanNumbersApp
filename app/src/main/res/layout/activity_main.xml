@@ -132,12 +132,13 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
                 android:focusableInTouchMode="false"
                 android:fontFamily="@font/baloo"
-                android:gravity="center"
+                android:gravity="clip_vertical|center_vertical"
                 android:inputType="number"
                 android:maxLength="6"
                 android:maxLines="1"
@@ -167,7 +168,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/keybConstraintLayout"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayerConstraint"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,24 +188,24 @@
 
             <ImageButton
                 android:id="@+id/digitSevenBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_seven_state" />
+                android:background="@drawable/game_seven_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitEightBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_eight_state" />
+                android:background="@drawable/game_eight_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitNineBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_nine_state" />
+                android:background="@drawable/game_nine_btn_unpressed" />
         </LinearLayout>
 
         <LinearLayout
@@ -220,24 +221,24 @@
 
             <ImageButton
                 android:id="@+id/digitFourBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_four_state" />
+                android:background="@drawable/game_four_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitFiveBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_five_state" />
+                android:background="@drawable/game_five_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitSixBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_six_state" />
+                android:background="@drawable/game_six_btn_unpressed" />
         </LinearLayout>
 
         <LinearLayout
@@ -253,24 +254,24 @@
 
             <ImageButton
                 android:id="@+id/digitOneBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_one_state" />
+                android:background="@drawable/game_one_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitTwoBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_two_state" />
+                android:background="@drawable/game_two_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitThreeBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_three_state" />
+                android:background="@drawable/game_three_btn_unpressed" />
         </LinearLayout>
 
         <LinearLayout
@@ -285,24 +286,24 @@
 
             <ImageButton
                 android:id="@+id/relistenBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/relisten_btn" />
+                android:background="@drawable/game_relisten_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/digitZeroBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_zero_state" />
+                android:background="@drawable/game_zero_btn_unpressed" />
 
             <ImageButton
                 android:id="@+id/imageButton17"
-                android:layout_width="wrap_content"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/empty_btn" />
+                android:background="@drawable/game_empty_unpressed" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -320,7 +321,7 @@
             android:id="@+id/enterNumberBox"
             android:layout_width="318dp"
             android:layout_height="fill_parent"
-            android:background="@drawable/entry_box"
+            android:background="@drawable/game_enter_number_box"
             android:clickable="false"
             android:cursorVisible="false"
             android:ems="10"
