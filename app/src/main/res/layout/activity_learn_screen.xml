@@ -17,12 +17,12 @@
 
         <ImageView
             android:id="@+id/learnPageTitleView"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="80dp"
-            app:srcCompat="@drawable/learn_title" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            app:srcCompat="@drawable/learn_title_one" />
 
         <ImageButton
             android:id="@+id/learnScreenBackBtn"
@@ -60,31 +60,35 @@
                 <ImageButton
                     android:id="@+id/learn_zero_to_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/learn_zero_to_nine_btn" />
 
                 <ImageButton
                     android:id="@+id/learn_ten_to_nineteen_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/learn_ten_to_nineteen_btn" />
 
                 <ImageButton
                     android:id="@+id/learn_twenty_to_twenty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginVertical="25dp"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_twenty_to_twenty_nine_btn" />
 
                 <ImageButton
                     android:id="@+id/learn_thirty_to_thirty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_thirty_to_thirty_nine_btn" />
@@ -92,7 +96,8 @@
                 <ImageButton
                     android:id="@+id/learn_forty_to_forty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_forty_to_forty_nine_btn" />
@@ -100,7 +105,8 @@
                 <ImageButton
                     android:id="@+id/learn_fifty_to_fifty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_fifty_to_fifty_nine_btn" />
@@ -108,7 +114,8 @@
                 <ImageButton
                     android:id="@+id/learn_sixty_to_sixty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_sixty_to_sixty_nine_btn" />
@@ -116,7 +123,8 @@
                 <ImageButton
                     android:id="@+id/learn_seventy_to_seventy_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_seventy_to_seventy_nine_btn" />
@@ -124,7 +132,8 @@
                 <ImageButton
                     android:id="@+id/learn_eighty_to_eighty_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_eighty_to_eighty_nine_btn" />
@@ -132,7 +141,8 @@
                 <ImageButton
                     android:id="@+id/learn_ninety_to_ninety_nine_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="98dp"
+                    android:scaleType="fitCenter"
                     android:layout_marginVertical="25dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/learn_ninety_to_ninety_nine_btn" />
