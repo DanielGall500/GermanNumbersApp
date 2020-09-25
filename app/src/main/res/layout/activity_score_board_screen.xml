@@ -52,10 +52,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="54dp"
-            android:layout_marginLeft="54dp"
             android:layout_marginTop="150dp"
-            app:srcCompat="@drawable/scores_title" />
+            app:srcCompat="@drawable/scores_screen_title" />
 
         <ImageButton
             android:id="@+id/scoresBackBtn"
