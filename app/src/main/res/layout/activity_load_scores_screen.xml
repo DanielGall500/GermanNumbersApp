@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="367dp"
+        android:layout_height="88dp"
         android:layout_marginTop="172dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/klang_logo_text" />
+        app:srcCompat="@drawable/splash_screen_title" />
 
     <ImageView
         android:id="@+id/loadingScoresBuffer"
