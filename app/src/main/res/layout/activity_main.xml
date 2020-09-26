@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/timerViewConstraint"
-            app:layout_constraintHorizontal_bias="0.105"
+            app:layout_constraintHorizontal_bias="0.534"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -111,8 +111,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/timerViewConstraint"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="135dp"
+            android:layout_height="51dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -131,7 +131,7 @@
 
             <TextView
                 android:id="@+id/timeUpdateTxt"
-                android:layout_width="40dp"
+                android:layout_width="85dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="12dp"
@@ -193,21 +193,36 @@
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_seven_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_seven_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitEightBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_eight_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_eight_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitNineBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/game_nine_btn_unpressed" />
+                android:background="@drawable/game_nine_btn_unpressed"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <LinearLayout
@@ -226,21 +241,36 @@
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_four_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_four_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitFiveBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_five_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_five_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitSixBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_six_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_six_btn_unpressed"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <LinearLayout
@@ -259,21 +289,36 @@
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_one_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_one_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitTwoBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_two_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_two_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitThreeBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_three_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_three_btn_unpressed"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
         <LinearLayout
@@ -291,21 +336,36 @@
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_relisten_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_relisten_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/digitZeroBtn"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_zero_btn_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_zero_btn_unpressed"
+                android:scaleType="fitCenter" />
 
             <ImageButton
                 android:id="@+id/imageButton17"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/game_empty_unpressed" />
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/game_empty_unpressed"
+                android:scaleType="fitCenter" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

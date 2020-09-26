@@ -4,6 +4,6 @@
         <bitmap android:src="@drawable/keyb_6" />
     </item>
     <item android:state_pressed="false">
-        <bitmap android:src="@drawable/keyb_6" />
+        <bitmap android:src="@drawable/game_six_btn_unpressed" />
     </item>
 </selector>

@@ -9,10 +9,11 @@ public class ButtonResource {
     Game Buttons
      */
     int[] unpressedBtnImgs = new int[]{
-            R.drawable.keyb_0, R.drawable.keyb_1, R.drawable.keyb_2,
-            R.drawable.keyb_3, R.drawable.keyb_4, R.drawable.keyb_5,
-            R.drawable.keyb_6, R.drawable.keyb_7, R.drawable.keyb_8,
-            R.drawable.keyb_9
+            R.drawable.game_zero_btn_unpressed, R.drawable.game_one_btn_unpressed,
+            R.drawable.game_two_btn_unpressed, R.drawable.game_three_btn_unpressed,
+            R.drawable.game_four_btn_unpressed, R.drawable.game_five_btn_unpressed,
+            R.drawable.game_six_btn_unpressed, R.drawable.game_seven_btn_unpressed,
+            R.drawable.game_eight_btn_unpressed, R.drawable.game_nine_btn_unpressed
     };
 
     int[] correctBtnImgs = new int[]{

@@ -2,7 +2,6 @@ package com.example.germanmemoriserapp.activities.game;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -227,7 +226,6 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private ImageButton getBtn(int digit) {
-        //TODO
         return findViewById(digitIds[digit]);
     }
 
@@ -260,8 +258,6 @@ public class GameScreen extends AppCompatActivity {
 
                 //Play the clip & Update GFX
                 GAME.relisten(relistenUpdatetxt);
-            } else {
-                //TODO: No Relistens Left
             }
         }
     }
