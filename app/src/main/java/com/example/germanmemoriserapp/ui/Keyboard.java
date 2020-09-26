@@ -26,6 +26,8 @@ public class Keyboard implements View.OnClickListener {
     Handler mHandler = new Handler();
     int mDigit;
 
+    private boolean isGameReady = false;
+
     public Keyboard(Handler inputFieldHandler, Handler buttonHandler,
                     Handler keyboardHandler, HashMap<Integer, Integer> idRef,
                     Game game) {
@@ -58,6 +60,13 @@ public class Keyboard implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        /*
+        If the game isn't ready for UI input yet,
+        don't allow the user to press anything.
+         */
+        if(!isGameReady)
+            return;
 
         int id = v.getId();
 
@@ -109,6 +118,14 @@ public class Keyboard implements View.OnClickListener {
             }
         }, wait);
 
+    }
+
+    public void setGameReady(boolean isReady) {
+        this.isGameReady = isReady;
+    }
+
+    public boolean isGameReady() {
+        return this.isGameReady;
     }
 
     private void updateFieldText(String s) {

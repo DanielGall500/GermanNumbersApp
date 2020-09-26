@@ -129,6 +129,9 @@ public class GameScreen extends AppCompatActivity {
                 /* Start Timer */
                 timer = new Timer(timerView);
                 timer.begin();
+
+                //Allow the user to input to keyboard
+                digitKeyboard.setGameReady(true);
             }
         }, WAIT_BEFORE_PLAYING);
     }
