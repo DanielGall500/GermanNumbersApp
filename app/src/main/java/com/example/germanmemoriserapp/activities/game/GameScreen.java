@@ -1,5 +1,6 @@
 package com.example.germanmemoriserapp.activities.game;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,9 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.activity_managers.NextActivityManager;
 import com.example.germanmemoriserapp.mechanics.game.Difficulty;
 import com.example.germanmemoriserapp.mechanics.game.Game;
@@ -29,11 +29,12 @@ import com.example.germanmemoriserapp.sound.elements.NumberClip;
 import com.example.germanmemoriserapp.ui.Keyboard;
 import com.example.germanmemoriserapp.ui.Keyboard.BUTTON_STATE;
 import com.example.germanmemoriserapp.ui.buttons.ButtonResource;
+import com.example.germanmemoriserapp.utilities.AppCleanup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameScreen extends AppCompatActivity {
+public class GameScreen extends CleanupActivity {
 
     //10 Digits + 1 Back Button
     final int SIZE_KEYB = 11;
@@ -78,6 +79,15 @@ public class GameScreen extends AppCompatActivity {
     InputFieldUIHandler inputFieldH = new InputFieldUIHandler();
     ButtonUIHandler buttonUiH = new ButtonUIHandler();
     private Difficulty.Level gameDifficulty;
+
+    @Override
+    public void onBackPressed() {
+        AppCleanup cleaner = new AppCleanup(this,this);
+        MenuActivityManager menuManager = new MenuActivityManager(this,this);
+
+        cleaner.run();
+        menuManager.run();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

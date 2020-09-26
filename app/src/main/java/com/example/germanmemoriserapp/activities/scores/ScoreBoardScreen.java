@@ -9,10 +9,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.activities.load.LoadScoresScreen;
 import com.example.germanmemoriserapp.activities.menu.MenuScreen;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.ui.buttons.BackButton;
 import com.example.germanmemoriserapp.ui.buttons.ScorePageButton;
 
 public class ScoreBoardScreen extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed() {
+        MenuActivityManager menuManager = new MenuActivityManager(this,this);
+        menuManager.run();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

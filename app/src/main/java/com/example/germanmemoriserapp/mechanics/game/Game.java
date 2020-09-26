@@ -143,6 +143,7 @@ public class Game {
     }
 
     public void playAudioClip() {
+
         soundManager.play(getCurrentNumber());
     }
 

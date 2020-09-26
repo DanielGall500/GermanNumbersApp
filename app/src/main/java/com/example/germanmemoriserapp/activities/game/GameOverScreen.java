@@ -41,19 +41,6 @@ public class GameOverScreen extends AppCompatActivity {
         updateResultsView();
         updateDifficulty();
 
-        /* Unload Game Sounds */
-        soundManager = SoundManager.get(this);
-
-        Thread releaseClips = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                soundManager.releaseAllGameUIClips();
-                soundManager.releaseAllNumberClips();
-            }
-        });
-
-        releaseClips.run();
-
         /* Buttons */
         new RetryButton(this, this, R.id.retryBtn, difficulty);
         new MenuButton(this, this, R.id.menuBtn,

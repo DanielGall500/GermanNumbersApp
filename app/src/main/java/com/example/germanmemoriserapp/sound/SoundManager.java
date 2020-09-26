@@ -78,6 +78,14 @@ public class SoundManager {
         return soundManager;
     }
 
+    public static boolean isActive() {
+        return soundManager != null;
+    }
+
+    public void release() {
+        soundManager = null;
+        soundPlayer.release();
+    }
     public void setOnAudioLoadedHandler(Handler h) {
         this.onAudioLoadedHandler = h;
     }
@@ -94,7 +102,6 @@ public class SoundManager {
 
     /* Remove A Clip From Loaded Sounds */
     public void unload(SoundElement element) {
-
         if (existsInLoadedClips(element)) {
             //Retrieve Element
             int localId = element.getLocalId();
@@ -102,8 +109,6 @@ public class SoundManager {
             //Remove & Unload
             removeFromLoadedSounds(element);
             soundPlayer.unload(localId);
-        } else {
-            invalidElementException();
         }
     }
 
@@ -138,8 +143,6 @@ public class SoundManager {
 
             soundPlayer.play(localId, LEFT_VOL, RIGHT_VOL,
                     PRIORITY, LOOP, RATE);
-        } else {
-            invalidElementException();
         }
     }
 
@@ -210,6 +213,10 @@ public class SoundManager {
     }
 
     private boolean existsInLoadedClips(SoundElement element) {
+        if(element == null) {
+            return false;
+        }
+
         return existsInLoadedClips(element.getFileName());
     }
 

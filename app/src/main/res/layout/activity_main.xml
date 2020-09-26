@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/empty_background"
+    android:background="#930009"
     tools:context=".activities.game.GameScreen">
 
 

@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
 import com.example.germanmemoriserapp.activities.menu.MenuScreen;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.buttons.BackButton;
 import com.example.germanmemoriserapp.ui.buttons.LearnPageButton;
+import com.example.germanmemoriserapp.utilities.AppCleanup;
 
 public class LearnScreen extends AppCompatActivity {
 
@@ -26,6 +28,15 @@ public class LearnScreen extends AppCompatActivity {
     };
 
     SoundManager soundManager;
+
+    @Override
+    public void onBackPressed() {
+        AppCleanup cleaner = new AppCleanup(this,this);
+        MenuActivityManager menuManager = new MenuActivityManager(this,this);
+
+        cleaner.run();
+        menuManager.run();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

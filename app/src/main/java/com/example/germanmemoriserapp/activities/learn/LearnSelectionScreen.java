@@ -15,8 +15,10 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.sound.SoundManager;
 import com.example.germanmemoriserapp.ui.buttons.BackButton;
+import com.example.germanmemoriserapp.utilities.AppCleanup;
 import com.example.germanmemoriserapp.utilities.LearnPage;
 import com.example.germanmemoriserapp.utilities.NumberFileManager;
 
@@ -51,6 +53,15 @@ public class LearnSelectionScreen extends AppCompatActivity {
         int[] minMax = LearnPage.getMinMax(loadScreenInformation);
         minNumber = minMax[0];
         maxNumber = minMax[1];
+    }
+
+    @Override
+    public void onBackPressed() {
+        AppCleanup cleaner = new AppCleanup(this,this);
+        MenuActivityManager menuManager = new MenuActivityManager(this,this);
+
+        cleaner.run();
+        menuManager.run();
     }
 
     @Override

@@ -9,9 +9,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.germanmemoriserapp.R;
+import com.example.germanmemoriserapp.activity_managers.MenuActivityManager;
 import com.example.germanmemoriserapp.mechanics.game.Difficulty;
 import com.example.germanmemoriserapp.mechanics.score.ScoreBoardManager;
 import com.example.germanmemoriserapp.ui.buttons.BackButton;
+import com.example.germanmemoriserapp.utilities.AppCleanup;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,12 @@ public class BestScoresScreen extends AppCompatActivity {
     private TextView bestScoreMasterScore;
 
     private String NEVER_PLAYED = "None Yet!";
+
+    @Override
+    public void onBackPressed() {
+        MenuActivityManager menuManager = new MenuActivityManager(this,this);
+        menuManager.run();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
