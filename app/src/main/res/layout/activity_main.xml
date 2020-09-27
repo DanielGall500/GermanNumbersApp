@@ -144,7 +144,7 @@
                 android:inputType="number"
                 android:maxLength="6"
                 android:maxLines="1"
-                android:text="10"
+                android:text="0"
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold"

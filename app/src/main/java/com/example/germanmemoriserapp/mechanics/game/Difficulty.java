@@ -5,11 +5,11 @@ public class Difficulty {
     private static final int beginnerId = 0;
     private static final int intermediateId = 1;
     private static final int masterId = 2;
-    private static int invalidId = -1;
+    private static final int invalidId = -1;
     private final String beginnerStr = "BEGINNER";
     private final String normalStr = "NORMAL";
     private final String masterStr = "MASTER";
-    private final String invalidStr = "EMPTY SLOT";
+    private final String invalidStr = "EMPTY";
 
     private Level diffLevel;
 

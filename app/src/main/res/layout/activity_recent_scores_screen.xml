@@ -80,7 +80,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard1Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -116,7 +116,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard2Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -152,7 +152,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard3Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -188,7 +188,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard4Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -224,7 +224,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard5Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -260,7 +260,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard6Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -296,7 +296,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard7Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -332,7 +332,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard8Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -368,7 +368,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard9Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
@@ -404,7 +404,7 @@
 
                         <TextView
                             android:id="@+id/recentScoresCard10Score"
-                            android:layout_width="150dp"
+                            android:layout_width="200dp"
                             android:layout_height="40dp"
                             android:gravity="center|start"
                             android:text="20 Seconds"
