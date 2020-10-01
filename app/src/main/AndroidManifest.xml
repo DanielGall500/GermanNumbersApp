@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.germanmemoriserapp">
+    package="ucd.danielgall.klangapp">
 
     <application
         android:allowBackup="true"
@@ -11,32 +11,32 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.menu.SplashScreen"
+            android:name="ucd.danielgall.klangapp.activities.menu.SplashScreen"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.load.LoadScoresScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.load.LoadScoresScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.scores.RecentScoresScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.scores.RecentScoresScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.scores.BestScoresScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.scores.BestScoresScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.scores.ScoreBoardScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.scores.ScoreBoardScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.learn.LearnSelectionScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.learn.LearnSelectionScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.learn.LearnScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.learn.LearnScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.load.LoadAudioScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.load.LoadAudioScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.game.GameScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.game.GameScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.game.GameOverScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.game.GameOverScreen"
             android:screenOrientation="sensorPortrait"/>
-        <activity android:name=".activities.menu.MenuScreen"
+        <activity android:name="ucd.danielgall.klangapp.activities.menu.MenuScreen"
             android:screenOrientation="sensorPortrait"/>
 
         <meta-data

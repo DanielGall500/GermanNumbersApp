@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/empty_background"
-    tools:context=".activities.learn.LearnSelectionScreen">
+    tools:context="ucd.danielgall.klangapp.activities.learn.LearnSelectionScreen">
 
 
     <RelativeLayout

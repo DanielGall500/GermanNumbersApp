@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/empty_background"
-    tools:context=".activities.scores.ScoreBoardScreen">
+    tools:context="ucd.danielgall.klangapp.activities.scores.ScoreBoardScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"

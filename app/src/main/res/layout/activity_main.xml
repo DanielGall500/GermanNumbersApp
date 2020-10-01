@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#930009"
-    tools:context=".activities.game.GameScreen">
+    tools:context="ucd.danielgall.klangapp.activities.game.GameScreen">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
