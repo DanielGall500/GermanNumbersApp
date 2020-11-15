@@ -28,6 +28,8 @@ public abstract class GeneralButton {
         this.appActivity = activity;
         this.appContext = context;
 
+        soundSystem = new SoundSystem(appContext);
+
         btn = appActivity.findViewById(resId);
 
         loadComponents();

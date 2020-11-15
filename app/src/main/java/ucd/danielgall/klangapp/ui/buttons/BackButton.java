@@ -31,7 +31,8 @@ public class BackButton {
         this.appActivity = appActivity;
         this.moveToActivity = moveTo;
 
-        this.soundManager = SoundManager.get(appContext, appActivity);
+        //this.soundManager = SoundManager.get(appContext, appActivity);
+        soundSystem = new SoundSystem(appContext);
 
         activityListener = new NextActivityManager(appContext, appActivity);
         activityListener.setNextActivity(moveTo);
