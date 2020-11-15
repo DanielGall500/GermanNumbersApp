@@ -29,7 +29,6 @@ public class BackButton {
         this.appActivity = appActivity;
         this.moveToActivity = moveTo;
 
-        //this.soundManager = SoundManager.get(appContext, appActivity);
         soundSystem = new SoundSystem(appContext);
 
         activityListener = new NextActivityManager(appContext, appActivity);
@@ -46,7 +45,6 @@ public class BackButton {
     private class BackButtonAnimationListener implements Animation.AnimationListener {
         @Override
         public void onAnimationStart(Animation animation) {
-            //soundManager.play(UIClip.BACK_BUTTON_CLICK);
             soundSystem.play(UIClip.BACK_BUTTON_CLICK);
         }
 

@@ -44,7 +44,6 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
     private BackButton learnScreenSelectedBackBtn;
 
-    //private SoundManager audioManager = SoundManager.get(this, this);
     private SoundSystem soundSystem = new SoundSystem(this);
 
     public void retrieveInformationFromLoadScreen() {

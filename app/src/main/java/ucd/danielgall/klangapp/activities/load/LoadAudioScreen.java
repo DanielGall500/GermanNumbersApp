@@ -26,7 +26,6 @@ public class LoadAudioScreen extends AppCompatActivity {
     NextActivityManager moveToNextScreen;
     NumberGenerator generator = new NumberGenerator();
     ArrayList<SoundElement> generatedArr;
-    //private SoundManager soundPlayer;
     private ProgressBar audioProgressBar;
     private AnimationDrawable loadBtnAnim;
     private ImageView loadBtn;

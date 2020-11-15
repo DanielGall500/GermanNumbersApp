@@ -51,7 +51,6 @@ public class Game {
         this.appContext = appContext;
         this.loadedNumbers = numberArr;
 
-        //soundManager = SoundManager.get(appContext, appActivity);
         soundSystem = new SoundSystem(appContext);
 
         setupDifficultySettings(level);
@@ -117,7 +116,6 @@ public class Game {
 
     private void onNewTurn() {
 
-        //soundManager.play(UIClip.GAME_CORRECT);
         soundSystem.play(UIClip.GAME_CORRECT);
 
         newNumber();
@@ -134,23 +132,18 @@ public class Game {
     }
 
     private void onGameWon() {
-        //soundManager.play(UIClip.GAME_WON);
         soundSystem.play(UIClip.GAME_WON);
     }
 
     private void onGameLost() {
-        //soundManager.play(UIClip.GAME_LOST);
         soundSystem.play(UIClip.GAME_LOST);
     }
 
     private void onFirstCorrect() {
-        //soundManager.play(UIClip.GAME_CORRECT);
         soundSystem.play(UIClip.GAME_CORRECT);
     }
 
     public void playAudioClip() {
-
-        //soundManager.play(getCurrentNumber());
         soundSystem.play(getCurrentNumber());
     }
 
@@ -207,7 +200,6 @@ public class Game {
             }
 
 
-            //soundManager.play(UIClip.GAME_INCORRECT);
             soundSystem.play(UIClip.GAME_INCORRECT);
 
             //Check If Out Of Lives

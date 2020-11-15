@@ -25,7 +25,6 @@ public class DifficultyListener implements View.OnClickListener {
     private Context appContext;
     private AppCompatActivity appActivity;
 
-    //private SoundManager soundManager;
     private SoundSystem soundSystem;
 
     public DifficultyListener(Context context,
@@ -44,7 +43,6 @@ public class DifficultyListener implements View.OnClickListener {
         this.appContext = context;
         this.appActivity = activity;
 
-        //this.soundManager = SoundManager.get(appContext, appActivity);
         soundSystem = new SoundSystem(appContext);
 
         this.updateDifficultyHandler = updateDifficulty;
@@ -60,7 +58,6 @@ public class DifficultyListener implements View.OnClickListener {
 
         Difficulty.Level btnDiffLevel = getButtonLevel(id);
 
-        //soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
         soundSystem.play(UIClip.GENERAL_BUTTON_CLICK);
 
         /*
