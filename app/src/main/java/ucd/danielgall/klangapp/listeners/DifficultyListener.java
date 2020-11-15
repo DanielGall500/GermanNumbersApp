@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ucd.danielgall.klangapp.mechanics.game.Difficulty;
 import ucd.danielgall.klangapp.sound.SoundManager;
+import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 import ucd.danielgall.klangapp.ui.buttons.DifficultyButton;
 
@@ -25,7 +26,8 @@ public class DifficultyListener implements View.OnClickListener {
     private Context appContext;
     private AppCompatActivity appActivity;
 
-    private SoundManager soundManager;
+    //private SoundManager soundManager;
+    private SoundSystem soundSystem;
 
     public DifficultyListener(Context context,
                               AppCompatActivity activity,
@@ -43,7 +45,8 @@ public class DifficultyListener implements View.OnClickListener {
         this.appContext = context;
         this.appActivity = activity;
 
-        this.soundManager = SoundManager.get(appContext, appActivity);
+        //this.soundManager = SoundManager.get(appContext, appActivity);
+        soundSystem = new SoundSystem(appContext);
 
         this.updateDifficultyHandler = updateDifficulty;
     }
@@ -58,7 +61,8 @@ public class DifficultyListener implements View.OnClickListener {
 
         Difficulty.Level btnDiffLevel = getButtonLevel(id);
 
-        soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
+        //soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
+        soundSystem.play(UIClip.GENERAL_BUTTON_CLICK);
 
         /*
         If we clicked the button that our difficulty is

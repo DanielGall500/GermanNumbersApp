@@ -3,6 +3,7 @@ package ucd.danielgall.klangapp.ui.buttons;
 import android.content.Context;
 import ucd.danielgall.klangapp.activity_managers.NextActivityManager;
 import ucd.danielgall.klangapp.sound.SoundManager;
+import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,7 +22,9 @@ public class BackButton {
     private Class moveToActivity;
     private ImageButton backButton;
     private Animation backBtnAnimation;
+
     private SoundManager soundManager;
+    private SoundSystem soundSystem;
 
     public BackButton(Context appContext, AppCompatActivity appActivity, int buttonId, Class moveTo) {
         this.appContext = appContext;
@@ -44,7 +47,8 @@ public class BackButton {
     private class BackButtonAnimationListener implements Animation.AnimationListener {
         @Override
         public void onAnimationStart(Animation animation) {
-            soundManager.play(UIClip.BACK_BUTTON_CLICK);
+            //soundManager.play(UIClip.BACK_BUTTON_CLICK);
+            soundSystem.play(UIClip.BACK_BUTTON_CLICK);
         }
 
         @Override

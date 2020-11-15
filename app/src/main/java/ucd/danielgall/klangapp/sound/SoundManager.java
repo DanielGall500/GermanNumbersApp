@@ -86,6 +86,18 @@ public class SoundManager {
         return soundManager;
     }
 
+    /* Play A Loaded Clip */
+    public void play(SoundElement element) {
+        if (existsInLoadedClips(element)) {
+            int localId = element.getLocalId();
+            float volume = getVolume();
+
+            soundPlayer.play(localId, volume, volume,
+                    PRIORITY, LOOP, RATE);
+        }
+    }
+
+
     public static boolean isActive() {
         return soundManager != null;
     }
@@ -141,17 +153,6 @@ public class SoundManager {
     public void unloadAll(ArrayList<SoundElement> elements) {
         for (SoundElement element : elements) {
             unload(element);
-        }
-    }
-
-    /* Play A Loaded Clip */
-    public void play(SoundElement element) {
-        if (existsInLoadedClips(element)) {
-            int localId = element.getLocalId();
-            float volume = getVolume();
-
-            soundPlayer.play(localId, volume, volume,
-                    PRIORITY, LOOP, RATE);
         }
     }
 

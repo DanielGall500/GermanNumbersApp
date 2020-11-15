@@ -1,6 +1,8 @@
 package ucd.danielgall.klangapp.activities.learn;
 
 import android.content.Intent;
+
+import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.utilities.LearnPage;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -43,7 +45,8 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
     private BackButton learnScreenSelectedBackBtn;
 
-    private SoundManager audioManager = SoundManager.get(this, this);
+    //private SoundManager audioManager = SoundManager.get(this, this);
+    private SoundSystem soundSystem = new SoundSystem(this);
 
     public void retrieveInformationFromLoadScreen() {
         Intent fromLoadScreen = getIntent();
@@ -150,7 +153,8 @@ public class LearnSelectionScreen extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            audioManager.play(mediaNumber);
+            //audioManager.play(mediaNumber);
+            soundSystem.play(mediaNumber);
         }
     }
 }

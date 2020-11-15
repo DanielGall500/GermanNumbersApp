@@ -3,6 +3,7 @@ package ucd.danielgall.klangapp.mechanics.game;
 import android.content.Context;
 import ucd.danielgall.klangapp.mechanics.score.Score;
 import ucd.danielgall.klangapp.sound.SoundManager;
+import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.sound.elements.NumberClip;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 import android.os.Handler;
@@ -32,7 +33,11 @@ public class Game {
     public static int GAME_LOST_VALUE = -1;
     public static String GAME_LOST_TEXT = "Out Of Lives!";
     private Score playerScore;
+
     private SoundManager soundManager;
+    private SoundSystem soundSystem;
+
+
     /*testing*/
     private int nLives;
     private int nRelistens;
@@ -50,6 +55,7 @@ public class Game {
         this.loadedNumbers = numberArr;
 
         soundManager = SoundManager.get(appContext, appActivity);
+        soundSystem = new SoundSystem(appContext);
 
         if (numberArr.size() != NUMBER_CLIPS) {
             throw new IllegalArgumentException("Invalid Number Array");
@@ -118,7 +124,9 @@ public class Game {
 
     private void onNewTurn() {
 
-        soundManager.play(UIClip.GAME_CORRECT);
+        //soundManager.play(UIClip.GAME_CORRECT);
+        soundSystem.play(UIClip.GAME_CORRECT);
+
         newNumber();
 
         Handler h = new Handler();
@@ -133,20 +141,24 @@ public class Game {
     }
 
     private void onGameWon() {
-        soundManager.play(UIClip.GAME_WON);
+        //soundManager.play(UIClip.GAME_WON);
+        soundSystem.play(UIClip.GAME_WON);
     }
 
     private void onGameLost() {
-        soundManager.play(UIClip.GAME_LOST);
+        //soundManager.play(UIClip.GAME_LOST);
+        soundSystem.play(UIClip.GAME_LOST);
     }
 
     private void onFirstCorrect() {
-        soundManager.play(UIClip.GAME_CORRECT);
+        //soundManager.play(UIClip.GAME_CORRECT);
+        soundSystem.play(UIClip.GAME_CORRECT);
     }
 
     public void playAudioClip() {
 
-        soundManager.play(getCurrentNumber());
+        //soundManager.play(getCurrentNumber());
+        soundSystem.play(getCurrentNumber());
     }
 
     /*
@@ -201,7 +213,9 @@ public class Game {
                 gameLives.decrementWithUIUpdate(lifeTxtView);
             }
 
-            soundManager.play(UIClip.GAME_INCORRECT);
+
+            //soundManager.play(UIClip.GAME_INCORRECT);
+            soundSystem.play(UIClip.GAME_INCORRECT);
 
             //Check If Out Of Lives
             if (gameLives.isOutOfLives()) {
