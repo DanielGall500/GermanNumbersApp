@@ -17,14 +17,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/learnSelectionTitleView"
-            android:layout_width="367dp"
-            android:layout_height="97dp"
-            android:layout_below="@+id/learnScreenSelectedBackBtn"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            app:srcCompat="@drawable/learn_title_two" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/learnTitleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="147dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="95dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/learnSelectionTitleView"
+                android:layout_width="344dp"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/learn_title_two" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/learnScreenSelectedBackBtn"
@@ -43,7 +55,7 @@
             android:id="@+id/learnScrollView"
             android:layout_width="match_parent"
             android:layout_height="563dp"
-            android:layout_below="@+id/learnSelectionTitleView"
+            android:layout_below="@+id/learnTitleLayout"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp">
@@ -175,10 +187,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView3"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView3"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -186,10 +198,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView3"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView3"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView3"
@@ -223,10 +235,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView4"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView4"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -234,10 +246,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView4"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView4"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView4"
@@ -270,10 +282,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView5"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView5"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -281,10 +293,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView5"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView5"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView5"
@@ -317,10 +329,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView6"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView6"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -328,10 +340,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView6"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView6"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView6"
@@ -364,10 +376,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView7"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView7"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -375,10 +387,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView7"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView7"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView7"
@@ -411,10 +423,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView8"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView8"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -422,10 +434,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView8"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView8"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView8"
@@ -458,10 +470,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView9"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView9"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -469,10 +481,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView9"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView9"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView9"
@@ -505,10 +517,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnGermanView10"
                             android:layout_width="220dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnGermanView10"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -516,10 +528,10 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/learnDigitView10"
                             android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:id="@+id/learnDigitView10"
                             android:text="TextView"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/learnGermanView10"

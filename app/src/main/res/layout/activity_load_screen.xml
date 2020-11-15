@@ -20,7 +20,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loadLayout"
-        android:layout_width="409dp"
+        android:layout_width="wrap_content"
         android:layout_height="179dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,20 +32,9 @@
             android:layout_width="80dp"
             android:layout_height="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/audioProgressBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/loading_btn" />
 
-        <ProgressBar
-            android:id="@+id/audioProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="325dp"
-            android:layout_height="59dp"
-            android:progress="1"
-            android:soundEffectsEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

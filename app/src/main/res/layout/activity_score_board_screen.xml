@@ -15,7 +15,7 @@
             android:id="@+id/scoresScreenBtnLayout"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:layout_below="@+id/scoresTitle"
+            android:layout_below="@+id/scoresTitleConstraint"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="141dp">
@@ -48,17 +48,23 @@
                 app:srcCompat="@drawable/scores_screen_recent_btn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/scoresTitle"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoresTitleConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="150dp"
-            app:srcCompat="@drawable/scores_screen_title" />
+            android:layout_marginTop="105dp">
+
+            <ImageView
+                android:id="@+id/scoresTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/scores_screen_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/scoresBackBtn"
