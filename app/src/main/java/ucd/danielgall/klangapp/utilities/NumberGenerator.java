@@ -10,17 +10,14 @@ public class NumberGenerator {
 
     private Random randGen = new Random();
 
-    public ArrayList<SoundElement> generateRandom(int min, int max, int N) {
+    public ArrayList<Integer> generateRandom(int min, int max, int N) {
 
-        ArrayList<SoundElement> generated = new ArrayList<>();
-        SoundElement nextNumber;
+        ArrayList<Integer> generated = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             int tmp = generateNumber(min, max);
-
             if (!generated.contains(tmp)) {
-                nextNumber = new NumberClip(tmp);
-                generated.add(nextNumber);
+                generated.add(tmp);
             } else {
                 i--;
             }

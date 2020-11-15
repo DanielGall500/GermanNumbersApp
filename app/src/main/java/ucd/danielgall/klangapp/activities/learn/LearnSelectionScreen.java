@@ -19,7 +19,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import ucd.danielgall.klangapp.R;
 import ucd.danielgall.klangapp.activity_managers.MenuActivityManager;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.ui.buttons.BackButton;
 import ucd.danielgall.klangapp.utilities.AppCleanup;
 import ucd.danielgall.klangapp.utilities.NumberFileManager;

@@ -4,15 +4,10 @@ import android.content.Intent;
 import ucd.danielgall.klangapp.activities.game.GameScreen;
 import ucd.danielgall.klangapp.activities.learn.LearnSelectionScreen;
 import ucd.danielgall.klangapp.activity_managers.NextActivityManager;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.sound.elements.SoundElement;
-import ucd.danielgall.klangapp.sound.elements.UIClip;
-import ucd.danielgall.klangapp.utilities.LearnPage;
 import ucd.danielgall.klangapp.utilities.NumberGenerator;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -31,7 +26,7 @@ public class LoadAudioScreen extends AppCompatActivity {
     NextActivityManager moveToNextScreen;
     NumberGenerator generator = new NumberGenerator();
     ArrayList<SoundElement> generatedArr;
-    private SoundManager soundPlayer;
+    //private SoundManager soundPlayer;
     private ProgressBar audioProgressBar;
     private AnimationDrawable loadBtnAnim;
     private ImageView loadBtn;
@@ -95,101 +90,20 @@ public class LoadAudioScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_load_screen);
 
-
         loadBtn = findViewById(R.id.loadBtn);
         loadBtnAnim = (AnimationDrawable) loadBtn.getDrawable();
         loadBtnAnim.start();
 
-        audioProgressBar = findViewById(R.id.audioProgressBar);
-        audioProgressBar.setMax(TOTAL_CLIPS);
-        audioProgressBar.setProgress(audioProgress);
-
-        /* Get our singleton implementation of
-         * an audio manager. */
-        soundPlayer = SoundManager.get(this, this);
-
-        /* Handle Input to Load Screen */
         retrieveLoadScreenInput();
-
-        if (isGame) {
-            soundPlayer.setOnAudioLoadedHandler(new GameAudioHandler());
-
-            /* Sounds For Number Pronunciation */
-            generator = new NumberGenerator();
-            generatedArr = generator.generateRandom(
-                    Game.MIN_NUM, Game.MAX_NUM, NUMBER_CLIPS);
-
-            /* UI Sound Effects */
-            generatedArr.add(UIClip.GAME_CORRECT);
-            generatedArr.add(UIClip.GAME_INCORRECT);
-            generatedArr.add(UIClip.GAME_WON);
-            generatedArr.add(UIClip.GAME_LOST);
-
-            soundPlayer.loadAll(generatedArr);
-        } else {
-            soundPlayer.setOnAudioLoadedHandler(new LearnPageAudioHandler());
-
-            int[] minMax = LearnPage.getMinMax(loadInformation);
-            generatedArr = generator.generateNormal(minMax[0], minMax[1]);
-            soundPlayer.loadAll(generatedArr);
-        }
-
-
+        loadComplete(getNextScreen(isGame));
     }
 
     private void loadComplete(Class nextScreen) {
-        /*
-        Store relevant information for learning page.
-        */
         String key = getString(R.string.load_screen_information);
-
-        /* Move To Learn Page */
-        System.out.println("Passing : " + loadInformation +
-                " To " + key);
 
         moveToNextScreen = new NextActivityManager(this, this);
         moveToNextScreen.setNextActivity(nextScreen);
         moveToNextScreen.addInformation(key, loadInformation);
         moveToNextScreen.run();
-    }
-
-    class GameAudioHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-
-            audioProgress++;
-
-            if (audioProgress == TOTAL_CLIPS) {
-                loadComplete(getNextScreen(isGame));
-            } else {
-                //Run on UI thread
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        audioProgressBar.setProgress(audioProgress);
-                    }
-                });
-            }
-        }
-    }
-
-    class LearnPageAudioHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-
-            audioProgress++;
-
-            if (audioProgress == LEARN_PAGE_CLIPS) {
-                loadComplete(getNextScreen(isGame));
-            } else {
-                //Run on UI thread
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        audioProgressBar.setProgress(audioProgress);
-                    }
-                });
-            }
-        }
     }
 }

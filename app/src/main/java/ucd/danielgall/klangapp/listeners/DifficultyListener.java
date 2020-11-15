@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ucd.danielgall.klangapp.mechanics.game.Difficulty;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 import ucd.danielgall.klangapp.ui.buttons.DifficultyButton;

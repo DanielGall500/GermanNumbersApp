@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import ucd.danielgall.klangapp.R;
 
 import ucd.danielgall.klangapp.activity_managers.MenuActivityManager;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.ui.buttons.BackButton;
 import ucd.danielgall.klangapp.ui.buttons.LearnPageButton;
 import ucd.danielgall.klangapp.utilities.AppCleanup;
@@ -27,8 +26,6 @@ public class LearnScreen extends AppCompatActivity {
             R.id.learn_sixty_to_sixty_nine_btn, R.id.learn_seventy_to_seventy_nine_btn,
             R.id.learn_eighty_to_eighty_nine_btn, R.id.learn_ninety_to_ninety_nine_btn,
     };
-
-    SoundManager soundManager;
 
     @Override
     public void onBackPressed() {
@@ -61,10 +58,5 @@ public class LearnScreen extends AppCompatActivity {
         for (int i = 0; i < N; i++) {
             new LearnPageButton(this, this, buttons[i], i);
         }
-
-        /* We need to ensure everything unnecessary is released
-         * before we begin loading new numbers. */
-        soundManager = SoundManager.get(this, this);
-        soundManager.releaseAllNumberClips();
     }
 }

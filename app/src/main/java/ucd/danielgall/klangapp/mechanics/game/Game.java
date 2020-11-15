@@ -2,9 +2,7 @@ package ucd.danielgall.klangapp.mechanics.game;
 
 import android.content.Context;
 import ucd.danielgall.klangapp.mechanics.score.Score;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.sound.SoundSystem;
-import ucd.danielgall.klangapp.sound.elements.NumberClip;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 import android.os.Handler;
 import android.widget.TextView;
@@ -34,7 +32,6 @@ public class Game {
     public static String GAME_LOST_TEXT = "Out Of Lives!";
     private Score playerScore;
 
-    private SoundManager soundManager;
     private SoundSystem soundSystem;
 
 
@@ -43,23 +40,19 @@ public class Game {
     private int nRelistens;
     private LifeManager gameLives;
     private RelistenManager gameRelistens;
-    private ArrayList<NumberClip> loadedNumbers;
+    private ArrayList<Integer> loadedNumbers;
     private int loadedNumbersCurrentIndx = -1;
     private boolean gameIsLost = false;
     private Context appContext;
 
-    public Game(Context appContext, AppCompatActivity appActivity, Difficulty.Level level, ArrayList<NumberClip> numberArr) {
+    public Game(Context appContext, AppCompatActivity appActivity, Difficulty.Level level, ArrayList<Integer> numberArr) {
         playerScore = new Score();
 
         this.appContext = appContext;
         this.loadedNumbers = numberArr;
 
-        soundManager = SoundManager.get(appContext, appActivity);
+        //soundManager = SoundManager.get(appContext, appActivity);
         soundSystem = new SoundSystem(appContext);
-
-        if (numberArr.size() != NUMBER_CLIPS) {
-            throw new IllegalArgumentException("Invalid Number Array");
-        }
 
         setupDifficultySettings(level);
 
@@ -269,7 +262,7 @@ public class Game {
     }
 
     private int getCurrentNumber() {
-        return loadedNumbers.get(loadedNumbersCurrentIndx).get();
+        return loadedNumbers.get(loadedNumbersCurrentIndx);
     }
 
     public enum GAME_STATE {

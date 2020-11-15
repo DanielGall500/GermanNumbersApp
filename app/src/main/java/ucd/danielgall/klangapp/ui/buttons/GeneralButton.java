@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ucd.danielgall.klangapp.R;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.sound.SoundSystem;
 import ucd.danielgall.klangapp.sound.elements.UIClip;
 
@@ -17,7 +16,6 @@ public abstract class GeneralButton {
     private Animation btnAnimation;
 
     private SoundSystem soundSystem;
-    private SoundManager soundManager;
 
     private AppCompatActivity appActivity;
     private Context appContext;
@@ -51,8 +49,6 @@ public abstract class GeneralButton {
     }
 
     private void loadComponents() {
-        this.soundManager = SoundManager.get(getContext(), getActivity());
-
         this.btnAnimation = AnimationUtils.loadAnimation(
                 getContext(), R.anim.fly_right);
 
@@ -81,7 +77,6 @@ public abstract class GeneralButton {
 
         @Override
         public void onAnimationStart(Animation animation) {
-            //soundManager.play(UIClip.GENERAL_BUTTON_CLICK);
             soundSystem.play(UIClip.GENERAL_BUTTON_CLICK);
 
         }

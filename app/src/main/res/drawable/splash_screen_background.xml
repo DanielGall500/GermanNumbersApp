@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@drawable/empty_background" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/klang_logo_text" />
+    </item>
+</layer-list>

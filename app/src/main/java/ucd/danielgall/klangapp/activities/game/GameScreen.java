@@ -1,6 +1,7 @@
 package ucd.danielgall.klangapp.activities.game;
 
 import android.content.Intent;
+
 import ucd.danielgall.klangapp.ui.buttons.ButtonResource;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,11 +25,11 @@ import ucd.danielgall.klangapp.mechanics.game.Game;
 import ucd.danielgall.klangapp.mechanics.game.Game.GAME_STATE;
 import ucd.danielgall.klangapp.mechanics.score.ScoreBoardManager;
 import ucd.danielgall.klangapp.mechanics.score.Timer;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.sound.elements.NumberClip;
 import ucd.danielgall.klangapp.ui.Keyboard;
 import ucd.danielgall.klangapp.ui.Keyboard.BUTTON_STATE;
 import ucd.danielgall.klangapp.utilities.AppCleanup;
+import ucd.danielgall.klangapp.utilities.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,8 @@ public class GameScreen extends CleanupActivity {
             R.id.digitSixBtn, R.id.digitSevenBtn, R.id.digitEightBtn,
             R.id.digitNineBtn, R.id.relistenBtn
     };
+
+    private final int NUMBER_CLIPS = 10;
 
     EditText enterNumberBox;
     TextView timerView;
@@ -110,12 +113,13 @@ public class GameScreen extends CleanupActivity {
 
         setAllButtonListeners(digitKeyboard);
 
-        /* Setup New Game */
-        ArrayList<NumberClip> loadedNumbersArr = SoundManager.get(
-                this, this).getLoadedNumbers();
-
         gameDifficulty = getDifficultyIdFromLoad();
-        GAME = new Game(this, this, gameDifficulty, loadedNumbersArr);
+
+        NumberGenerator generator = new NumberGenerator();
+        ArrayList<Integer> generatedArr = generator.generateRandom(
+                Game.MIN_NUM, Game.MAX_NUM, NUMBER_CLIPS);
+
+        GAME = new Game(this, this, gameDifficulty, generatedArr);
 
         /* Lives/Listens Buttons */
         relistenBtn = findViewById(R.id.relistenBtn);

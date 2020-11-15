@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import ucd.danielgall.klangapp.R;
 import ucd.danielgall.klangapp.activity_managers.MenuActivityManager;
 import ucd.danielgall.klangapp.mechanics.game.Game;
-import ucd.danielgall.klangapp.sound.SoundManager;
 import ucd.danielgall.klangapp.ui.buttons.RetryButton;
 
 public class GameOverScreen extends AppCompatActivity {
@@ -20,7 +19,6 @@ public class GameOverScreen extends AppCompatActivity {
     private TextView scoreResultView;
 
     private boolean gameLost;
-    private SoundManager soundManager;
 
     private int difficulty;
 
