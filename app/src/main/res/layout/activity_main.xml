@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topLayerConstraintL"
-        android:layout_width="352dp"
-        android:layout_height="139dp"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/keybConstraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/secondLayerConstraint"
             android:layout_width="fill_parent"
-            android:layout_height="63dp"
+            android:layout_height="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/secondLayerConstraint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -194,6 +196,7 @@
         android:id="@+id/keybConstraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomLayerConstraint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
