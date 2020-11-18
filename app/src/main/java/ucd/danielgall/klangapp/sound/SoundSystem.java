@@ -18,7 +18,8 @@ public class SoundSystem implements SoundPlayer {
         sDir = new SoundDirectory(appContext);
     }
 
-    private void play(Context context, int resId) {
+    private void playResource(Context context, int resId) {
+        release();
         mMediaPlayer = android.media.MediaPlayer.create(context, resId);
         mMediaPlayer.start();
     }
@@ -26,13 +27,18 @@ public class SoundSystem implements SoundPlayer {
     @Override
     public void play(SoundElement element) {
         int resId = sDir.getId(element);
-        play(appContext,resId);
+        playResource(appContext,resId);
     }
 
     @Override
     public void play(int n) {
         SoundElement numberClip = new NumberClip(n);
         int resId = sDir.getId(numberClip);
-        play(appContext,resId);
+        playResource(appContext,resId);
+    }
+
+    @Override
+    public void release() {
+        mMediaPlayer.release();
     }
 }
