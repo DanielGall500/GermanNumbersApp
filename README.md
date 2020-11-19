@@ -29,7 +29,6 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [License](#license)
 * [Contact](#contact)
@@ -38,7 +37,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Store-Image][store-image]
 
 Klang was built over the course of Summer 2020 and developed by UCD Computer Science student Daniel Gallagher.
 
@@ -95,3 +94,4 @@ A massive thank you to Carina Hettwer, who recorded all audio assets for the Ger
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: https://github.com/DanielGall500/GermanNumbersApp/blob/master/featured_images/icon/klang_app_icon.png
+[store-image]: https://github.com/DanielGall500/GermanNumbersApp/blob/master/featured_images/store_image.png
