@@ -61,14 +61,15 @@ You must have an android device in order to download and run this application.
 
 ### Installation
 
+#### Android Emulator
 1. Clone the repo
 ```sh
 git clone https://github.com/DanielGall500/GermanNumbersApp.git
 ```
-2. Install NPM packages
-```sh
-npm install
-```
+2. Run On An Android Emulator
+
+#### QA Tester
+If you would like to become an internal tester for the app, please get in contact at my email address linked below.
 
 <!-- ROADMAP -->
 ## Roadmap
